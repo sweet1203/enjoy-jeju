@@ -143,6 +143,8 @@ img { max-width: 100%; }
 
 #feedback { text-align: center; }
 
+.todo { color: #b0a898; font-style: italic; }
+
 /* 장면 이미지 */
 .scene { margin: 48px auto 0; max-width: 820px; text-align: center; }
 .scene img {
