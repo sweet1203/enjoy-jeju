@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>즐겨라 제주 | 팀 속전속결</title>
+  <meta name="description" content="정보 교사 팀 속전속결이 만든 제주 주제 정보 수업계획안 공유 사이트" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="#top">🍊 속전속결</a>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+    <nav class="nav-links">
+      <a href="#about">프로젝트 소개</a>
+      <a href="#lessons">수업계획안</a>
+      <a href="#resources">자료실</a>
+      <a href="#team">팀 소개</a>
+      <a href="#feedback">의견 남기기</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- 메인 -->
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="hero-kicker">정보 교사 6인의 제주 수업 프로젝트</p>
+        <h1>즐겨라 <span>제주</span></h1>
+        <p class="hero-sub">제주를 주제로 한 정보 수업계획안을 함께 나눕니다.<br />바로 가져가서 수업에 쓰세요!</p>
+        <a class="btn" href="#lessons">수업계획안 보러 가기 →</a>
+        <img class="hero-img" src="assets/hero.webp" alt="팀 속전속결 6인의 캐릭터 단체 사진" />
+      </div>
+      <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,64 C240,120 480,0 720,48 C960,96 1200,24 1440,64 L1440,120 L0,120 Z" />
+      </svg>
+    </section>
+
+    <!-- 프로젝트 소개 -->
+    <section id="about" class="section">
+      <h2>💡 프로젝트 소개</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>왜 제주인가요?</h3>
+          <p>작성 예정 — 학생들에게 친숙한 제주를 소재로, 정보 교과의 핵심 개념을 실생활 문제 해결과 연결합니다.</p>
+        </div>
+        <div class="about-card">
+          <h3>무엇을 배우나요?</h3>
+          <p>정보 교과 전 영역(디지털 문화 · 자료와 정보 · 알고리즘 · 프로그래밍 · 인공지능 · 컴퓨팅 시스템)을 제주 주제로 하나씩 다룹니다.</p>
+        </div>
+        <div class="about-card">
+          <h3>어떻게 쓰나요?</h3>
+          <p>수업계획안을 열어 흐름을 확인하고, 자료실에서 활동지와 PPT를 받아 그대로 또는 고쳐서 사용하세요.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 수업계획안 -->
+    <section id="lessons" class="section section-tint">
+      <h2>📝 수업계획안</h2>
+      <p class="section-desc">카드를 누르면 상세 계획안이 열립니다.</p>
+      <div class="filters" id="filters"></div>
+      <div class="lesson-grid" id="lesson-grid"></div>
+    </section>
+
+    <!-- 자료실 -->
+    <section id="resources" class="section">
+      <h2>📂 자료실</h2>
+      <p class="section-desc">활동지 · PPT · 평가 루브릭을 내려받을 수 있습니다.</p>
+      <div class="resource-list" id="resource-list"></div>
+    </section>
+
+    <!-- 팀 소개 -->
+    <section id="team" class="section section-tint">
+      <h2>👥 팀 속전속결</h2>
+      <p class="section-desc">빠르고 확실하게! 정보 교사 6명이 모였습니다.</p>
+      <div class="team-grid" id="team-grid"></div>
+    </section>
+
+    <!-- 의견 -->
+    <section id="feedback" class="section">
+      <h2>💬 의견 남기기</h2>
+      <p class="section-desc">수업에 써 보신 후기나 개선 의견을 들려주세요.</p>
+      <a class="btn" id="feedback-btn" href="#" target="_blank" rel="noopener">의견 보내기</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 팀 속전속결 · 즐겨라 제주</p>
+  </footer>
+
+  <!-- 수업계획안 상세 -->
+  <dialog id="lesson-modal" class="modal">
+    <button class="modal-close" aria-label="닫기">✕</button>
+    <div id="modal-body"></div>
+  </dialog>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
