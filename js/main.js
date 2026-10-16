@@ -84,7 +84,7 @@ $("#team-grid").innerHTML = TEAM.map((m) => `
   <div class="member">
     <img src="${m.img}" alt="${esc(m.name)} 캐릭터" loading="lazy" />
     <span class="role">${esc(m.role)}</span>
-    <h3>${esc(m.name)}</h3>
+    <h3>${esc(m.name)} <small class="subject">정보 교사</small></h3>
     <p class="role-desc">${esc(m.roleDesc)}</p>
   </div>`).join("");
 
