@@ -86,6 +86,7 @@ $("#team-grid").innerHTML = TEAM.map((m) => `
     <span class="role">${esc(m.role)}</span>
     <h3>${esc(m.name)} <small class="subject">정보 교사</small></h3>
     <p class="role-desc">${esc(m.roleDesc)}</p>
+    ${m.school ? `<p class="region">🏫 ${esc(m.school)}</p>` : ""}
     ${m.region ? `<p class="region">📍 ${esc(m.region)}</p>` : ""}
   </div>`).join("");
 

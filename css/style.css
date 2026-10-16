@@ -138,7 +138,7 @@ img { max-width: 100%; }
 }
 .member h3 { margin: 6px 0 0; font-size: 1.4rem; }
 .member img[src*="sera"] { object-position: 88% 45%; }
-.region { margin: 6px 0 0; font-size: 0.85rem; color: var(--muted); }
+.region { margin: 4px 0 0; font-size: 0.85rem; color: var(--muted); }
 .motto {
   max-width: 640px; margin: -12px auto 36px; padding: 20px 24px; text-align: center;
   background: #fff; border: 2px dashed var(--tangerine); border-radius: var(--radius);
