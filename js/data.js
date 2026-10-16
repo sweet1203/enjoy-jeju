@@ -4,12 +4,12 @@
 // =====================================================
 
 const TEAM = [
-  { name: "구정화", role: "CEO", roleDesc: "Team Leader", img: "assets/team/junghwa.png" },
-  { name: "장원재", role: "CTO", roleDesc: "Technology", img: "assets/team/wonjae.png" },
-  { name: "임태현", role: "CTO", roleDesc: "Technology", img: "assets/team/taehyun.png" },
-  { name: "김세라", role: "CDO", roleDesc: "진척도관리", img: "assets/team/sera.webp" },
-  { name: "구현주", role: "CDO", roleDesc: "웹페이지관리", img: "assets/team/hyunju.webp" },
-  { name: "박혜경", role: "CHRO", roleDesc: "기구관리", img: "assets/team/hyekyung.webp" },
+  { name: "구정화", region: "전남광주통합특별시 나주시", role: "CEO", roleDesc: "Team Leader", img: "assets/team/junghwa.png" },
+  { name: "장원재", region: "춘천", role: "CTO", roleDesc: "Technology", img: "assets/team/wonjae.png" },
+  { name: "임태현", region: "서울 성동구", role: "CTO", roleDesc: "Technology", img: "assets/team/taehyun.png" },
+  { name: "김세라", region: "울주군", role: "CDO", roleDesc: "진척도관리", img: "assets/team/sera.webp" },
+  { name: "구현주", region: "고양시", role: "CDO", roleDesc: "웹페이지관리", img: "assets/team/hyunju.webp" },
+  { name: "박혜경", region: "대구", role: "CHRO", roleDesc: "기구관리", img: "assets/team/hyekyung.webp" },
 ];
 
 // 수업계획안 — 빈칸("")은 사이트에 "작성 예정"으로 표시됩니다.

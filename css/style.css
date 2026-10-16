@@ -138,6 +138,13 @@ img { max-width: 100%; }
 }
 .member h3 { margin: 6px 0 0; font-size: 1.4rem; }
 .member img[src*="sera"] { object-position: 88% 45%; }
+.region { margin: 6px 0 0; font-size: 0.85rem; color: var(--muted); }
+.motto {
+  max-width: 640px; margin: -12px auto 36px; padding: 20px 24px; text-align: center;
+  background: #fff; border: 2px dashed var(--tangerine); border-radius: var(--radius);
+}
+.motto-label { margin: 0; color: var(--sea); font-size: 0.95rem; }
+.motto-text { margin: 6px 0 0; font-family: "Jua", sans-serif; font-size: 1.35rem; color: var(--tangerine-dark); line-height: 1.5; }
 .subject { font-family: "Noto Sans KR", sans-serif; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
 .role-desc { margin: 0; color: var(--sea); font-weight: 700; font-size: 0.9rem; }
 .line { margin: 8px 0 0; color: var(--muted); font-size: 0.9rem; }
