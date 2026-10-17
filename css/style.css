@@ -1,4 +1,11 @@
+/* 글꼴: 제목 = 제주고딕, 각주·설명 = 배달의민족 꾸불림체 */
+@import url("https://cdn.jsdelivr.net/npm/@noonnu/jeju-gothic/index.css");
+@import url("https://cdn.jsdelivr.net/gh/fonts-archive/BMKkubulim/BMKkubulim.css");
+
+
 :root {
+  --font-title: "Jeju Gothic", "Noto Sans KR", sans-serif;
+  --font-note: "BM Kkubulim", "Noto Sans KR", sans-serif;
   --tangerine: #f28c28;
   --tangerine-dark: #d96f0e;
   --sea: #1e7fa3;
@@ -21,7 +28,11 @@ body {
   background: var(--paper);
   line-height: 1.7;
 }
-h1, h2, h3, .logo, .btn, .role { font-family: "Jua", sans-serif; font-weight: 400; }
+h1, h2, h3, .logo, .btn, .role, .motto-text { font-family: var(--font-title); font-weight: 400; }
+
+/* 각주·설명 문구 */
+.hero-kicker, .section-desc, .motto-label, .region, .line,
+.scene figcaption, .resource-item small, .footer, .todo { font-family: var(--font-note); }
 img { max-width: 100%; }
 
 /* 상단 메뉴 */
@@ -144,7 +155,7 @@ img { max-width: 100%; }
   background: #fff; border: 2px dashed var(--tangerine); border-radius: var(--radius);
 }
 .motto-label { margin: 0; color: var(--sea); font-size: 0.95rem; }
-.motto-text { margin: 6px 0 0; font-family: "Jua", sans-serif; font-size: 1.35rem; color: var(--tangerine-dark); line-height: 1.5; }
+.motto-text { margin: 6px 0 0; font-size: 1.35rem; color: var(--tangerine-dark); line-height: 1.5; }
 .subject { font-family: "Noto Sans KR", sans-serif; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
 .role-desc { margin: 0; color: var(--sea); font-weight: 700; font-size: 0.9rem; }
 .line { margin: 8px 0 0; color: var(--muted); font-size: 0.9rem; }
