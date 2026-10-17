@@ -17,48 +17,120 @@ links.addEventListener("click", (e) => {
 });
 
 // 수업계획안 카드
-function renderLessons(area) {
-  const list = area ? LESSONS.filter((l) => l.area === area) : LESSONS;
-  $("#lesson-grid").innerHTML = list.map((l) => `
-    <button class="lesson-card" data-id="${l.id}">
+function renderLessons() {
+  $("#lesson-grid").innerHTML = LESSONS.map((l) => `
+    <button class="lesson-card" data-id="${l.id}" aria-expanded="false" aria-controls="lesson-detail">
       <span class="lesson-icon">${l.icon}</span>
       <span class="tag">${esc(l.area)}</span>
       <h3>${esc(l.title)}</h3>
       <p>${val(l.summary)}</p>
       <span class="lesson-meta">${[l.grade, l.periods, l.teacher].filter(Boolean).map(esc).join(" · ") || "세부 내용 작성 예정"}</span>
+      <span class="lesson-open">자세히 보기 ▼</span>
     </button>`).join("");
 }
 
-// 상세 계획안 (통일 양식)
-const modal = $("#lesson-modal");
-function openLesson(id) {
-  const l = LESSONS.find((x) => x.id === id);
-  $("#modal-body").innerHTML = `
-    <span class="tag">${esc(l.area)}</span>
-    <h2>${l.icon} ${esc(l.title)}</h2>
+// 상세 계획안 — 카드를 누르면 아래로 펼쳐지고, 한글(.hwpx) 파일로 저장할 수 있습니다.
+const detail = $("#lesson-detail");
+let openId = null;
+
+function detailHTML(l) {
+  return `
+    <div class="detail-head">
+      <div>
+        <span class="tag">${esc(l.area)}</span>
+        <h3 class="detail-title">${l.icon} ${esc(l.title)}</h3>
+      </div>
+      <div class="detail-actions">
+        <button class="btn-mini hwp-btn" data-id="${l.id}">📄 한글 파일로 저장</button>
+        <button class="btn-mini ghost fold-btn">접기 ▲</button>
+      </div>
+    </div>
     <table class="info-table">
       <tr><th>교과</th><td>정보</td><th>대상</th><td>${val(l.grade)}</td></tr>
       <tr><th>차시</th><td>${val(l.periods)}</td><th>담당</th><td>${val(l.teacher)}</td></tr>
     </table>
-    <h3>성취기준</h3><p>${val(l.standards)}</p>
-    <h3>학습 목표</h3>${l.goals.length ? `<ul>${l.goals.map((g) => `<li>${esc(g)}</li>`).join("")}</ul>` : `<p>${val("")}</p>`}
-    <h3>수업 흐름</h3>
+    <h4>성취기준</h4><p>${val(l.standards)}</p>
+    <h4>학습 목표</h4>${l.goals.length ? `<ul>${l.goals.map((g) => `<li>${esc(g)}</li>`).join("")}</ul>` : `<p>${val("")}</p>`}
+    <h4>수업 흐름</h4>
     <div class="flow">
       <div><b>도입</b><p>${val(l.flow.intro)}</p></div>
       <div><b>전개</b><p>${val(l.flow.main)}</p></div>
       <div><b>정리</b><p>${val(l.flow.close)}</p></div>
     </div>
-    <h3>평가 계획</h3><p>${val(l.assessment)}</p>
-    <h3>준비물 · 자료</h3><p>${val(l.materials)}</p>
-    <h3>💡 수업 팁</h3><p>${val(l.tips)}</p>`;
-  modal.showModal();
+    <h4>평가 계획</h4><p>${val(l.assessment)}</p>
+    <h4>준비물 · 자료</h4><p>${val(l.materials)}</p>
+    <h4>💡 수업 팁</h4><p>${val(l.tips)}</p>`;
 }
+
+function toggleLesson(id) {
+  const same = openId === id && !detail.hidden;
+  document.querySelectorAll(".lesson-card").forEach((c) =>
+    c.setAttribute("aria-expanded", String(!same && c.dataset.id === id)));
+  if (same) { detail.hidden = true; openId = null; return; }
+  openId = id;
+  detail.innerHTML = detailHTML(LESSONS.find((x) => x.id === id));
+  detail.hidden = false;
+  detail.classList.remove("opening"); void detail.offsetWidth; detail.classList.add("opening");
+  detail.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 $("#lesson-grid").addEventListener("click", (e) => {
   const card = e.target.closest(".lesson-card");
-  if (card) openLesson(card.dataset.id);
+  if (card) toggleLesson(card.dataset.id);
 });
-$(".modal-close").addEventListener("click", () => modal.close());
-modal.addEventListener("click", (e) => { if (e.target === modal) modal.close(); });
+detail.addEventListener("click", (e) => {
+  if (e.target.closest(".fold-btn")) toggleLesson(openId);
+  const hwp = e.target.closest(".hwp-btn");
+  if (hwp) saveHwpx(hwp);
+});
+
+// 한글(.hwpx) 파일 만들기 — 버튼을 누를 때만 변환 라이브러리를 불러옵니다.
+const HWP_LIB = "https://cdn.jsdelivr.net/npm/hwp-convert@1.13.0/dist/browser/hwp-convert.browser.mjs";
+const plain = (s) => (s && String(s).trim() ? esc(s).replace(/\n/g, "<br/>") : "작성 예정");
+
+function exportHTML(l) {
+  const cell = 'style="border:1px solid #999;padding:6px 8px;"';
+  const head = 'style="border:1px solid #999;padding:6px 8px;background-color:#e6f4f9;font-weight:bold;"';
+  const h = (t) => `<h3>${t}</h3>`;
+  return `
+    <h1 style="text-align:center;">${esc(l.title)} 수업계획안</h1>
+    <table style="width:100%;border-collapse:collapse;">
+      <tr><td ${head}>교과</td><td ${cell}>정보</td><td ${head}>대상</td><td ${cell}>${plain(l.grade)}</td></tr>
+      <tr><td ${head}>차시</td><td ${cell}>${plain(l.periods)}</td><td ${head}>담당</td><td ${cell}>${plain(l.teacher)}</td></tr>
+      <tr><td ${head}>영역</td><td ${cell} colspan="3">${esc(l.area)}</td></tr>
+    </table>
+    ${h("1. 성취기준")}<p>${plain(l.standards)}</p>
+    ${h("2. 학습 목표")}${l.goals.length ? `<ol>${l.goals.map((g) => `<li>${esc(g)}</li>`).join("")}</ol>` : "<p>작성 예정</p>"}
+    ${h("3. 수업 흐름")}
+    <table style="width:100%;border-collapse:collapse;">
+      <tr><td ${head}>도입</td><td ${cell}>${plain(l.flow.intro)}</td></tr>
+      <tr><td ${head}>전개</td><td ${cell}>${plain(l.flow.main)}</td></tr>
+      <tr><td ${head}>정리</td><td ${cell}>${plain(l.flow.close)}</td></tr>
+    </table>
+    ${h("4. 평가 계획")}<p>${plain(l.assessment)}</p>
+    ${h("5. 준비물 · 자료")}<p>${plain(l.materials)}</p>
+    ${h("6. 수업 팁")}<p>${plain(l.tips)}</p>
+    <p style="text-align:right;">팀 속전속결 · 즐겨라 제주</p>`;
+}
+
+async function saveHwpx(btn) {
+  const l = LESSONS.find((x) => x.id === btn.dataset.id);
+  const label = btn.textContent;
+  btn.disabled = true; btn.textContent = "만드는 중…";
+  try {
+    const { htmlToHwpx } = await import(HWP_LIB);
+    const bytes = await htmlToHwpx(exportHTML(l), { title: `${l.title} 수업계획안`, creator: "팀 속전속결", page: { size: "A4", orientation: "portrait" } });
+    const url = URL.createObjectURL(new Blob([bytes], { type: "application/hwp+zip" }));
+    const a = Object.assign(document.createElement("a"), { href: url, download: `${l.title} 수업계획안.hwpx` });
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  } catch (err) {
+    console.error(err);
+    alert("한글 파일을 만들지 못했어요. 잠시 후 다시 시도해 주세요.");
+  } finally {
+    btn.disabled = false; btn.textContent = label;
+  }
+}
 
 // 자료실
 $("#resource-list").innerHTML = LESSONS.map((l) => `

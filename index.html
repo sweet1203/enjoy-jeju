@@ -78,8 +78,9 @@
     <!-- 수업계획안 -->
     <section id="lessons" class="section section-tint">
       <h2>📝 수업계획안</h2>
-      <p class="section-desc">카드를 누르면 상세 계획안이 열립니다.</p>
+      <p class="section-desc">카드를 누르면 상세 계획안이 아래로 펼쳐지고, 한글 파일로도 받을 수 있어요.</p>
       <div class="lesson-grid" id="lesson-grid"></div>
+      <div class="lesson-detail" id="lesson-detail" hidden></div>
     </section>
 
     <!-- 자료실 -->
@@ -109,11 +110,6 @@
     <p>© 2026 팀 속전속결 · 즐겨라 제주</p>
   </footer>
 
-  <!-- 수업계획안 상세 -->
-  <dialog id="lesson-modal" class="modal">
-    <button class="modal-close" aria-label="닫기">✕</button>
-    <div id="modal-body"></div>
-  </dialog>
 
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
