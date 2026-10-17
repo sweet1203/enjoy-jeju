@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3차시 · 튜링과 첫 대화: 찾아보고 답하는 AI | 즐겨라 제주</title>
+<meta name="description" content="앨런 튜링 페르소나 AI 프로젝트 3차시 수업 자료 겸 학습지" />
+<link rel="stylesheet" href="lesson.css" />
+</head>
+<body data-lesson="lesson-3">
+<header class="topbar">
+  <a class="home" href="../index.html#resources">🍊 즐겨라 제주</a>
+  <nav class="lesson-nav" aria-label="차시 이동"><a href="lesson-1.html">1차시</a><a href="lesson-2.html">2차시</a><a href="lesson-3.html" class="on">3차시</a><a href="lesson-4.html">4차시</a><a href="lesson-5.html">5차시</a></nav>
+</header>
+<main>
+  <div class="hero">
+    <span class="badge">앨런 튜링 페르소나 AI · 3/5차시</span>
+    <h1>튜링과 첫 대화: 찾아보고 답하는 AI</h1>
+    <p class="unit">인공지능 기초 · 1. 인공지능의 이해</p>
+    <div class="student">
+      <label>학번<input type="text" name="sid" /></label>
+      <label>이름<input type="text" name="sname" /></label>
+      <label>모둠<input type="text" name="sgroup" /></label>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>오늘의 학습 목표</h2>
+    <ol class="goals"><li>검색 후 답하기(RAG)의 과정을 정보 이용 탐색의 관점에서 설명할 수 있다.</li><li>질문에 맞는 자료가 검색될지 예측하고 CLI 대화로 확인할 수 있다.</li><li>언어 모델(딥러닝)이 서버에서 답을 만드는 구조를 설명할 수 있다.</li></ol>
+    <h3>오늘의 흐름</h3>
+    <div class="flow3"><div><b>도입</b><p>암기 시험 vs 오픈북 시험, app.py로 튜링과 첫 인사</p></div><div><b>전개</b><p>검색될 자료 예측 → CLI 대화 → 예측과 비교 → 빗나간 질문 분석</p></div><div><b>정리</b><p>app.py = 찾기(BM25) + 말하기(EXAONE)</p></div></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">개념</span>오늘 알아 둘 것</h2>
+    <div class="concepts">
+      <div class="concept"><b>RAG (검색 증강 생성)</b> · 답하기 전에 자료집에서 관련 내용을 먼저 찾아 보고 답하는 방식. 외워서 보는 시험이 아니라 <b>오픈북 시험</b>이에요.</div>
+      <div class="concept"><b>app.py의 구조</b> · 자료 검색(BM25) → 프롬프트 조립 → EXAONE 호출</div>
+      <div class="concept"><b>app.py가 답을 만드는 순서</b> · ① 지금 질문(2번)+직전 질문으로 자료 1건 검색 ② 점수가 0이면 “관련 자료가 검색되지 않았다”를 넣음 ③ SYSTEM_PROMPT + 자료 + 최근 대화 6회를 vLLM 서버로 전달</div>
+    </div>
+
+    <details class="easy"><summary>BM25 검색은 어떻게 자료를 고르나요?</summary><div>
+      <p>질문과 자료를 작은 조각으로 자른 뒤, <b>겹치는 조각이 많을수록</b> 높은 점수를 줘요. 그리고 여러 자료에 흔하게 나오는 조각보다 <b>드물게 나오는 조각</b>이 겹칠 때 점수를 더 많이 줘요.</p>
+      <p>app.py는 그중 <b>점수가 가장 높은 1건</b>만 골라요(<code>k=1</code>). 겹치는 조각이 하나도 없으면(점수 0) 자료를 넣지 않아요.</p>
+      <p class="note">이렇게 ‘단서(겹치는 조각)를 이용해 가능성이 높은 것부터 찾는 방식’이 인공지능 기초의 <b>정보 이용 탐색</b>이에요. 모든 자료를 처음부터 끝까지 읽는 방식은 <b>맹목적 탐색</b>이라고 해요.</p>
+    </div></details>
+
+    <details class="easy"><summary>왜 낱말을 2글자씩 자르나요? (tokenize)</summary><div>
+      <p>한국어는 같은 낱말에 조사가 다르게 붙어요. ‘자전거로’, ‘자전거를’, ‘자전거가’… 통째로 비교하면 서로 다른 말로 보이죠.</p>
+      <p>2글자씩 자르면 ‘자전’, ‘전거’가 모두 겹쳐서 조사가 달라도 찾을 수 있어요. 예: <code>모방게임</code> → <code>모방</code> · <code>방게</code> · <code>게임</code></p>
+      <div class="tip" data-tokenize>
+        <b>직접 해 보기</b> · 질문을 쓰면 app.py와 같은 규칙으로 잘라 줘요. 자료 문장도 쓰면 <span style="background:#e07b1f;color:#fff;border-radius:4px;padding:0 4px">겹치는 조각</span>이 표시돼요.
+        <div class="field">질문 <input type="text" name="tkq" data-q placeholder="예) 학교에 자전거 타고 갔어요?" /></div>
+        <div class="field">자료 문장 <input type="text" name="tkd" data-d placeholder="예) 학교까지 약 97km를 혼자 자전거로 달렸다" /></div>
+        <div class="chips" data-chips></div>
+        <p class="note">겹치는 조각 수: <output class="result" data-count>0</output></p>
+      </div>
+    </div></details>
+
+    <details class="easy"><summary>질문을 왜 두 번 넣나요? 서버는 또 뭔가요?</summary><div>
+      <p>app.py는 검색할 때 <code>지금 질문 + 지금 질문 + 직전 질문</code>을 써요. 지금 질문을 두 번 넣어 더 중요하게 보고, 직전 질문으로 앞의 주제도 이어 가요. “그럼 그때는요?”처럼 짧은 질문도 앞 맥락으로 찾을 수 있게요.</p>
+      <p><b>서버</b>는 AI 모델(EXAONE)을 켜 두고 질문을 받으면 답을 돌려주는 컴퓨터예요. 선생님이 VESSL의 GPU 컴퓨터에서 <b>vLLM</b>이라는 프로그램으로 켜 둬요. 우리가 쓰는 app.py는 그 서버에 질문을 보내는 쪽(클라이언트)이에요.</p>
+      <p class="note">이 서버는 <b>한 번에 한 질문만</b> 처리하도록 설정돼 있어서, 모둠 대표가 순서대로 질문해야 해요.</p>
+    </div></details>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">참고</span>튜링 자료집(data.json)의 문서 목록</h2>
+    <div class="choices" style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr))"><span>T01 출생 · 가족</span><span>T02 셔번 학교 · 자전거 등교</span><span>T03 친구 크리스토퍼 모컴</span><span>T04 케임브리지 킹스 칼리지</span><span>T05 1936년 튜링 기계 논문</span><span>T06 프린스턴 유학</span><span>T07 블레츨리 파크(비밀 업무)</span><span>T08 꽃가루 알레르기 · 방독면</span><span>T09 장거리 달리기 · 마라톤</span><span>T10 국립물리연구소 · ACE</span><span>T11 맨체스터 · 페란티 마크 1</span><span>T12 「계산 기계와 지능」 · 모방 게임</span><span>T13 기계의 실수에 대한 강연</span><span>T14 체스 프로그램 투로챔프</span><span>T15 제퍼슨의 반론</span><span>T16 생물의 무늬 연구</span><span>T17 1952년 재판을 앞둔 상황</span><span>T18 친구에게 보낸 편지</span></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">활동</span>검색 예측 기록지</h2>
+    <p>① 질문을 정하고 어떤 자료가 검색될지 <b>예측</b> → ② 모둠 대표가 CLI에서 질문하고 답을 기록 → ③ 예측과 비교해요.</p>
+    <div class="table-wrap"><table class="sheet">
+      <tr><th style="width:5%">번호</th><th style="width:30%">질문</th><th style="width:13%">예측 자료</th><th>튜링의 답 (요약)</th><th style="width:13%">예측 결과</th></tr>
+      <tr class="ex"><td class="c">예</td><td>자전거로 학교 간 적 있어요?</td><td class="c">T02</td><td>13살 첫 등교 날 총파업 때문에 자전거로 갔다고 답함</td><td class="c">적중</td></tr>
+      <tr><td class="c">1</td><td><input type="text" name="q0" placeholder="" /></td><td><input type="text" name="p0" placeholder="T__" /></td><td><textarea name="a0" placeholder="" style="min-height:52px"></textarea></td><td><select name="h0" data-rate-of="hit"><option value="">선택</option><option value="o">적중</option><option value="x">빗나감</option></select></td></tr><tr><td class="c">2</td><td><input type="text" name="q1" placeholder="" /></td><td><input type="text" name="p1" placeholder="T__" /></td><td><textarea name="a1" placeholder="" style="min-height:52px"></textarea></td><td><select name="h1" data-rate-of="hit"><option value="">선택</option><option value="o">적중</option><option value="x">빗나감</option></select></td></tr><tr><td class="c">3</td><td><input type="text" name="q2" placeholder="" /></td><td><input type="text" name="p2" placeholder="T__" /></td><td><textarea name="a2" placeholder="" style="min-height:52px"></textarea></td><td><select name="h2" data-rate-of="hit"><option value="">선택</option><option value="o">적중</option><option value="x">빗나감</option></select></td></tr><tr><td class="c">4</td><td><input type="text" name="q3" placeholder="" /></td><td><input type="text" name="p3" placeholder="T__" /></td><td><textarea name="a3" placeholder="" style="min-height:52px"></textarea></td><td><select name="h3" data-rate-of="hit"><option value="">선택</option><option value="o">적중</option><option value="x">빗나감</option></select></td></tr><tr><td class="c">5</td><td><input type="text" name="q4" placeholder="" /></td><td><input type="text" name="p4" placeholder="T__" /></td><td><textarea name="a4" placeholder="" style="min-height:52px"></textarea></td><td><select name="h4" data-rate-of="hit"><option value="">선택</option><option value="o">적중</option><option value="x">빗나감</option></select></td></tr>
+    </table></div>
+    <p>예측 적중률: <output class="result" data-rate="hit">- / 5</output></p>
+
+    <h3>빗나간 질문 분석</h3>
+    <div class="field">빗나간 질문과 실제로 나온(또는 나오지 않은) 자료 <input type="text" name="miss" placeholder="" /></div>
+    <div class="field">원인은? (하나 이상)</div>
+    <div class="choices"><label><input type="checkbox" name="why0" value="0" /> <span>자료에 그 내용이 없어서</span></label><label><input type="checkbox" name="why1" value="1" /> <span>keywords에 그 낱말이 없어서</span></label><label><input type="checkbox" name="why2" value="2" /> <span>질문 표현이 자료와 달라서</span></label><label><input type="checkbox" name="why3" value="3" /> <span>다른 자료와 겹치는 조각이 더 많아서</span></label></div>
+    <div class="field">2글자로 잘라 보니 겹친 조각 / 안 겹친 조각 <input type="text" name="chunks" placeholder="위의 ‘직접 해 보기’를 활용하세요" /></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">정리</span>스스로 평가하기</h2>
+    <div class="table-wrap"><table class="sheet self"><tr><th>평가 내용</th><th>잘함</th><th>보통</th><th>노력</th></tr><tr><td>RAG가 ‘찾기 + 말하기’로 이루어진다는 것을 설명할 수 있다.</td><td class="c"><input type="radio" name="se0" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se0" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se0" value="노력" aria-label="노력" /></td></tr><tr><td>질문에 맞는 자료를 예측하고 실제 결과와 비교했다.</td><td class="c"><input type="radio" name="se1" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se1" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se1" value="노력" aria-label="노력" /></td></tr><tr><td>모델 서버와 app.py가 어떻게 연결되는지 설명할 수 있다.</td><td class="c"><input type="radio" name="se2" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se2" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se2" value="노력" aria-label="노력" /></td></tr></table></div>
+    <div class="field">한 줄 정리: app.py = 찾기(______) + 말하기(______) <input type="text" name="sum" placeholder="" /></div>
+    <p class="note">빗나간 질문은 버리지 말고 남겨 두세요. 4차시 ‘페르소나 디버깅’의 재료가 돼요.</p>
+  </section>
+
+  <div class="actions">
+    <button type="button" data-action="print">🖨️ 인쇄 · PDF로 저장</button>
+    <button type="button" class="ghost" data-action="reset">적은 내용 모두 지우기</button>
+  </div>
+  <p class="saved">적은 내용은 이 브라우저에 자동 저장돼요. 제출할 때는 ‘인쇄 · PDF로 저장’을 이용하세요.</p>
+</main>
+<script src="lesson.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>2차시 · 튜링 자료집 data.json 만들기 | 즐겨라 제주</title>
+<meta name="description" content="앨런 튜링 페르소나 AI 프로젝트 2차시 수업 자료 겸 학습지" />
+<link rel="stylesheet" href="lesson.css" />
+</head>
+<body data-lesson="lesson-2">
+<header class="topbar">
+  <a class="home" href="../index.html#resources">🍊 즐겨라 제주</a>
+  <nav class="lesson-nav" aria-label="차시 이동"><a href="lesson-1.html">1차시</a><a href="lesson-2.html" class="on">2차시</a><a href="lesson-3.html">3차시</a><a href="lesson-4.html">4차시</a><a href="lesson-5.html">5차시</a></nav>
+</header>
+<main>
+  <div class="hero">
+    <span class="badge">앨런 튜링 페르소나 AI · 2/5차시</span>
+    <h1>튜링 자료집 data.json 만들기</h1>
+    <p class="unit">인공지능 기초 · 2. 인공지능과 학습</p>
+    <div class="student">
+      <label>학번<input type="text" name="sid" /></label>
+      <label>이름<input type="text" name="sname" /></label>
+      <label>모둠<input type="text" name="sgroup" /></label>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>오늘의 학습 목표</h2>
+    <ol class="goals"><li>페르소나에 필요한 자료를 선정하고 출처를 확인하여 수집할 수 있다.</li><li>수집한 자료를 id, content, keywords 구조의 JSON으로 정리할 수 있다.</li><li>검색이 잘 되도록 자료마다 핵심 키워드를 뽑을 수 있다.</li></ol>
+    <h3>오늘의 흐름</h3>
+    <div class="flow3"><div><b>도입</b><p>자료 없이 / 자료와 함께 답한 두 결과 비교하기</p></div><div><b>전개</b><p>주제별로 나누기 → 3인칭 content 쓰기 → 키워드 뽑기 → JSON 검사</p></div><div><b>정리</b><p>문서 1건 발표, 출처 확인의 중요성</p></div></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">개념</span>오늘 알아 둘 것</h2>
+    <div class="concepts">
+      <div class="concept"><b>JSON</b> · <code>{"이름": 값}</code> 모양으로 자료를 정리하는 형식이에요. 파이썬 딕셔너리와 거의 똑같아요.</div>
+      <div class="concept"><b>app.py가 읽는 구조</b> · <code>documents</code> 목록 안에 문서마다 <code>id</code>(번호) · <code>content</code>(사실) · <code>keywords</code>(검색어)가 들어 있어요.</div>
+      <div class="concept"><b>좋은 자료의 조건</b> · ① 한 문서에 한 주제(날짜·장소·인물을 분명하게) ② 3인칭 서술 ③ 학생이 물을 법한 키워드</div>
+    </div>
+    <h3>실제 data.json의 문서 한 건</h3>
+    <div class="example">{
+  "documents": [
+    {
+      "id": "T09",
+      "content": "장거리 달리기를 즐겼다. 마라톤 기록은 약 2시간 46분이었고, 1948년 올림픽 대표 선발에 도전했지만 부상으로 뜻을 이루지 못했다.",
+      "keywords": ["운동", "달리기", "마라톤", "육상", "올림픽", "취미", "체력", "건강", "기록"]
+    }
+  ]
+}</div>
+
+    <details class="easy"><summary>JSON 문법, 이것만 기억하세요</summary><div>
+      <ul>
+        <li><code>{ }</code> 중괄호 = 하나의 묶음(문서 한 건), <code>[ ]</code> 대괄호 = 여러 개의 목록</li>
+        <li>이름과 글자는 반드시 <b>큰따옴표</b> <code>" "</code>로 감싸요. 작은따옴표 <code>' '</code>는 오류!</li>
+        <li>항목 사이에는 쉼표 <code>,</code>를 넣고, <b>마지막 항목 뒤에는 쉼표를 넣지 않아요.</b></li>
+        <li>열었던 괄호는 꼭 닫아요. <code>{</code> 개수 = <code>}</code> 개수</li>
+      </ul>
+      <div class="example">// ✘ 자주 하는 실수
+{ 'id': "T20", "content": "...", "keywords": ["a", "b",] }
+//    ↑ 작은따옴표                         ↑ 마지막 쉼표</div>
+    </div></details>
+
+    <details class="easy"><summary>왜 ‘그는 ~했다’처럼 3인칭으로 쓰나요?</summary><div>
+      <p><code>app.py</code>는 찾은 자료를 튜링에게 건네면서 <b>“자료의 ‘그’는 나 자신이다”</b>라고 알려 줘요. 그래서 3인칭으로 써 두면 튜링이 자기 이야기로 자연스럽게 바꿔 말해요.</p>
+      <p>“나는 ~했다”로 쓰면 학생의 이야기인지 튜링의 이야기인지 헷갈릴 수 있어요.</p>
+    </div></details>
+
+    <details class="easy"><summary>keywords는 어디에 쓰이나요?</summary><div>
+      <p>keywords는 <b>자료를 찾을 때만</b> 쓰여요. AI에게 건네지는 건 <code>content</code>뿐이에요.</p>
+      <p>예를 들어 학생이 “선생님 운동 좋아하세요?”라고 물으면, content에는 ‘운동’이라는 말이 없어도 keywords의 ‘운동’ 덕분에 T09를 찾을 수 있어요. 그러니 <b>학생들이 실제로 쓸 법한 말</b>을 넣는 게 중요해요.</p>
+    </div></details>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">활동 1</span>조사 노트를 주제별 문서로 나누기</h2>
+    <div class="table-wrap"><table class="sheet">
+      <tr><th style="width:20%">주제</th><th>들어갈 내용 (1차시 조사 노트에서)</th><th style="width:16%">문서 id</th></tr>
+      <tr><td class="c">생애</td><td><input type="text" name="cat0" placeholder="" /></td><td><input type="text" name="catid0" placeholder="예) G01" /></td></tr><tr><td class="c">학창 시절</td><td><input type="text" name="cat1" placeholder="" /></td><td><input type="text" name="catid1" placeholder="예) G02" /></td></tr><tr><td class="c">업적</td><td><input type="text" name="cat2" placeholder="" /></td><td><input type="text" name="catid2" placeholder="예) G03" /></td></tr><tr><td class="c">취미</td><td><input type="text" name="cat3" placeholder="" /></td><td><input type="text" name="catid3" placeholder="예) G04" /></td></tr><tr><td class="c">생각과 어록</td><td><input type="text" name="cat4" placeholder="" /></td><td><input type="text" name="catid4" placeholder="예) G05" /></td></tr>
+    </table></div>
+  </section>
+
+  <section class="block" data-json-build>
+    <h2><span class="no">활동 2·3</span>문서 쓰기와 키워드 뽑기</h2>
+    <p>날짜 · 장소 · 인물은 <b>출처와 다시 대조</b>해서 확인해요. 아래에 쓰면 오른쪽 아래 미리보기에 JSON이 자동으로 만들어져요.</p>
+    
+      <div data-doc class="step">
+        <h3><span class="tag">문서 1</span></h3>
+        <div class="field">id (번호)<input type="text" name="d0id" data-id placeholder="예) G01" /></div>
+        <div class="field">content (3인칭으로 2~3문장)<textarea name="d0c" data-content placeholder="예) 그는 장거리 달리기를 즐겼다. ..."></textarea></div>
+        <div class="field">keywords (쉼표로 구분, 5~10개)<input type="text" name="d0k" data-keywords placeholder="예) 운동, 달리기, 마라톤, 취미" /></div>
+      </div>
+      <div data-doc class="step">
+        <h3><span class="tag">문서 2</span></h3>
+        <div class="field">id (번호)<input type="text" name="d1id" data-id placeholder="예) G02" /></div>
+        <div class="field">content (3인칭으로 2~3문장)<textarea name="d1c" data-content placeholder="예) 그는 장거리 달리기를 즐겼다. ..."></textarea></div>
+        <div class="field">keywords (쉼표로 구분, 5~10개)<input type="text" name="d1k" data-keywords placeholder="예) 운동, 달리기, 마라톤, 취미" /></div>
+      </div>
+      <div data-doc class="step">
+        <h3><span class="tag">문서 3</span></h3>
+        <div class="field">id (번호)<input type="text" name="d2id" data-id placeholder="예) G03" /></div>
+        <div class="field">content (3인칭으로 2~3문장)<textarea name="d2c" data-content placeholder="예) 그는 장거리 달리기를 즐겼다. ..."></textarea></div>
+        <div class="field">keywords (쉼표로 구분, 5~10개)<input type="text" name="d2k" data-keywords placeholder="예) 운동, 달리기, 마라톤, 취미" /></div>
+      </div>
+    <h3>자동으로 만들어진 JSON 미리보기</h3>
+    <pre class="example" data-preview></pre>
+    <button type="button" class="btn no-print" data-action="copy-json">↓ 이 JSON을 검사기에 넣기</button>
+  </section>
+
+  <section class="block" data-json-check>
+    <h2><span class="no">활동 4</span>JSON 형식 검사기</h2>
+    <p>모둠 data.json 전체를 붙여 넣으면 형식이 맞는지 바로 알려 줘요.</p>
+    <textarea name="jsoncheck" placeholder="{&quot;documents&quot;: [ ... ]}" style="min-height:160px"></textarea>
+    <p class="status"></p>
+    <details class="easy"><summary>검사를 통과했다면? app.py로 확인하기</summary><div>
+      <p>선생님 서버에서 <code>python persona-core/app.py</code>를 실행하면 맨 처음에 <code>참고 자료 N건</code>이라는 메시지가 나와요. 우리가 쓴 문서 수만큼 늘었다면 성공!</p>
+    </div></details>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">정리</span>스스로 평가하기</h2>
+    <div class="table-wrap"><table class="sheet self"><tr><th>평가 내용</th><th>잘함</th><th>보통</th><th>노력</th></tr><tr><td>출처를 확인하며 필요한 자료를 골라 모았다.</td><td class="c"><input type="radio" name="se0" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se0" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se0" value="노력" aria-label="노력" /></td></tr><tr><td>자료를 id · content · keywords 구조의 JSON으로 정리했다.</td><td class="c"><input type="radio" name="se1" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se1" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se1" value="노력" aria-label="노력" /></td></tr><tr><td>학생들이 물을 법한 키워드를 뽑았다.</td><td class="c"><input type="radio" name="se2" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se2" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se2" value="노력" aria-label="노력" /></td></tr></table></div>
+    <div class="field">발표할 문서 1건: 어떤 질문에 쓰일 자료인가요? <input type="text" name="present" placeholder="" /></div>
+    <p class="note">기억하기: 자료가 틀리면 AI도 틀려요. 다음 차시에는 이 자료를 찾아서 답하는 RAG와 CLI 대화를 해 봐요.</p>
+  </section>
+
+  <div class="actions">
+    <button type="button" data-action="print">🖨️ 인쇄 · PDF로 저장</button>
+    <button type="button" class="ghost" data-action="reset">적은 내용 모두 지우기</button>
+  </div>
+  <p class="saved">적은 내용은 이 브라우저에 자동 저장돼요. 제출할 때는 ‘인쇄 · PDF로 저장’을 이용하세요.</p>
+</main>
+<script src="lesson.js"></script>
+</body>
+</html>

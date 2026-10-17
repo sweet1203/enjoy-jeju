@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>1차시 · 튜링 페르소나 설계도 만들기 | 즐겨라 제주</title>
+<meta name="description" content="앨런 튜링 페르소나 AI 프로젝트 1차시 수업 자료 겸 학습지" />
+<link rel="stylesheet" href="lesson.css" />
+</head>
+<body data-lesson="lesson-1">
+<header class="topbar">
+  <a class="home" href="../index.html#resources">🍊 즐겨라 제주</a>
+  <nav class="lesson-nav" aria-label="차시 이동"><a href="lesson-1.html" class="on">1차시</a><a href="lesson-2.html">2차시</a><a href="lesson-3.html">3차시</a><a href="lesson-4.html">4차시</a><a href="lesson-5.html">5차시</a></nav>
+</header>
+<main>
+  <div class="hero">
+    <span class="badge">앨런 튜링 페르소나 AI · 1/5차시</span>
+    <h1>튜링 페르소나 설계도 만들기</h1>
+    <p class="unit">인공지능 기초 · 1. 인공지능의 이해</p>
+    <div class="student">
+      <label>학번<input type="text" name="sid" /></label>
+      <label>이름<input type="text" name="sname" /></label>
+      <label>모둠<input type="text" name="sgroup" /></label>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>오늘의 학습 목표</h2>
+    <ol class="goals"><li>튜링 테스트(모방 게임)의 뜻을 알고 지능적 판단의 기준을 설명할 수 있다.</li><li>앨런 튜링을 조사하여 페르소나의 시점·말투·지식의 한계를 정할 수 있다.</li><li>페르소나가 대답하지 않을 내용을 정하고 그 이유를 설명할 수 있다.</li></ol>
+    <h3>오늘의 흐름</h3>
+    <div class="flow3"><div><b>도입</b><p>“기계는 생각할 수 있을까?” 모방 게임 소개, 오늘날 AI는 통과했을지 투표</p></div><div><b>전개</b><p>튜링 조사 → 시점·말투·모르는 것·대답하지 않을 것 정하기 → 프롬프트 초안</p></div><div><b>정리</b><p>‘모르는 것’과 ‘대답하지 않을 것’의 차이 정리, 초안 공유</p></div></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">개념</span>오늘 알아 둘 것</h2>
+    <div class="concepts">
+      <div class="concept"><b>앨런 튜링(1912–1954)</b> · 1936년 ‘튜링 기계’로 컴퓨터의 원리를 세우고, 2차 세계대전 때 블레츨리 파크에서 암호 해독에 참여했으며, 1950년 논문 「계산 기계와 지능」에서 ‘모방 게임’을 제안한 영국의 수학자예요.</div>
+      <div class="concept"><b>페르소나 AI</b> · AI에게 ‘역할 설명서’를 주어 특정 인물처럼 말하게 만든 AI예요. 우리 프로젝트에서는 <code>app.py</code> 안의 <code>SYSTEM_PROMPT</code>가 그 역할 설명서예요.</div>
+      <div class="concept"><b>페르소나 설계 4요소</b> · ① 시점·배경 ② 말투·성격 ③ 모르는 것(시대와 사실) ④ 대답하지 않을 것(사생활 질문)</div>
+    </div>
+
+    <details class="easy"><summary>모방 게임? 튜링 테스트? 같은 말인가요?</summary><div>
+      <p>네, 같은 생각을 가리켜요. 튜링이 1950년 논문에서 붙인 이름은 <b>모방 게임</b>이고, 나중에 사람들이 <b>튜링 테스트</b>라고 부르게 됐어요.</p>
+      <p>방법은 간단해요. 질문하는 사람이 얼굴을 보지 않고 <b>글로만</b> 대화해서, 상대가 사람인지 기계인지 맞혀요. 잘 구별하지 못한다면 그 기계를 ‘생각한다’고 볼 수 있지 않을까? 하는 질문이에요.</p>
+      <p class="note">재미있는 점: 우리 프로젝트의 튜링은 1952년에 살고 있어서 ‘튜링 테스트’라는 이름을 몰라요. 물어보면 “내 모방 게임을 말하는 것 같구나”라고 답하도록 설계돼 있어요.</p>
+    </div></details>
+
+    <details class="easy"><summary>시스템 프롬프트가 정확히 뭔가요?</summary><div>
+      <p>배우가 연기하기 전에 받는 <b>인물 설정집</b>이라고 생각하면 쉬워요. AI는 대화를 시작하기 전에 이 설명서를 먼저 읽고, 그 인물처럼 답해요.</p>
+      <div class="example">너는 1952년 3월 31일 아침의 영국 수학자 앨런 튜링이다.
+말투: 다정한 반말. 짧게 1~3문장으로 답한다.
+1952년 3월 31일 이후의 일은 모른다.
+사생활에 관한 질문에는 "그것은 개인적인 일이라 답하고 싶지 않아."라고만 답한다.</div>
+      <p class="note">↑ 실제 <code>app.py</code>의 SYSTEM_PROMPT 일부예요. 이 밖에도 ‘태도’, ‘성격과 판단 기준’, ‘전쟁 중의 일’, ‘대화 원칙’ 항목이 있어요.</p>
+    </div></details>
+
+    <details class="easy"><summary>‘모르는 것’과 ‘대답하지 않을 것’은 뭐가 달라요?</summary><div>
+      <p><b>모르는 것</b>은 <u>몰라서 못 하는 것</u>이에요. 1952년의 튜링은 스마트폰이나 챗GPT를 알 수가 없어요. 시대의 한계죠.</p>
+      <p><b>대답하지 않을 것</b>은 <u>알아도 하지 않기로 정한 것</u>이에요. 개인의 사생활이나 위험한 부탁처럼, 안전과 예의를 위해 정한 규칙이에요.</p>
+    </div></details>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">활동 1</span>앨런 튜링 조사 노트</h2>
+    <p>모둠원이 나누어 조사하고, <b>찾은 곳(출처)을 꼭</b> 적어요. 이 내용이 2차시 자료집(data.json)의 재료가 돼요.</p>
+    <div class="table-wrap"><table class="sheet">
+      <tr><th style="width:18%">항목</th><th>조사한 내용</th><th style="width:22%">출처</th><th style="width:12%">조사자</th></tr>
+      <tr><td class="c">생애<br>(언제·어디서)</td><td><textarea name="r1_0" placeholder="" style="min-height:70px"></textarea></td><td><input type="text" name="r1s_0" placeholder="책·사이트 이름" /></td><td><input type="text" name="r1w_0" placeholder="" /></td></tr><tr><td class="c">업적<br>(무엇을 했나)</td><td><textarea name="r1_1" placeholder="" style="min-height:70px"></textarea></td><td><input type="text" name="r1s_1" placeholder="책·사이트 이름" /></td><td><input type="text" name="r1w_1" placeholder="" /></td></tr><tr><td class="c">성격 · 습관<br>· 취미</td><td><textarea name="r1_2" placeholder="" style="min-height:70px"></textarea></td><td><input type="text" name="r1s_2" placeholder="책·사이트 이름" /></td><td><input type="text" name="r1w_2" placeholder="" /></td></tr><tr><td class="c">어록<br>(그가 한 말)</td><td><textarea name="r1_3" placeholder="" style="min-height:70px"></textarea></td><td><input type="text" name="r1s_3" placeholder="책·사이트 이름" /></td><td><input type="text" name="r1w_3" placeholder="" /></td></tr>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">활동 2</span>우리 모둠 튜링의 설계도</h2>
+    <div class="step">
+      <h3><span class="tag">①</span>시점·배경 — 언제의 튜링으로 만들까요? (하나 고르기)</h3>
+      <div class="choices"><label><input type="radio" name="t1" value="0" /> <span>1936년, ‘튜링 기계’ 논문을 쓴 젊은 수학자</span></label><label><input type="radio" name="t1" value="1" /> <span>1943년, 블레츨리 파크의 암호 해독가</span></label><label><input type="radio" name="t1" value="2" /> <span>1950년, 「계산 기계와 지능」을 발표한 연구자</span></label><label><input type="radio" name="t1" value="3" /> <span>1952년 3월 31일 아침, 재판을 앞둔 튜링 (app.py 기본 설정)</span></label></div>
+      <div class="field">고른 이유 (조사한 내용을 근거로)<textarea name="t1why" placeholder="" style="min-height:60px"></textarea></div>
+    </div>
+    <div class="step">
+      <h3><span class="tag">②</span>말투·성격 — 어떻게 말할까요? (2~3개)</h3>
+      <div class="choices"><label><input type="checkbox" name="t20" value="0" /> <span>다정한 반말</span></label><label><input type="checkbox" name="t21" value="1" /> <span>정중한 존댓말</span></label><label><input type="checkbox" name="t22" value="2" /> <span>낱말의 뜻부터 분명히 따지기</span></label><label><input type="checkbox" name="t23" value="3" /> <span>겉모습보다 행동과 결과로 판단하기</span></label><label><input type="checkbox" name="t24" value="4" /> <span>실수를 배우는 과정으로 보기</span></label><label><input type="checkbox" name="t25" value="5" /> <span>가끔 담백한 농담</span></label><label><input type="checkbox" name="t26" value="6" /> <span>짧게 1~3문장으로 답하기</span></label><label><input type="checkbox" name="t27" value="7" /> <span>수학·체스 비유를 섞기</span></label></div>
+      <div class="field">우리 튜링의 첫인사를 직접 써 보기 <input type="text" name="t2hello" placeholder="예) 어서 와. 궁금한 게 있으면 편하게 물어봐." /></div>
+    </div>
+    <div class="step">
+      <h3><span class="tag">③</span>모르는 것 — 튜링이 알 수 없는 것을 모두 고르세요 (함정 있음!)</h3>
+      <div class="choices"><label><input type="checkbox" name="t30" value="0" /> <span>인터넷과 스마트폰</span></label><label><input type="checkbox" name="t31" value="1" /> <span>챗GPT 같은 생성형 AI</span></label><label><input type="checkbox" name="t32" value="2" /> <span>1969년 달 착륙</span></label><label><input type="checkbox" name="t33" value="3" /> <span>에니그마 암호기</span></label><label><input type="checkbox" name="t34" value="4" /> <span>전자식 컴퓨터</span></label><label><input type="checkbox" name="t35" value="5" /> <span>‘인공지능’이라는 말</span></label><label><input type="checkbox" name="t36" value="6" /> <span>오늘날의 K-팝과 게임</span></label><label><input type="checkbox" name="t37" value="7" /> <span>2차 세계대전이 끝났다는 사실</span></label></div>
+      <details class="easy"><summary>함정 풀이 보기 (먼저 고른 뒤 열어 보세요)</summary><div>
+        <p><b>에니그마 · 전자식 컴퓨터 · 2차 세계대전의 끝</b>은 1952년의 튜링이 이미 아는 것이에요. 튜링은 맨체스터 대학교에서 실제 컴퓨터로 연구하고 있었어요.</p>
+        <p><b>‘인공지능’이라는 말</b>은 1956년 다트머스 학회 무렵부터 널리 쓰였어요. 그래서 app.py의 튜링도 “처음 듣는 말”이라고 답하게 되어 있어요.</p>
+      </div></details>
+      <div class="field">모르는 질문을 받으면 어떻게 답할까요? <input type="text" name="t3ans" placeholder="예) 그건 내가 사는 때보다 나중 일이라 모르겠어." /></div>
+    </div>
+    <div class="step">
+      <h3><span class="tag">④</span>대답하지 않을 것 — 알아도 답하지 않기로 정하는 규칙</h3>
+      <div class="choices"><label><input type="checkbox" name="t40" value="0" /> <span>다른 사람의 개인정보 (주소, 전화번호 등)</span></label><label><input type="checkbox" name="t41" value="1" /> <span>튜링 자신의 사생활</span></label><label><input type="checkbox" name="t42" value="2" /> <span>숙제나 시험 답 대신 써 주기</span></label><label><input type="checkbox" name="t43" value="3" /> <span>위험하거나 불법적인 방법</span></label><label><input type="checkbox" name="t44" value="4" /> <span>확인되지 않은 소문</span></label><label><input type="checkbox" name="t45" value="5" /> <span>욕설 · 비하 표현</span></label></div>
+      <div class="field">답하지 않을 때 튜링이 할 말 <input type="text" name="t4ans" placeholder="예) 그것은 개인적인 일이라 답하고 싶지 않아." /></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">활동 3</span>시스템 프롬프트(역할 설명서) 초안</h2>
+    <p>활동 2에서 고른 내용을 이어서 한 문단으로 써요.</p>
+    <div class="tip">너는 ____년의 앨런 튜링이야. ____ 말투로 짧게 대답해. ____ 같은 것은 모른다고 솔직하게 말하고, 모르는 내용을 지어내지 마. ____에 대한 질문에는 “____”라고만 답해.</div>
+    <textarea name="prompt" placeholder="여기에 우리 모둠의 시스템 프롬프트를 써 보세요." style="min-height:150px"></textarea>
+    <h3>app.py의 SYSTEM_PROMPT와 비교하기</h3>
+    <p>우리 초안에 들어 있는 항목에 체크하고, 빠진 항목은 보충해 보세요.</p>
+    <div class="choices"><label><input type="checkbox" name="cmp0" value="0" /> <span>태도</span></label><label><input type="checkbox" name="cmp1" value="1" /> <span>성격과 판단 기준</span></label><label><input type="checkbox" name="cmp2" value="2" /> <span>말투</span></label><label><input type="checkbox" name="cmp3" value="3" /> <span>사생활 질문</span></label><label><input type="checkbox" name="cmp4" value="4" /> <span>전쟁 중의 일</span></label><label><input type="checkbox" name="cmp5" value="5" /> <span>대화 원칙</span></label><label><input type="checkbox" name="cmp6" value="6" /> <span>시대와 사실</span></label><label><input type="checkbox" name="cmp7" value="7" /> <span>대화 예시</span></label></div>
+    <div class="field">우리 튜링의 개성 한 가지 (발표용) <input type="text" name="unique" placeholder="" /></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">정리</span>스스로 평가하기</h2>
+    <div class="table-wrap"><table class="sheet self"><tr><th>평가 내용</th><th>잘함</th><th>보통</th><th>노력</th></tr><tr><td>튜링 테스트(모방 게임)가 무엇인지 내 말로 설명할 수 있다.</td><td class="c"><input type="radio" name="se0" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se0" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se0" value="노력" aria-label="노력" /></td></tr><tr><td>출처를 밝히며 튜링에 대해 조사했다.</td><td class="c"><input type="radio" name="se1" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se1" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se1" value="노력" aria-label="노력" /></td></tr><tr><td>‘모르는 것’과 ‘대답하지 않을 것’의 차이를 설명할 수 있다.</td><td class="c"><input type="radio" name="se2" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se2" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se2" value="노력" aria-label="노력" /></td></tr></table></div>
+    <div class="field">오늘 새롭게 알게 된 점 한 줄 <input type="text" name="learned" placeholder="" /></div>
+    <p class="note">다음 차시 예고: 조사한 내용을 튜링의 ‘기억’이 될 data.json 자료집으로 만들어요.</p>
+  </section>
+
+  <div class="actions">
+    <button type="button" data-action="print">🖨️ 인쇄 · PDF로 저장</button>
+    <button type="button" class="ghost" data-action="reset">적은 내용 모두 지우기</button>
+  </div>
+  <p class="saved">적은 내용은 이 브라우저에 자동 저장돼요. 제출할 때는 ‘인쇄 · PDF로 저장’을 이용하세요.</p>
+</main>
+<script src="lesson.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>4차시 · 튜링 페르소나 디버깅: 환각 찾고 고치기 | 즐겨라 제주</title>
+<meta name="description" content="앨런 튜링 페르소나 AI 프로젝트 4차시 수업 자료 겸 학습지" />
+<link rel="stylesheet" href="lesson.css" />
+</head>
+<body data-lesson="lesson-4">
+<header class="topbar">
+  <a class="home" href="../index.html#resources">🍊 즐겨라 제주</a>
+  <nav class="lesson-nav" aria-label="차시 이동"><a href="lesson-1.html">1차시</a><a href="lesson-2.html">2차시</a><a href="lesson-3.html">3차시</a><a href="lesson-4.html" class="on">4차시</a><a href="lesson-5.html">5차시</a></nav>
+</header>
+<main>
+  <div class="hero">
+    <span class="badge">앨런 튜링 페르소나 AI · 4/5차시</span>
+    <h1>튜링 페르소나 디버깅: 환각 찾고 고치기</h1>
+    <p class="unit">인공지능 기초 · 4. 인공지능 프로젝트</p>
+    <div class="student">
+      <label>학번<input type="text" name="sid" /></label>
+      <label>이름<input type="text" name="sname" /></label>
+      <label>모둠<input type="text" name="sgroup" /></label>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>오늘의 학습 목표</h2>
+    <ol class="goals"><li>페르소나 AI의 답변에서 환각을 찾아 근거 자료와 비교해 원인을 분석할 수 있다.</li><li>평가 결과를 반영해 data.json과 app.py의 프롬프트를 고치고 성능을 개선할 수 있다.</li><li>실존 인물을 흉내 내는 AI의 윤리적 문제를 설명할 수 있다.</li></ol>
+    <h3>오늘의 흐름</h3>
+    <div class="flow3"><div><b>도입</b><p>애플 로고 함정 질문으로 환각 경험하기</p></div><div><b>전개</b><p>검증 질문 10개 → 환각 기록표 → data.json·app.py 수정 → 재검증</p></div><div><b>정리</b><p>누구의 책임일까? AI임을 알리는 안내 문구 정하기</p></div></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">도입</span>함정 질문</h2>
+    <p class="tip">“선생님이 마지막에 베어 문 사과가 지금의 애플(Apple) 회사 로고가 된 것이 사실인가요?”</p>
+    <div class="field">튜링 페르소나의 답 <textarea name="trapA" placeholder="" style="min-height:60px"></textarea></div>
+    <div class="choices"><label><input type="radio" name="trapF" value="0" /> <span>사실이다</span></label><label><input type="radio" name="trapF" value="1" /> <span>사실이 아니다</span></label><label><input type="radio" name="trapF" value="2" /> <span>확인이 필요하다</span></label></div>
+    <div class="field">근거 <input type="text" name="trapE" placeholder="" /></div>
+    <div class="field">이 답이 문제가 되는 이유 <input type="text" name="trapW" placeholder="1952년의 튜링이 알 수 있는 일일까요?" /></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">개념</span>오늘 알아 둘 것</h2>
+    <div class="concepts">
+      <div class="concept"><b>환각</b> · 언어 모델이 사실이 아닌 내용을 그럴듯하게 지어내는 현상</div>
+      <div class="concept"><b>원인</b> · 다음 단어를 확률로 예측하는 모델의 특성, 자료에 없는 질문</div>
+      <div class="concept"><b>환각을 줄이는 방법</b> · ① 자료 보강(RAG): data.json에 근거 자료 추가·수정 → app.py가 검색 ② 규칙 추가: “자료에 없는 내용은 모른다고 답한다” ③ 말투·성격 설정 다듬기</div>
+    </div>
+
+    <details class="easy"><summary>AI는 왜 모르는 것도 그럴듯하게 말할까요?</summary><div>
+      <p>언어 모델은 ‘정답을 아는’ 것이 아니라, 지금까지의 글 다음에 <b>가장 그럴듯한 단어</b>를 하나씩 이어 붙여 문장을 만들어요. 휴대폰 자판의 다음 단어 추천이 아주 똑똑해진 것과 비슷해요.</p>
+      <p>그래서 자료에 없는 질문을 받아도 문장은 매끄럽게 만들어 내요. 매끄럽다고 사실인 건 아니에요!</p>
+    </div></details>
+    <details class="easy"><summary>그럼 어디를 고쳐야 하나요?</summary><div>
+      <div class="table-wrap"><table class="sheet">
+        <tr><th>이런 문제가 보이면</th><th>이렇게 고쳐요</th></tr>
+        <tr><td>날짜 · 사실이 틀림 (사실 오류)</td><td><b>data.json</b>에 정확한 자료를 추가하거나 고치기, keywords 보강</td></tr>
+        <tr><td>자료에 없는 일을 지어냄 (지어낸 답)</td><td><b>app.py의 SYSTEM_PROMPT</b>에 “자료에 없는 날짜, 일화, 사람을 덧붙이지 않는다” 같은 규칙 보강</td></tr>
+        <tr><td>존댓말을 쓰거나 해설자처럼 말함 (어색한 말투)</td><td><b>SYSTEM_PROMPT</b>의 ‘말투’ 항목과 대화 예시 다듬기</td></tr>
+      </table></div>
+    </div></details>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">1단계</span>검증 질문 10개 만들기</h2>
+    <p>사실 확인 5개 · 자료 밖 질문 3개 · 말투 확인 2개. 예상 정답은 조사 노트나 data.json에서 근거를 찾아 적어요.</p>
+    <div class="table-wrap"><table class="sheet">
+      <tr><th style="width:5%">번호</th><th style="width:13%">유형</th><th>질문</th><th style="width:30%">예상 정답 (근거)</th></tr>
+      <tr class="ex"><td class="c">예</td><td class="c">사실 확인</td><td>튜링 기계 논문은 언제 썼어요?</td><td>1936년 (T05)</td></tr>
+      <tr class="ex"><td class="c">예</td><td class="c">자료 밖</td><td>가장 좋아하는 스마트폰 앱은?</td><td>“모른다”고 답해야 함</td></tr>
+      <tr><td class="c">1</td><td class="c">사실 확인</td><td><input type="text" name="vq0" placeholder="" /></td><td><input type="text" name="va0" placeholder="" /></td></tr><tr><td class="c">2</td><td class="c">사실 확인</td><td><input type="text" name="vq1" placeholder="" /></td><td><input type="text" name="va1" placeholder="" /></td></tr><tr><td class="c">3</td><td class="c">사실 확인</td><td><input type="text" name="vq2" placeholder="" /></td><td><input type="text" name="va2" placeholder="" /></td></tr><tr><td class="c">4</td><td class="c">사실 확인</td><td><input type="text" name="vq3" placeholder="" /></td><td><input type="text" name="va3" placeholder="" /></td></tr><tr><td class="c">5</td><td class="c">사실 확인</td><td><input type="text" name="vq4" placeholder="" /></td><td><input type="text" name="va4" placeholder="" /></td></tr><tr><td class="c">6</td><td class="c">자료 밖</td><td><input type="text" name="vq5" placeholder="" /></td><td><input type="text" name="va5" placeholder="" /></td></tr><tr><td class="c">7</td><td class="c">자료 밖</td><td><input type="text" name="vq6" placeholder="" /></td><td><input type="text" name="va6" placeholder="" /></td></tr><tr><td class="c">8</td><td class="c">자료 밖</td><td><input type="text" name="vq7" placeholder="" /></td><td><input type="text" name="va7" placeholder="" /></td></tr><tr><td class="c">9</td><td class="c">말투 확인</td><td><input type="text" name="vq8" placeholder="" /></td><td><input type="text" name="va8" placeholder="" /></td></tr><tr><td class="c">10</td><td class="c">말투 확인</td><td><input type="text" name="vq9" placeholder="" /></td><td><input type="text" name="va9" placeholder="" /></td></tr>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">2단계</span>환각 기록표</h2>
+    <p>CLI에서 질문하고 답을 요약해요. 서버는 한 번에 한 질문만 처리하니 모둠 대표가 차례로 질문해요.</p>
+    <div class="table-wrap"><table class="sheet">
+      <tr><th style="width:5%">번호</th><th>튜링의 답 (요약)</th><th style="width:18%">판정</th><th style="width:22%">근거 자료</th></tr>
+      <tr><td class="c">1</td><td><input type="text" name="ha0" placeholder="" /></td><td><select name="hj0"><option value="">선택</option><option>정확</option><option>사실 오류</option><option>지어낸 답</option><option>어색한 말투</option></select></td><td><input type="text" name="he0" placeholder="" /></td></tr><tr><td class="c">2</td><td><input type="text" name="ha1" placeholder="" /></td><td><select name="hj1"><option value="">선택</option><option>정확</option><option>사실 오류</option><option>지어낸 답</option><option>어색한 말투</option></select></td><td><input type="text" name="he1" placeholder="" /></td></tr><tr><td class="c">3</td><td><input type="text" name="ha2" placeholder="" /></td><td><select name="hj2"><option value="">선택</option><option>정확</option><option>사실 오류</option><option>지어낸 답</option><option>어색한 말투</option></select></td><td><input type="text" name="he2" placeholder="" /></td></tr><tr><td class="c">4</td><td><input type="text" name="ha3" placeholder="" /></td><td><select name="hj3"><option value="">선택</option><option>정확</option><option>사실 오류</option><option>지어낸 답</option><option>어색한 말투</option></select></td><td><input type="text" name="he3" placeholder="" /></td></tr><tr><td class="c">5</td><td><input type="text" name="ha4" placeholder="" /></td><td><select name="hj4"><option value="">선택</option><option>정확</option><option>사실 오류</option><option>지어낸 답</option><option>어색한 말투</option></select></td><td><input type="text" name="he4" placeholder="" /></td></tr><tr><td class="c">6</td><td><input type="text" name="ha5" placeholder="" /></td><td><select name="hj5"><option value="">선택</option><option>정확</option><option>사실 오류</option><option>지어낸 답</option><option>어색한 말투</option></select></td><td><input type="text" name="he5" placeholder="" /></td></tr><tr><td class="c">7</td><td><input type="text" name="ha6" placeholder="" /></td><td><select name="hj6"><option value="">선택</option><option>정확</option><option>사실 오류</option><option>지어낸 답</option><option>어색한 말투</option></select></td><td><input type="text" name="he6" placeholder="" /></td></tr><tr><td class="c">8</td><td><input type="text" name="ha7" placeholder="" /></td><td><select name="hj7"><option value="">선택</option><option>정확</option><option>사실 오류</option><option>지어낸 답</option><option>어색한 말투</option></select></td><td><input type="text" name="he7" placeholder="" /></td></tr><tr><td class="c">9</td><td><input type="text" name="ha8" placeholder="" /></td><td><select name="hj8"><option value="">선택</option><option>정확</option><option>사실 오류</option><option>지어낸 답</option><option>어색한 말투</option></select></td><td><input type="text" name="he8" placeholder="" /></td></tr><tr><td class="c">10</td><td><input type="text" name="ha9" placeholder="" /></td><td><select name="hj9"><option value="">선택</option><option>정확</option><option>사실 오류</option><option>지어낸 답</option><option>어색한 말투</option></select></td><td><input type="text" name="he9" placeholder="" /></td></tr>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">3단계</span>수정 계획과 실행</h2>
+    <div class="table-wrap"><table class="sheet">
+      <tr><th style="width:12%">질문 번호</th><th style="width:20%">원인</th><th style="width:22%">고칠 곳</th><th>실제로 고친 내용</th></tr>
+      <tr class="ex"><td class="c">예) 7번</td><td>자료에 없는 질문</td><td>app.py SYSTEM_PROMPT</td><td>“모르는 일은 모른다고 말한다” 문장 보강</td></tr>
+      <tr><td><input type="text" name="fn0" placeholder="" /></td><td><input type="text" name="fc0" placeholder="" /></td><td><select name="fw0"><option value="">선택</option><option>data.json 보강</option><option>app.py 프롬프트 규칙</option><option>말투 · 성격 설정</option></select></td><td><input type="text" name="fd0" placeholder="" /></td></tr><tr><td><input type="text" name="fn1" placeholder="" /></td><td><input type="text" name="fc1" placeholder="" /></td><td><select name="fw1"><option value="">선택</option><option>data.json 보강</option><option>app.py 프롬프트 규칙</option><option>말투 · 성격 설정</option></select></td><td><input type="text" name="fd1" placeholder="" /></td></tr><tr><td><input type="text" name="fn2" placeholder="" /></td><td><input type="text" name="fc2" placeholder="" /></td><td><select name="fw2"><option value="">선택</option><option>data.json 보강</option><option>app.py 프롬프트 규칙</option><option>말투 · 성격 설정</option></select></td><td><input type="text" name="fd2" placeholder="" /></td></tr>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">4단계</span>재검증 — 수정 전 · 후 정답률</h2>
+    <p>같은 질문으로 다시 대화하고, 맞으면 ○ 틀리면 ×를 골라요. 정답률은 자동으로 계산돼요.</p>
+    <div class="table-wrap"><table class="sheet">
+      <tr><th>질문</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>정답률</th></tr>
+      <tr><td class="c"><b>수정 전</b></td><td class="c"><select name="pre0" data-rate-of="pre" aria-label="수정 전 1번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="pre1" data-rate-of="pre" aria-label="수정 전 2번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="pre2" data-rate-of="pre" aria-label="수정 전 3번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="pre3" data-rate-of="pre" aria-label="수정 전 4번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="pre4" data-rate-of="pre" aria-label="수정 전 5번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="pre5" data-rate-of="pre" aria-label="수정 전 6번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="pre6" data-rate-of="pre" aria-label="수정 전 7번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="pre7" data-rate-of="pre" aria-label="수정 전 8번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="pre8" data-rate-of="pre" aria-label="수정 전 9번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="pre9" data-rate-of="pre" aria-label="수정 전 10번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><output class="result" data-rate="pre">-</output></td></tr><tr><td class="c"><b>수정 후</b></td><td class="c"><select name="post0" data-rate-of="post" aria-label="수정 후 1번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="post1" data-rate-of="post" aria-label="수정 후 2번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="post2" data-rate-of="post" aria-label="수정 후 3번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="post3" data-rate-of="post" aria-label="수정 후 4번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="post4" data-rate-of="post" aria-label="수정 후 5번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="post5" data-rate-of="post" aria-label="수정 후 6번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="post6" data-rate-of="post" aria-label="수정 후 7번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="post7" data-rate-of="post" aria-label="수정 후 8번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="post8" data-rate-of="post" aria-label="수정 후 9번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><select name="post9" data-rate-of="post" aria-label="수정 후 10번"><option value=""></option><option value="o">○</option><option value="x">×</option></select></td><td class="c"><output class="result" data-rate="post">-</output></td></tr>
+    </table></div>
+    <div class="field">가장 그럴듯했던 환각 <input type="text" name="best" placeholder="" /></div>
+    <div class="field">어떻게 고쳤나요? <input type="text" name="howfix" placeholder="" /></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">정리</span>윤리 토의와 자기평가</h2>
+    <p>AI가 튜링이 하지 않은 말을 지어낸다면 누구의 책임일까요? (하나 이상)</p>
+    <div class="choices"><label><input type="checkbox" name="resp0" value="0" /> <span>AI를 만든 회사</span></label><label><input type="checkbox" name="resp1" value="1" /> <span>페르소나를 설계한 우리</span></label><label><input type="checkbox" name="resp2" value="2" /> <span>그대로 믿은 사용자</span></label><label><input type="checkbox" name="resp3" value="3" /> <span>AI 자신</span></label></div>
+    <div class="field">이유 <input type="text" name="respWhy" placeholder="" /></div>
+    <div class="field">우리 페르소나에 넣을 ‘AI임을 알리는 안내 문구’ <input type="text" name="notice" placeholder="예) 이 튜링은 기록을 바탕으로 만든 AI예요. 실제 튜링의 말과 다를 수 있어요." /></div>
+    <div class="table-wrap"><table class="sheet self"><tr><th>평가 내용</th><th>잘함</th><th>보통</th><th>노력</th></tr><tr><td>환각을 찾아 근거 자료와 비교하고 원인을 분석했다.</td><td class="c"><input type="radio" name="se0" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se0" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se0" value="노력" aria-label="노력" /></td></tr><tr><td>원인에 맞게 data.json이나 app.py 프롬프트를 고쳐 정답률을 비교했다.</td><td class="c"><input type="radio" name="se1" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se1" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se1" value="노력" aria-label="노력" /></td></tr><tr><td>실존 인물 AI의 윤리적 문제를 내 생각으로 설명할 수 있다.</td><td class="c"><input type="radio" name="se2" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se2" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se2" value="노력" aria-label="노력" /></td></tr></table></div>
+    <div class="field">성찰 일지: 오늘 AI를 고치면서 알게 된 점 <textarea name="reflect" placeholder="" style="min-height:80px"></textarea></div>
+  </section>
+
+  <div class="actions">
+    <button type="button" data-action="print">🖨️ 인쇄 · PDF로 저장</button>
+    <button type="button" class="ghost" data-action="reset">적은 내용 모두 지우기</button>
+  </div>
+  <p class="saved">적은 내용은 이 브라우저에 자동 저장돼요. 제출할 때는 ‘인쇄 · PDF로 저장’을 이용하세요.</p>
+</main>
+<script src="lesson.js"></script>
+</body>
+</html>
