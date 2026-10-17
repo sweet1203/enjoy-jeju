@@ -24,6 +24,18 @@ document.querySelectorAll(".flip-card").forEach((card) => {
   });
 });
 
+// 확장 트랙 탭
+document.querySelectorAll(".track-tab").forEach((tab) => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".track-tab").forEach((t) => {
+      const on = t === tab;
+      t.classList.toggle("on", on);
+      t.setAttribute("aria-selected", String(on));
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+  });
+});
+
 // 수업계획안 카드
 function renderLessons() {
   $("#lesson-grid").innerHTML = LESSONS.map((l) => `

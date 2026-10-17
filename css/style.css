@@ -294,6 +294,20 @@ img { max-width: 100%; }
 .hwp-flow .plan-box p { margin: 0; white-space: normal; word-break: keep-all; }
 .hwp-flow .plan-box p.sub { padding-left: 1.2em; }
 
+/* 확장 트랙 */
+.track-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; }
+.track-tab {
+  font: inherit; font-family: var(--font-myungjo); font-weight: 700; font-size: 1.05rem; cursor: pointer;
+  padding: 10px 22px; border-radius: 999px; border: 2px solid var(--sea); background: #fff; color: var(--sea);
+}
+.track-tab.on { background: var(--sea); color: #fff; }
+.track-tab:focus-visible { outline: 3px solid var(--tangerine); outline-offset: 2px; }
+.track[hidden] { display: none; }
+#extend .plan-table td:first-child { white-space: nowrap; }
+#extend .plan-table.compare td:first-child { white-space: normal; text-align: left; font-weight: 400; color: var(--muted); width: 40%; }
+#extend .plan-table td b { color: var(--sea); }
+@media print { .track[hidden] { display: block !important; } .track-tabs { display: none; } }
+
 /* 상세 계획안 (아래로 펼침) */
 .lesson-open { font-size: 0.85rem; color: var(--tangerine-dark); font-weight: 700; }
 .lesson-card[aria-expanded="true"] { border-color: var(--tangerine); }

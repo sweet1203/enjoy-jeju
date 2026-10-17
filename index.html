@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261017-hero2" />
+  <link rel="stylesheet" href="css/style.css?v=20261017-extend" />
 </head>
 <body>
   <header class="nav">
@@ -178,6 +178,122 @@
         <figcaption>🌊 수업도 제주처럼, 즐겨라!</figcaption>
       </figure>
     </section>
+
+    <!-- 확장 트랙 -->
+    <section id="extend" class="section section-tint">
+      <h2>🌱 확장 트랙</h2>
+      <p class="section-desc">같은 튜링 페르소나 AI를 중학교 수업과 윤리 융합 수업으로 넓혀 봅니다.</p>
+
+      <div class="track-tabs" role="tablist" aria-label="확장 트랙 선택">
+        <button class="track-tab on" role="tab" aria-selected="true" aria-controls="track-ms" id="tab-ms">트랙 1 · 중학교 적용</button>
+        <button class="track-tab" role="tab" aria-selected="false" aria-controls="track-eth" id="tab-eth">트랙 2 · 윤리 융합 수업</button>
+      </div>
+
+      <!-- 트랙 1 -->
+      <div class="track" id="track-ms" role="tabpanel" aria-labelledby="tab-ms">
+        <div class="plan-block">
+          <h3>🏫 트랙 1. 중학생이 만나는 ‘튜링 카드’ AI</h3>
+          <dl class="plan-target">
+            <div><dt>대상 · 과목</dt><dd>중학교 2~3학년 · 2022 개정 「정보」 (인공지능 · 디지털 문화 영역), 「도덕」 연계</dd></div>
+            <div><dt>차시</dt><dd>4차시 (고등학교 5차시에서 코드·터미널 단계를 빼고 체험과 판단 중심으로 재구성)</dd></div>
+            <div><dt>핵심 아이디어</dt><dd>학생은 코드를 다루지 않고 <b>인물 카드</b>(말투·모르는 것·대답하지 않을 것)와 <b>사실 카드</b>(자료)를 만든다. 교사가 미리 켜 둔 <b>웹 채팅</b>에 카드를 넣어 대화하고, 틀린 답을 찾아 고친다.</dd></div>
+          </dl>
+        </div>
+
+        <div class="plan-block">
+          <h3>🔁 고등학교 수업에서 이렇게 바꿔요</h3>
+          <div class="table-wrap">
+            <table class="plan-table compare">
+              <thead><tr><th>고등학교 (인공지능 기초)</th><th>중학교 (정보)</th></tr></thead>
+              <tbody>
+                <tr><td>터미널(CLI)에서 app.py 실행</td><td>교사가 켜 둔 <b>웹 채팅 화면</b>에서 대화 (주소만 공유)</td></tr>
+                <tr><td>시스템 프롬프트를 한 문단으로 작성</td><td>빈칸 채우기형 <b>인물 카드</b> (보기에서 고르고 한 줄 쓰기)</td></tr>
+                <tr><td>data.json 직접 작성 · 형식 검사</td><td>양식에 사실 카드를 쓰면 <b>JSON이 자동으로 만들어지는</b> 학습지 사용 (2차시 학습지 기능)</td></tr>
+                <tr><td>BM25 · tokenize · RAG 개념 설명</td><td>“AI가 오픈북 시험을 본다” 비유와 2글자 자르기 체험만</td></tr>
+                <tr><td>검증 질문 10개 · 정답률 계산</td><td>모둠별 <b>질문 5개</b>, 맞음/틀림 ○× 기록</td></tr>
+                <tr><td>책임 소재 · 공존 방안 토론</td><td>‘인물 AI 사용 약속’ 만들기 (도덕 [9도03-07] 연계)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="plan-block">
+          <h3>📚 4차시 수업 흐름</h3>
+          <div class="table-wrap">
+            <table class="plan-table">
+              <thead><tr><th>차시</th><th>활동</th><th>성취기준</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td><b>누가 사람일까?</b> 친구 · 교사 · 챗봇의 답을 섞은 블라인드 채팅으로 모방 게임 체험, 인공지능의 뜻과 특징 정리</td><td>[9정04-01] 인공지능의 개념과 특성을 설명하고 인공지능 소프트웨어를 구별한다.</td></tr>
+                <tr><td>2</td><td><b>튜링 카드 만들기</b> 인물 카드(시대 · 말투 · 모르는 것 · 대답하지 않을 것)와 사실 카드 5장 작성, 출처 적기</td><td>[9정04-02] 인공지능 학습에서 데이터의 중요성을 이해하고, 필요한 데이터를 수집하여 분류한다.</td></tr>
+                <tr><td>3</td><td><b>우리 튜링과 대화하기</b> 카드를 웹 채팅에 넣고 질문 5개로 대화, 카드가 있을 때와 없을 때 답 비교</td><td>[9정04-03] 다양한 데이터를 활용하여 인공지능 시스템을 구성하고 적용한다.</td></tr>
+                <tr><td>4</td><td><b>틀린 답 고치기와 약속</b> ○× 기록으로 지어낸 답 찾기 → 카드 고치기, 출처 · 사생활 보호를 담은 ‘인물 AI 사용 약속’ 3가지</td><td>[9정04-05] 데이터의 수집과 활용에서 발생하는 윤리적인 문제의 해결 방안을 구상한다.<br />[9정05-03] 개인 정보 및 권리와 저작권 보호 실천</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="plan-note"><b>운영 팁</b> 웹 채팅 서버는 교사가 VESSL에서 한 번만 켜고, 모둠별 카드는 교사가 모아 서버에 반영합니다. 학생 기기에는 설치할 것이 없습니다. 실존 인물의 사생활 질문에는 답하지 않는 규칙을 꼭 함께 안내하세요.</p>
+        </div>
+      </div>
+
+      <!-- 트랙 2 -->
+      <div class="track" id="track-eth" role="tabpanel" aria-labelledby="tab-eth" hidden>
+        <div class="plan-block">
+          <h3>⚖️ 트랙 2. ‘인공지능 기초’ × ‘현대사회와 윤리’ 융합 수업</h3>
+          <dl class="plan-target">
+            <div><dt>대상 · 과목</dt><dd>고등학교 2학년 · 「인공지능 기초」(진로선택) + 「현대사회와 윤리」(일반선택), 정보 · 윤리 교사 협력</dd></div>
+            <div><dt>차시</dt><dd>7차시 (정보 4 + 윤리 3), 같은 학급에서 같은 주에 번갈아 운영</dd></div>
+            <div><dt>핵심 질문</dt><dd>“세상을 떠난 실존 인물을 AI로 되살려 대화하게 해도 될까? 된다면 어떤 조건에서?”</dd></div>
+          </dl>
+        </div>
+
+        <div class="plan-block">
+          <h3>🎯 연계 성취기준</h3>
+          <div class="table-wrap">
+            <table class="plan-table">
+              <thead><tr><th>과목</th><th>성취기준</th></tr></thead>
+              <tbody>
+                <tr><td>현대사회와 윤리</td><td><b>[12현윤03-03]</b> 윤리적인 인공지능을 위하여 인간과 인공지능의 관계를 설명하고, 인공지능으로 인해 발생하는 윤리 문제의 해결 방안을 인공지능 윤리의 관점에서 제시할 수 있다.</td></tr>
+                <tr><td>현대사회와 윤리</td><td>[12현윤03-01] 과학기술 연구에 대한 다양한 관점을 조사하여 비교·설명하고, 과학기술의 사회적 책임 문제에 적용하여 비판 또는 정당화할 수 있다.</td></tr>
+                <tr><td>현대사회와 윤리</td><td>[12현윤01-02] 동양 및 서양의 윤리사상, 사회사상의 접근들을 비교 분석하고, 현대사회의 윤리 문제와 쟁점에 적용하여 윤리적 해결 방안을 도출할 수 있다.</td></tr>
+                <tr><td>인공지능 기초</td><td>[12인기03-04] 인공지능의 활용사례와 윤리적 딜레마 상황을 인공지능 윤리 관점에서 분석한다. · [12인기04-04] 사회적 영향을 고려하여 개발하고 성능을 개선한다.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="plan-block">
+          <h3>📚 7차시 수업 흐름</h3>
+          <div class="table-wrap">
+            <table class="plan-table">
+              <thead><tr><th>차시</th><th>과목</th><th>활동</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>윤리</td><td><b>기계는 생각할 수 있을까?</b> 튜링의 모방 게임과 설(J. Searle)의 ‘중국어 방’ 논증 비교, 인간과 AI의 관계 정리</td></tr>
+                <tr><td>2</td><td>정보</td><td><b>페르소나 설계와 자료집</b> 시스템 프롬프트와 data.json 작성 (기존 1·2차시 압축)</td></tr>
+                <tr><td>3</td><td>정보</td><td><b>찾아보고 답하는 AI</b> RAG 원리와 CLI 대화, 검색 예측 (기존 3차시)</td></tr>
+                <tr><td>4</td><td>윤리</td><td><b>인물 AI의 윤리 쟁점</b> 고인의 동의와 인격, 사생활 보호, 사실과 다른 말을 인물의 말처럼 하는 문제. 칸트의 의무론(인격을 수단으로만 대하지 말라)과 공리주의(교육적 이익과 피해)로 각각 판단해 보기</td></tr>
+                <tr><td>5</td><td>정보</td><td><b>환각 디버깅</b> 검증 질문 · 환각 기록표 · 정답률 비교 (기존 4차시). 윤리 시간에 정한 기준을 거절 규칙과 안내 문구로 프롬프트에 반영</td></tr>
+                <tr><td>6</td><td>정보</td><td><b>공개와 상호 평가</b> 웹 · Roblox NPC로 공개, ‘튜링다움’과 함께 ‘윤리 기준 준수’ 항목도 평가</td></tr>
+                <tr><td>7</td><td>윤리</td><td><b>우리 반 인물 AI 윤리 가이드라인</b> 투명성(AI임을 밝힘) · 사실 확인 · 사생활 존중 · 책임 소재를 담은 가이드라인 작성과 발표, 과학기술자의 사회적 책임 성찰</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="plan-note"><b>융합 포인트</b> app.py의 튜링은 사생활 · 재판 관련 질문에 “그것은 개인적인 일이라 답하고 싶지 않아.”라고만 답하도록 설계되어 있습니다. 4차시 윤리 수업에서 이 규칙이 왜 필요한지 토론하고, 학생들이 정한 기준을 5차시에 직접 코드(프롬프트)에 반영하면 ‘윤리적 판단 → 기술적 설계’가 한 흐름으로 이어집니다.</p>
+        </div>
+
+        <div class="plan-block">
+          <h3>📝 평가 아이디어</h3>
+          <div class="table-wrap">
+            <table class="plan-table">
+              <thead><tr><th>과목</th><th>평가 과제</th><th>관점</th></tr></thead>
+              <tbody>
+                <tr><td>윤리</td><td>“실존 인물 AI는 허용되어야 하는가” 논술 (두 윤리 이론 적용)</td><td>논거의 타당성, 이론 적용의 정확성</td></tr>
+                <tr><td>정보</td><td>윤리 기준을 반영한 프롬프트 · data.json과 수정 전 · 후 정답률 보고서</td><td>기준의 구현 정도, 근거 기반 개선</td></tr>
+                <tr><td>공동</td><td>인물 AI 윤리 가이드라인 발표</td><td>협력, 실천 가능성</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -185,7 +301,7 @@
   </footer>
 
 
-  <script src="js/data.js?v=20261017-hero2"></script>
-  <script src="js/main.js?v=20261017-hero2"></script>
+  <script src="js/data.js?v=20261017-extend"></script>
+  <script src="js/main.js?v=20261017-extend"></script>
 </body>
 </html>
