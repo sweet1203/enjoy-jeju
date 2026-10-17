@@ -84,9 +84,9 @@ img { max-width: 100%; }
 .section h2 { font-family: var(--font-myungjo); font-size: 2.2rem; letter-spacing: -0.05em; margin: 0 0 6px; text-align: center; }
 .section-desc { text-align: center; color: var(--muted); margin: 0 0 36px; }
 
-/* 수업계획안 안내 문구: 오른쪽으로 1글자만큼 들여쓰기 (넓은 화면에서만) */
+/* 수업계획안 안내 문구: 가운데에서 왼쪽으로 2글자만큼 옮김 (넓은 화면에서만) */
 @media (min-width: 1100px) {
-  #lessons .section-desc { width: fit-content; margin-left: auto; margin-right: auto; position: relative; left: 1em; }
+  #lessons .section-desc { width: fit-content; margin-left: auto; margin-right: auto; position: relative; left: -2em; }
 }
 
 /* 프로젝트 소개 */
