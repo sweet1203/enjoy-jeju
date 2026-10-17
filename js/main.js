@@ -95,5 +95,37 @@ const fb = $("#feedback-btn");
 if (FEEDBACK_FORM_URL) fb.href = FEEDBACK_FORM_URL;
 else { fb.textContent = "의견 폼 준비 중"; fb.classList.add("disabled"); fb.removeAttribute("href"); }
 
+// 현재 위치 바 (오른쪽) — 스크롤하면 지금 보고 있는 섹션이 표시됩니다.
+function renderSpy() {
+  const spy = $("#spy");
+  if (!spy) return;
+  const secs = [
+    { el: $(".hero"), label: "처음" },
+    ...[...document.querySelectorAll("main section[id]")].map((el) => ({
+      el, label: el.querySelector("h2").textContent.replace(/^[^\p{L}]+/u, "").trim(),
+    })),
+  ];
+  spy.innerHTML = `<div class="spy-track"><i class="spy-fill"></i></div>
+    <ol>${secs.map((s, i) => `<li><a href="#${s.el.id || "top"}" data-i="${i}"><span>${esc(s.label)}</span></a></li>`).join("")}</ol>`;
+  const links = [...spy.querySelectorAll("a")];
+  const fill = spy.querySelector(".spy-fill");
+
+  function update() {
+    const y = window.scrollY + window.innerHeight * 0.4;
+    let cur = 0;
+    secs.forEach((s, i) => { if (s.el.offsetTop <= y) cur = i; });
+    links.forEach((a, i) => {
+      a.classList.toggle("active", i === cur);
+      a.classList.toggle("passed", i < cur);
+    });
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    fill.style.height = (max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0) + "%";
+  }
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+}
+
 renderFilters();
 renderLessons();
+renderSpy();

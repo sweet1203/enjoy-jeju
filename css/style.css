@@ -170,6 +170,37 @@ img { max-width: 100%; }
 .footer { text-align: center; padding: 28px; background: var(--basalt); color: #cfd4d6; font-size: 0.9rem; }
 .footer p { margin: 0; }
 
+/* 현재 위치 바 (오른쪽) */
+.spy {
+  position: fixed; right: 22px; top: 50%; transform: translateY(-50%); z-index: 9;
+  --gap: 46px;
+}
+.spy-track {
+  position: absolute; right: 6px; top: 7px; bottom: 7px; width: 4px;
+  background: rgba(47, 52, 55, 0.12); border-radius: 999px; overflow: hidden;
+}
+.spy-fill { display: block; width: 100%; height: 0; background: linear-gradient(var(--canola), var(--tangerine)); transition: height .15s linear; }
+.spy ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--gap); }
+.spy a {
+  position: relative; display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+  text-decoration: none; color: var(--muted);
+}
+.spy a::after {
+  content: ""; width: 16px; height: 16px; border-radius: 50%; flex: none;
+  background: #fff; border: 3px solid #cfd4d6; transition: all .25s;
+}
+.spy a span {
+  font-family: "Jua", sans-serif; font-size: 0.9rem; white-space: nowrap;
+  background: rgba(255, 255, 255, 0.85); padding: 1px 10px; border-radius: 999px;
+  opacity: 0; transform: translateX(6px); transition: all .25s;
+}
+.spy:hover a span, .spy a.active span { opacity: 1; transform: none; }
+.spy a.passed::after { border-color: var(--tangerine); }
+.spy a.active::after { background: var(--tangerine); border-color: #fff; box-shadow: 0 0 0 3px var(--tangerine); transform: scale(1.15); }
+.spy a.active span { background: var(--tangerine); color: #fff; font-size: 1rem; box-shadow: 0 4px 10px rgba(217, 111, 14, 0.25); }
+.spy a:hover span { color: var(--tangerine-dark); }
+.spy a.active:hover span { color: #fff; }
+
 /* 상세 모달 */
 .modal {
   width: min(760px, calc(100% - 32px)); max-height: 88vh;
@@ -203,4 +234,9 @@ img { max-width: 100%; }
   .member img { width: 90px; height: 90px; }
   .flow { grid-template-columns: 1fr; }
   .modal { padding: 22px 18px; }
+  .btn { font-size: 1.35rem; padding: 12px 26px; }
+  .spy { right: 8px; --gap: 30px; }
+  .spy a::after { width: 12px; height: 12px; border-width: 2px; }
+  .spy-track { right: 5px; width: 3px; }
+  .spy a span { font-size: 0.8rem; }
 }
