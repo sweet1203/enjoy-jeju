@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261017-adv" />
+  <link rel="stylesheet" href="css/style.css?v=20261017-track3" />
 </head>
 <body>
   <header class="nav">
@@ -199,11 +199,12 @@
     <!-- 확장 트랙 -->
     <section id="extend" class="section section-tint">
       <h2>🌱 확장 트랙</h2>
-      <p class="section-desc">같은 튜링 페르소나 AI를 중학교 수업과 윤리 융합 수업으로 넓혀 봅니다.</p>
+      <p class="section-desc">같은 튜링 페르소나 AI를 중학교 수업, 윤리 융합 수업, 코드 심화 과제로 넓혀 봅니다.</p>
 
       <div class="track-tabs" role="tablist" aria-label="확장 트랙 선택">
         <button class="track-tab on" role="tab" aria-selected="true" aria-controls="track-ms" id="tab-ms">트랙 1 · 중학교 적용</button>
         <button class="track-tab" role="tab" aria-selected="false" aria-controls="track-eth" id="tab-eth">트랙 2 · 윤리 융합 수업</button>
+        <button class="track-tab" role="tab" aria-selected="false" aria-controls="track-code" id="tab-code">트랙 3 · app.py 심화 과제</button>
       </div>
 
       <!-- 트랙 1 -->
@@ -310,6 +311,86 @@
           </div>
         </div>
       </div>
+      <!-- 트랙 3 -->
+      <div class="track" id="track-code" role="tabpanel" aria-labelledby="tab-code" hidden>
+        <div class="plan-block">
+          <h3>🛠️ 트랙 3. app.py 고쳐 쓰기 심화 프로젝트</h3>
+          <dl class="plan-target">
+            <div><dt>대상</dt><dd>5차시 기본 수업을 마친 고등학교 2학년 중 코드 심화를 원하는 모둠 (동아리 · 방과후 · 추가 2~3차시)</dd></div>
+            <div><dt>목표</dt><dd>대화 프로그램 <code>app.py</code>의 <b>chat() 함수를 직접 고쳐</b> 기능을 더하고, 4차시에서 찾은 환각과 윤리 문제를 <b>코드로</b> 해결한다.</dd></div>
+            <div><dt>성취기준</dt><dd>[12인기04-03] 협력적 문제 해결로 인공지능 소프트웨어 개발 · [12인기04-04] 사회적 영향을 고려해 개발하고 성능 개선 · [12인기01-04] 정보 이용 탐색 알고리즘 적용</dd></div>
+          </dl>
+        </div>
+
+        <div class="plan-block">
+          <h3>🎯 미션 고르기 (모둠별 2~3개)</h3>
+          <div class="table-wrap">
+            <table class="plan-table missions">
+              <thead><tr><th>미션</th><th>난이도</th><th>할 일</th><th>고칠 곳</th><th>성공 기준</th></tr></thead>
+              <tbody>
+                <tr><td>1. 명령어 만들기</td><td>★</td><td><code>/자료</code>를 치면 마지막 참고 자료를, <code>/처음</code>을 치면 대화를 처음부터</td><td>chat()의 while 반복문 맨 앞</td><td>명령어는 모델에게 보내지 않고 바로 처리된다</td></tr>
+                <tr><td>2. 출처 밝히기</td><td>★★</td><td>답 뒤에 <code>(참고: T09)</code>처럼 쓴 자료 번호 표시, 시작할 때 ‘AI임을 알리는 안내 문구’ 출력</td><td>print(f"튜링: …") 줄, WELCOME 뒤</td><td>답마다 자료 번호 또는 ‘참고 자료 없음’이 보인다</td></tr>
+                <tr><td>3. 대화 기록 저장</td><td>★★</td><td>질문 · 참고 자료 · 답을 <code>chat_log.csv</code>에 한 줄씩 저장</td><td>새 함수 save_log() 추가</td><td>엑셀로 열어 4차시 환각 기록표에 바로 쓸 수 있다</td></tr>
+                <tr><td>4. ‘모른다’ 안전장치</td><td>★★</td><td>자료가 검색되지 않으면 “사실을 묻는 질문이면 지어내지 말라”는 안내를 함께 전달</td><td>if len(evidence_parts) == 0: 부분</td><td>자료 밖 질문에서 지어낸 답이 줄어든다 (eval.py로 전 · 후 비교)</td></tr>
+                <tr><td>5. 동의어 사전</td><td>★★★</td><td>“AI → 인공지능”, “튜링 테스트 → 모방 게임”처럼 학생 말을 자료의 말로 넓혀 검색</td><td>새 함수 expand_query(), query 만드는 줄</td><td>빗나가던 질문이 맞는 자료를 찾는다 (--dry-run으로 확인)</td></tr>
+                <tr><td>6. 코드로 막는 질문</td><td>★★★</td><td>개인정보 같은 금지어가 있으면 모델에 보내지 않고 정해진 문장으로 답하기</td><td>while 반복문, 새 목록 BLOCK_WORDS</td><td>프롬프트 규칙과 코드 규칙의 차이를 설명할 수 있다</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="plan-block">
+          <h3>💡 미션 힌트</h3>
+          <details class="hint"><summary>미션 1 · 명령어 만들기</summary>
+<pre><code>last_evidence = "아직 없음"          # while 문 위에 추가
+
+    if user == "/자료":
+        print("[마지막 참고 자료]\n" + last_evidence)
+        continue                       # 모델에게 보내지 않고 다음 입력으로
+    if user == "/처음":
+        history.clear()
+        print("튜링: 좋아, 처음부터 다시 이야기하자.")
+        continue
+
+    ...
+    last_evidence = evidence           # 자료를 고른 뒤 기억해 두기</code></pre>
+          </details>
+          <details class="hint"><summary>미션 4 · ‘모른다’ 안전장치</summary>
+<pre><code>if len(evidence_parts) == 0:
+    evidence = ("관련 자료가 검색되지 않았다. 날짜, 사건, 사람 같은 사실을 묻는 질문이면 "
+                "지어내지 말고 잘 모르겠다고 답한다.")</code></pre>
+            <p>원래는 “관련 자료가 검색되지 않았다.” 한 문장뿐이에요. 이 문장은 SYSTEM_PROMPT의 <code>{evidence}</code> 자리에 들어가므로, 여기에 쓴 안내도 튜링에게 전달돼요.</p>
+          </details>
+          <details class="hint"><summary>미션 5 · 동의어 사전</summary>
+<pre><code>SYNONYMS = {"AI": "인공지능 생각하는 기계", "튜링 테스트": "모방 게임"}
+
+def expand_query(text):
+    extra = [v for k, v in SYNONYMS.items() if k.lower() in text.lower()]
+    return text + " " + " ".join(extra)
+
+    query = user + " " + user + " " + previous
+    query = expand_query(query)        # ← 이 줄 추가</code></pre>
+          </details>
+          <details class="hint"><summary>생각해 볼 질문 · 미션 6</summary>
+            <p>사생활 질문을 막는 방법은 두 가지예요. ① SYSTEM_PROMPT에 “답하지 않는다”고 쓰기(프롬프트 규칙) ② 코드에서 금지어를 찾아 모델에 보내지 않기(코드 규칙). 어느 쪽이 더 확실할까요? 금지어를 피해 돌려 묻는 질문은 어떻게 될까요? 둘을 함께 쓰면 어떤 장점이 있을까요?</p>
+          </details>
+        </div>
+
+        <div class="plan-block">
+          <h3>📚 진행 순서와 평가</h3>
+          <div class="table-wrap">
+            <table class="plan-table">
+              <thead><tr><th>차시</th><th>활동</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td><b>코드 읽기와 계획</b> app.py의 chat() 흐름을 순서도로 그리기 → 미션 2~3개 고르고 역할 나누기 → app.py를 복사해 <code>app_우리모둠.py</code>로 작업</td></tr>
+                <tr><td>2</td><td><b>구현과 검증</b> 미션 구현 → <code>eval.py</code>로 수정 전 · 후 비교, <code>--dry-run</code>으로 검색 변화 확인</td></tr>
+                <tr><td>3</td><td><b>발표</b> 고친 코드와 전 · 후 결과, 미션 6의 ‘프롬프트 규칙 vs 코드 규칙’ 토의 결과 공유</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="plan-note"><b>평가 관점</b> 기능 동작(미션 성공 기준) · 근거 기반 개선(전 · 후 비교) · 코드 설명(왜 그 줄을 그곳에 넣었는지) · 협업 기록. 교사용 예시 답안 <a href="assets/code/app_missions.py" download>app_missions.py</a>에는 미션 1~6이 모두 들어 있어요. 원본 app.py와 같은 폴더에 두고 <code>python persona-core/app_missions.py</code>로 실행합니다.</p>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -318,7 +399,7 @@
   </footer>
 
 
-  <script src="js/data.js?v=20261017-adv"></script>
-  <script src="js/main.js?v=20261017-adv"></script>
+  <script src="js/data.js?v=20261017-track3"></script>
+  <script src="js/main.js?v=20261017-track3"></script>
 </body>
 </html>
