@@ -36,7 +36,7 @@ let openId = null;
 function stageHTML(text) {
   if (!text || !String(text).trim()) return `<p>${val("")}</p>`;
   const out = []; let box = [];
-  const flush = () => { if (box.length) out.push(`<div class="plan-box">${box.map((t) => `<p class="${/^\s*[-0-9]/.test(t) ? "sub" : ""}">${esc(t.trim())}</p>`).join("")}</div>`); box = []; };
+  const flush = () => { if (box.length) out.push(`<div class="plan-box">${box.map((t) => `<p class="${/^\s*[-0-9(]/.test(t) ? "sub" : ""}">${esc(t.trim())}</p>`).join("")}</div>`); box = []; };
   for (const line of String(text).split("\n")) {
     if (!line.trim()) { flush(); continue; }
     if (/^\s*\[.*\]\s*$/.test(line)) { flush(); out.push(`<p class="plan-head">${esc(line.trim())}</p>`); }
