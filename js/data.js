@@ -45,5 +45,5 @@ const LESSONS = [
   },
 ];
 
-// 의견 남기기 — 구글 폼 주소를 넣으면 버튼이 연결됩니다.
-const FEEDBACK_FORM_URL = "";
+// 의견 나누기 — 패들릿 주소. 바꾸면 버튼 링크가 바뀝니다.
+const FEEDBACK_FORM_URL = "https://padlet.com/daesunggirlshighschool/padlet-s024l52tic5gfq6wz0qa";

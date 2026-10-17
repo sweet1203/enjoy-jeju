@@ -169,7 +169,7 @@ $("#team-grid").innerHTML = TEAM.map((m) => `
     ${m.region ? `<p class="region">📍 ${esc(m.region)}</p>` : ""}
   </div>`).join("");
 
-// 의견 남기기
+// 의견 나누기 (패들릿)
 const fb = $("#feedback-btn");
 if (FEEDBACK_FORM_URL) fb.href = FEEDBACK_FORM_URL;
 else { fb.textContent = "의견 폼 준비 중"; fb.classList.add("disabled"); fb.removeAttribute("href"); }
