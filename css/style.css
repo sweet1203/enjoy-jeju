@@ -219,7 +219,7 @@ img { max-width: 100%; }
 .lesson-detail.opening { animation: unfold .35s ease-out; }
 @keyframes unfold { from { opacity: 0; transform: translateY(-12px); } }
 .detail-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
-.detail-title { margin: 6px 0 0; font-size: 1.8rem; }
+.detail-title { margin: 6px 0 0; font-family: var(--font-myungjo); font-weight: 700; font-size: 1.8rem; letter-spacing: -0.03em; word-break: keep-all; }
 .detail-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .btn-mini {
   font: inherit; font-family: "Jua", sans-serif; font-size: 1rem; cursor: pointer;
@@ -229,7 +229,7 @@ img { max-width: 100%; }
 .btn-mini:hover { transform: translateY(2px); box-shadow: 0 2px 0 #145c77; }
 .btn-mini:disabled { opacity: .6; cursor: progress; }
 .btn-mini.ghost { background: #f2f2f2; color: var(--muted); box-shadow: none; }
-.lesson-detail h4 { font-family: "Jua", sans-serif; font-weight: 400; color: var(--sea); margin: 22px 0 6px; font-size: 1.15rem; border-left: 4px solid var(--tangerine); padding-left: 10px; }
+.lesson-detail h4 { font-family: var(--font-myungjo); font-weight: 700; letter-spacing: -0.03em; color: var(--sea); margin: 22px 0 6px; font-size: 1.15rem; border-left: 4px solid var(--tangerine); padding-left: 10px; }
 .lesson-detail p { margin: 0; white-space: pre-line; }
 .info-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
 .info-table th, .info-table td { border: 1px solid var(--line); padding: 8px 10px; }
