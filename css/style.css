@@ -1,12 +1,8 @@
-/* 글꼴: 큰 제목 = 꾸불림체, 작은 제목·버튼 = 주아체, 본문 = 고운돋움, 각주 = 개구체 */
-@import url("https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=Gaegu:wght@400;700&display=swap");
+/* 글꼴 불러오기: 꾸불림체, 조선일보명조체 */
 @import url("https://cdn.jsdelivr.net/gh/fonts-archive/BMKkubulim/BMKkubulim.css");
+@import url("https://cdn.jsdelivr.net/npm/@noonnu/chosunilbo-myungjo/index.css");
 
 :root {
-  --font-display: "BM Kkubulim", "Jua", sans-serif;
-  --font-title: "Jua", sans-serif;
-  --font-body: "Gowun Dodum", "Noto Sans KR", sans-serif;
-  --font-note: "Gaegu", "Gowun Dodum", sans-serif;
   --tangerine: #f28c28;
   --tangerine-dark: #d96f0e;
   --sea: #1e7fa3;
@@ -18,27 +14,20 @@
   --muted: #6b7175;
   --line: #ece4d8;
   --radius: 18px;
+  --font-wave: "BM Kkubulim", "Jua", sans-serif;           /* 꾸불림체 */
+  --font-myungjo: "Chosunilbo_myungjo", "Noto Serif KR", serif; /* 조선일보명조체 */
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 body {
   margin: 0;
-  font-family: var(--font-body);
+  font-family: "Noto Sans KR", sans-serif;
   color: var(--basalt);
   background: var(--paper);
   line-height: 1.7;
 }
-h3, .btn, .role, .chip, .tag { font-family: var(--font-title); font-weight: 400; }
-
-/* 큰 제목: 꾸불꾸불 파도 느낌 */
-h1, h2, .logo, .motto-text { font-family: var(--font-display); font-weight: 400; letter-spacing: 0.01em; }
-
-/* 각주·설명: 손글씨 느낌 */
-.hero-kicker, .section-desc, .motto-label, .region, .line,
-.scene figcaption, .resource-item small, .footer, .todo {
-  font-family: var(--font-note); font-size: 1.12em; font-weight: 700;
-}
+h1, h2, h3, .logo, .btn, .role { font-family: "Jua", sans-serif; font-weight: 400; }
 img { max-width: 100%; }
 
 /* 상단 메뉴 */
@@ -66,10 +55,10 @@ img { max-width: 100%; }
   overflow: hidden;
 }
 .hero-inner { position: relative; z-index: 1; }
-.hero-kicker { margin: 0; font-weight: 500; opacity: 0.95; }
-.hero h1 { font-size: clamp(3.2rem, 11vw, 6.5rem); margin: 4px 0 8px; line-height: 1.1; text-shadow: 0 4px 0 rgba(0,0,0,0.08); }
+.hero-kicker { margin: 0; font-family: var(--font-myungjo); font-weight: 400; font-size: 1.15rem; opacity: 0.95; }
+.hero h1 { font-family: var(--font-wave); font-size: clamp(3.2rem, 11vw, 6.5rem); margin: 4px 0 8px; line-height: 1.1; text-shadow: 0 4px 0 rgba(0,0,0,0.08); }
 .hero h1 span { color: var(--canola); }
-.hero-sub { font-size: 1.1rem; margin: 0 0 28px; }
+.hero-sub { font-family: var(--font-myungjo); font-size: 1.2rem; margin: 0 0 28px; }
 .hero-img {
   display: block; width: min(860px, 100%); margin: 44px auto 0;
   border-radius: 28px; border: 6px solid #fff;
@@ -80,8 +69,8 @@ img { max-width: 100%; }
 .btn {
   display: inline-block;
   background: var(--sea); color: #fff;
-  padding: 12px 26px; border-radius: 999px;
-  text-decoration: none; font-size: 1.15rem;
+  padding: 14px 34px; border-radius: 999px;
+  text-decoration: none; font-family: var(--font-wave); font-size: 1.7rem;
   box-shadow: 0 6px 0 #145c77;
   transition: transform .15s, box-shadow .15s;
 }
@@ -92,7 +81,7 @@ img { max-width: 100%; }
 .section { padding: 80px 24px; max-width: 1120px; margin: 0 auto; }
 .section-tint { max-width: none; background: var(--sea-light); }
 .section-tint > * { max-width: 1072px; margin-left: auto; margin-right: auto; }
-.section h2 { font-size: 2.2rem; margin: 0 0 6px; text-align: center; }
+.section h2 { font-family: var(--font-myungjo); font-size: 2.2rem; letter-spacing: -0.05em; margin: 0 0 6px; text-align: center; }
 .section-desc { text-align: center; color: var(--muted); margin: 0 0 36px; }
 
 /* 프로젝트 소개 */
@@ -105,7 +94,7 @@ img { max-width: 100%; }
 .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 28px; }
 .chip {
   border: 1.5px solid var(--sea); background: #fff; color: var(--sea);
-  padding: 6px 16px; border-radius: 999px; cursor: pointer; font: inherit; font-family: var(--font-title); font-weight: 400;
+  padding: 6px 16px; border-radius: 999px; cursor: pointer; font: inherit; font-weight: 500;
 }
 .chip.active, .chip:hover { background: var(--sea); color: #fff; }
 
@@ -161,8 +150,8 @@ img { max-width: 100%; }
   background: #fff; border: 2px dashed var(--tangerine); border-radius: var(--radius);
 }
 .motto-label { margin: 0; color: var(--sea); font-size: 0.95rem; }
-.motto-text { margin: 6px 0 0; font-size: 1.35rem; color: var(--tangerine-dark); line-height: 1.5; }
-.subject { font-family: var(--font-body); font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+.motto-text { margin: 6px 0 0; font-family: "Jua", sans-serif; font-size: 1.35rem; color: var(--tangerine-dark); line-height: 1.5; }
+.subject { font-family: "Noto Sans KR", sans-serif; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
 .role-desc { margin: 0; color: var(--sea); font-weight: 700; font-size: 0.9rem; }
 .line { margin: 8px 0 0; color: var(--muted); font-size: 0.9rem; }
 
