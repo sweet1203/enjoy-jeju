@@ -178,7 +178,12 @@ $("#team-grid").innerHTML = TEAM.map((m) => `
 
 // 의견 나누기 (패들릿)
 const fb = $("#feedback-btn");
-if (FEEDBACK_FORM_URL) fb.href = FEEDBACK_FORM_URL;
+if (FEEDBACK_FORM_URL) {
+  fb.href = FEEDBACK_FORM_URL;
+  // 패들릿 주소 끝의 보드 ID로 화면 안에 넣을 임베드 주소를 만든다.
+  const padletId = FEEDBACK_FORM_URL.split("/").pop().split("-").pop();
+  $("#padlet-frame").src = `https://padlet.com/embed/${padletId}`;
+}
 else { fb.textContent = "의견 폼 준비 중"; fb.classList.add("disabled"); fb.removeAttribute("href"); }
 
 // 현재 위치 바 (오른쪽) — 스크롤하면 지금 보고 있는 섹션이 표시됩니다.

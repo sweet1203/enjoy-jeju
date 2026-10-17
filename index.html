@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=20261017-padlet" />
 </head>
 <body>
   <header class="nav">
@@ -156,8 +156,12 @@
     <!-- 의견 -->
     <section id="feedback" class="section">
       <h2>💬 의견 나누기</h2>
-      <p class="section-desc">수업에 써 보신 후기나 개선 의견을 패들릿에 남겨 주세요.</p>
-      <a class="btn" id="feedback-btn" href="#" target="_blank" rel="noopener">패들릿에서 의견 나누기 →</a>
+      <p class="section-desc">수업에 써 보신 후기나 개선 의견을 아래 패들릿에 바로 남겨 주세요. 오른쪽 아래 <b>+ 게시</b> 버튼을 누르면 로그인 없이 쓸 수 있어요.</p>
+      <div class="padlet-embed">
+        <iframe id="padlet-frame" title="의견 나누기 패들릿" loading="lazy"
+                allow="camera;microphone;geolocation;display-capture;clipboard-write"></iframe>
+      </div>
+      <a class="padlet-open" id="feedback-btn" href="#" target="_blank" rel="noopener">새 창에서 크게 보기 ↗</a>
       <figure class="scene">
         <img src="assets/scenes/pool.webp" alt="여섯 캐릭터가 수영장에서 즐겁게 노는 모습" loading="lazy" />
         <figcaption>🌊 수업도 제주처럼, 즐겨라!</figcaption>
@@ -170,7 +174,7 @@
   </footer>
 
 
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/data.js?v=20261017-padlet"></script>
+  <script src="js/main.js?v=20261017-padlet"></script>
 </body>
 </html>
