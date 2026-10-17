@@ -15,18 +15,9 @@ const TEAM = [
 // 수업계획안 — 빈칸("")은 사이트에 "작성 예정"으로 표시됩니다.
 const LESSONS = [
   {
-    id: "persona-ai", teacher: "", area: "생성형 AI", icon: "🤖",
-    title: "페르소나 AI 만들기",
+    id: "turing-persona-ai", teacher: "", area: "생성형 AI", icon: "🤖",
+    title: "앨런 튜링 페르소나 AI 만들기",
     summary: "",
-    grade: "", periods: "",
-    standards: "", goals: [],
-    flow: { intro: "", main: "", close: "" },
-    assessment: "", materials: "", tips: "",
-  },
-  {
-    id: "object-detection", teacher: "", area: "컴퓨터 비전", icon: "🎯",
-    title: "Object Detection 모델 만들기",
-    summary: "Object Detection 모델 만들기 → Roboflow → 아이유 얼굴 따라가기 모델 만들기",
     grade: "", periods: "",
     standards: "", goals: [],
     flow: { intro: "", main: "", close: "" },

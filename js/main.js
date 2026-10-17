@@ -16,7 +16,7 @@ links.addEventListener("click", (e) => {
   if (e.target.tagName === "A") links.classList.remove("open");
 });
 
-// 수업계획안 카드 + 영역 필터
+// 수업계획안 카드
 function renderLessons(area) {
   const list = area ? LESSONS.filter((l) => l.area === area) : LESSONS;
   $("#lesson-grid").innerHTML = list.map((l) => `
@@ -27,18 +27,6 @@ function renderLessons(area) {
       <p>${val(l.summary)}</p>
       <span class="lesson-meta">${[l.grade, l.periods, l.teacher].filter(Boolean).map(esc).join(" · ") || "세부 내용 작성 예정"}</span>
     </button>`).join("");
-}
-
-function renderFilters() {
-  const areas = ["전체", ...new Set(LESSONS.map((l) => l.area))];
-  $("#filters").innerHTML = areas.map((a, i) =>
-    `<button class="chip${i === 0 ? " active" : ""}" data-area="${esc(a)}">${esc(a)}</button>`).join("");
-  $("#filters").addEventListener("click", (e) => {
-    const chip = e.target.closest(".chip");
-    if (!chip) return;
-    document.querySelectorAll(".chip").forEach((c) => c.classList.toggle("active", c === chip));
-    renderLessons(chip.dataset.area === "전체" ? null : chip.dataset.area);
-  });
 }
 
 // 상세 계획안 (통일 양식)
@@ -126,6 +114,5 @@ function renderSpy() {
   update();
 }
 
-renderFilters();
 renderLessons();
 renderSpy();

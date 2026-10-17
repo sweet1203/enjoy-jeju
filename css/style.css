@@ -99,7 +99,7 @@ img { max-width: 100%; }
 .chip.active, .chip:hover { background: var(--sea); color: #fff; }
 
 /* 수업계획안 카드 */
-.lesson-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+.lesson-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 400px)); justify-content: center; gap: 22px; }
 .lesson-card {
   text-align: left; font: inherit; color: inherit; cursor: pointer;
   background: var(--card); border: 2px solid transparent; border-radius: var(--radius);
