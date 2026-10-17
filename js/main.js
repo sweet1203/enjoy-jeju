@@ -174,15 +174,18 @@ async function saveHwpx(btn) {
 // 자료실
 $("#resource-list").innerHTML = (typeof LESSON_PAGES !== "undefined" ? `
   <div class="lesson-pages">${LESSON_PAGES.map((p) => `
-    <a class="lesson-page" href="${esc(p.href)}">
-      <span class="lp-no">${p.no}차시</span>
-      <b>${esc(p.title)}</b>
-      <small>${esc(p.desc)}</small>
-      <span class="lp-go">수업 자료 · 학습지 열기 →</span>
-    </a>`).join("")}</div>` : "") + LESSONS.map((l) => `
+    <div class="lesson-page">
+      <a class="lp-main" href="${esc(p.href)}">
+        <span class="lp-no">${p.no}차시</span>
+        <b>${esc(p.title)}</b>
+        <small>${esc(p.desc)}</small>
+        <span class="lp-go">수업 자료 · 학습지 열기 →</span>
+      </a>
+      ${p.plan ? `<a class="lp-plan" href="${esc(p.plan)}" download="${p.no}차시_교수학습지도안.hwp">📎 ${p.no}차시 지도안 (.hwp)</a>` : ""}
+    </div>`).join("")}</div>` : "") + LESSONS.map((l) => `
   <div class="resource-item">
     <span>${l.icon} <b>${esc(l.title)}</b> <small>${esc(l.teacher || "")}</small></span>
-    <span class="resource-files">${l.file ? `<a href="${esc(l.file.href)}" download="${esc(l.file.name)}">📎 ${esc(l.file.label)} (.hwp)</a> · ` : ""}PPT <em>(업로드 예정)</em></span>
+    <span class="resource-files">PPT <em>(업로드 예정)</em></span>
   </div>`).join("");
 
 // 팀 소개

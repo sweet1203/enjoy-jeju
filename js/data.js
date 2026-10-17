@@ -21,7 +21,7 @@ const LESSONS = [
     summary: "4차시 공개수업 · 환각을 찾아 고치는 ‘튜링 페르소나 디버깅’",
     grade: "고등학교 2학년", periods: "4/5차시 (공개수업)",
     // 원본 지도안 파일 (assets/docs 폴더) — 상세 계획안과 자료실에 내려받기 버튼이 생깁니다.
-    file: { href: "assets/docs/turing-lesson4-plan.hwp", name: "4차시_교수학습지도안.hwp", label: "4차시 교수·학습 지도안" },
+    file: { href: "assets/docs/lesson4-plan.hwp", name: "4차시_교수학습지도안.hwp", label: "4차시 교수·학습 지도안" },
     standards: "4. 인공지능 프로젝트 - 앨런 튜링 페르소나 AI (4/5차시)\n[12인기04-04] 평가 결과를 반영해 성능 개선 · [12인기03-04] 윤리적 딜레마 분석",
     goals: [
       "페르소나 AI의 답변에서 환각을 찾아 근거 자료와 비교해 원인을 분석할 수 있다.",
@@ -47,11 +47,11 @@ const LESSONS = [
 
 // 자료실 · 차시별 수업 자료 겸 학습지 (웹페이지, lessons 폴더)
 const LESSON_PAGES = [
-  { no: 1, title: "튜링 페르소나 설계도 만들기", desc: "모방 게임, 시스템 프롬프트, 설계도 4요소", href: "lessons/lesson-1.html" },
-  { no: 2, title: "튜링 자료집 data.json 만들기", desc: "JSON 문법, 3인칭 서술, 키워드, JSON 검사기", href: "lessons/lesson-2.html" },
-  { no: 3, title: "튜링과 첫 대화: 찾아보고 답하는 AI", desc: "RAG · BM25 · 2글자 자르기 체험, 검색 예측", href: "lessons/lesson-3.html" },
-  { no: 4, title: "튜링 페르소나 디버깅", desc: "환각 기록표, 수정 전·후 정답률 자동 계산", href: "lessons/lesson-4.html" },
-  { no: 5, title: "튜링 NPC 공개와 상호 평가", desc: "웹·Roblox 연결, ‘튜링다움’ 평가표", href: "lessons/lesson-5.html" },
+  { no: 1, title: "튜링 페르소나 설계도 만들기", desc: "모방 게임, 시스템 프롬프트, 설계도 4요소", href: "lessons/lesson-1.html", plan: "assets/docs/lesson1-plan.hwp" },
+  { no: 2, title: "튜링 자료집 data.json 만들기", desc: "JSON 문법, 3인칭 서술, 키워드, JSON 검사기", href: "lessons/lesson-2.html", plan: "assets/docs/lesson2-plan.hwp" },
+  { no: 3, title: "튜링과 첫 대화: 찾아보고 답하는 AI", desc: "RAG · BM25 · 2글자 자르기 체험, 검색 예측", href: "lessons/lesson-3.html", plan: "assets/docs/lesson3-plan.hwp" },
+  { no: 4, title: "튜링 페르소나 디버깅", desc: "환각 기록표, 수정 전·후 정답률 자동 계산", href: "lessons/lesson-4.html", plan: "assets/docs/lesson4-plan.hwp" },
+  { no: 5, title: "튜링 NPC 공개와 상호 평가", desc: "웹·Roblox 연결, ‘튜링다움’ 평가표", href: "lessons/lesson-5.html", plan: "assets/docs/lesson5-plan.hwp" },
 ];
 
 // 의견 나누기 — 패들릿 주소. 바꾸면 버튼 링크가 바뀝니다.

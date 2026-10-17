@@ -172,14 +172,20 @@ img { max-width: 100%; }
 /* 자료실 · 차시별 학습지 카드 */
 .lesson-pages { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 6px; }
 .lesson-page {
-  display: flex; flex-direction: column; gap: 4px; text-decoration: none; color: var(--basalt);
-  background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px;
+  display: flex; flex-direction: column; color: var(--basalt);
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
   transition: transform .15s, border-color .15s;
 }
 .lesson-page:hover { transform: translateY(-3px); border-color: var(--tangerine); }
+.lesson-page .lp-main { display: flex; flex-direction: column; gap: 4px; flex: 1; padding: 16px 16px 12px; text-decoration: none; color: inherit; }
 .lesson-page .lp-no { font-size: 0.8rem; font-weight: 700; color: var(--tangerine-dark); }
 .lesson-page b { font-family: var(--font-myungjo); font-size: 1.12rem; letter-spacing: -0.03em; line-height: 1.35; word-break: keep-all; }
 .lesson-page small { color: var(--muted); font-size: 0.85rem; line-height: 1.5; word-break: keep-all; flex: 1; }
+.lesson-page .lp-plan {
+  display: block; padding: 10px 16px; border-top: 1px dashed var(--line); background: #fffaf3;
+  font-size: 0.88rem; font-weight: 700; color: var(--tangerine-dark); text-decoration: none;
+}
+.lesson-page .lp-plan:hover { background: #fff1e0; }
 .lesson-page .lp-go { font-size: 0.85rem; font-weight: 700; color: var(--sea); margin-top: 6px; }
 
 /* 팀 */
