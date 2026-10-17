@@ -117,6 +117,11 @@ details.easy > div { padding: 0 0 14px; }
 .note { font-size: 0.9rem; color: var(--muted); }
 .tip { background: var(--sea-light); border-radius: 10px; padding: 10px 14px; font-size: 0.95rem; }
 
+/* 선택 심화 */
+section.block.adv { border: 2px dashed #8fb9c9; background: #fbfdfe; }
+section.block > h2 .no.adv-no { background: var(--tangerine); }
+section.block.adv a { font-weight: 700; }
+
 /* 활동 단계 */
 .step { border-top: 1px dashed var(--line); padding-top: 16px; margin-top: 18px; }
 .step:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }

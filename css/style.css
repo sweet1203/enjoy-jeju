@@ -294,6 +294,13 @@ img { max-width: 100%; }
 .hwp-flow .plan-box p { margin: 0; white-space: normal; word-break: keep-all; }
 .hwp-flow .plan-box p.sub { padding-left: 1.2em; }
 
+/* 선택 심화 블록 (수업 설계) */
+.adv-block { border: 2px dashed #8fb9c9; }
+.adv-lead { margin: -4px 0 14px; color: var(--basalt); }
+.adv-block code { font-family: "JetBrains Mono", Consolas, monospace; font-size: 0.88em; background: #f1ede6; padding: 1px 5px; border-radius: 4px; }
+.adv-block .muted { color: var(--muted); font-size: 0.9em; }
+.adv-block .plan-table td:first-child { white-space: nowrap; }
+
 /* 확장 트랙 */
 .track-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; }
 .track-tab {

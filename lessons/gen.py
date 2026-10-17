@@ -21,7 +21,7 @@ def shell(n, unit, goals, flow, body):
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{n}차시 · {TITLES[n]} | 즐겨라 제주</title>
 <meta name="description" content="앨런 튜링 페르소나 AI 프로젝트 {n}차시 수업 자료 겸 학습지" />
-<link rel="stylesheet" href="lesson.css" />
+<link rel="stylesheet" href="lesson.css?v=adv" />
 </head>
 <body data-lesson="lesson-{n}">
 <header class="topbar">
@@ -53,7 +53,7 @@ def shell(n, unit, goals, flow, body):
   </div>
   <p class="saved">적은 내용은 이 브라우저에 자동 저장돼요. 제출할 때는 ‘인쇄 · PDF로 저장’을 이용하세요.</p>
 </main>
-<script src="lesson.js"></script>
+<script src="lesson.js?v=adv"></script>
 </body>
 </html>
 """
@@ -318,6 +318,122 @@ L3 = f"""
   </section>
 """
 
+
+# ------------------------------------------------------------------ 선택 심화 (코드 작성)
+def code(src):
+    return '<div class="example">' + html.escape(src.strip("\n")) + '</div>'
+
+CODE_PRINT = '''
+        for doc in docs:
+            index = doc.metadata["index"]
+            print(f"[검색] {doc.metadata['evidence'][:25]}… 점수 {scores[index]:.2f}")   # ← 이 줄 추가
+            if scores[index] > 0:
+                evidence_parts.append(doc.metadata["evidence"])
+'''
+CODE_TOK = '''
+    for word in words:
+        if len(word) == 1:                       # ← 힌트: 이 조건을 어떻게 바꿔야 할까?
+            tokens.append(word)
+        else:
+            for index in range(len(word) - 1):   # ← 3글자로 자르려면?
+                token = word[index:index + 2]    # ← 3글자로 자르려면?
+                tokens.append(token)
+'''
+CODE_TOK_ANS = '''
+    for word in words:
+        if len(word) <= 3:          # 3글자 이하는 통째로 넣는다
+            tokens.append(word)
+        else:
+            for index in range(len(word) - 2):
+                token = word[index:index + 3]
+                tokens.append(token)
+'''
+CODE_RUN = '''
+# ① 모델 없이 검색만 확인 (빠름, 서버를 쓰지 않음)
+python persona-core/eval_starter.py --dry-run
+
+# ② 수정 전: 튜링에게 질문하고 결과 저장
+python persona-core/eval_starter.py --out persona-core/before.csv
+
+# ③ data.json 이나 SYSTEM_PROMPT 를 고친 뒤 다시 실행
+python persona-core/eval_starter.py --out persona-core/after.csv
+'''
+
+ADV3 = f"""
+  <section class="block adv">
+    <h2><span class="no adv-no">선택 심화</span>app.py를 직접 고쳐 보기 (1·2단계)</h2>
+    <p class="tip">여기부터는 <b>선택 과제</b>예요. 기본 활동을 마친 모둠이나 코드를 더 다뤄 보고 싶은 학생이 도전해요. 고치기 전에 꼭 <b>app.py를 복사해 두고</b> 시작하세요.</p>
+
+    <div class="step">
+      <h3><span class="tag">1단계</span>값 바꾸기 — 숫자 하나로 답이 어떻게 달라질까?</h3>
+      <div class="table-wrap"><table class="sheet">
+        <tr><th style="width:22%">바꿀 곳 (app.py)</th><th style="width:22%">원래 값 → 바꿀 값</th><th>관찰할 것</th><th style="width:26%">관찰 결과</th></tr>
+        <tr><td><code>OPENING</code></td><td>첫인사 문장 → 우리 모둠 인사</td><td>CLI 첫 화면이 바뀌는지</td><td>{text("adv1a")}</td></tr>
+        <tr><td><code>k=1</code> (make_retriever)</td><td>1 → 2</td><td>참고 자료가 2건 들어가면 답이 더 풍부해질까, 엉뚱해질까?</td><td>{text("adv1b")}</td></tr>
+        <tr><td><code>temperature=0.2</code></td><td>0.2 → 1.0</td><td>같은 질문을 3번 했을 때 답이 얼마나 달라지는지</td><td>{text("adv1c")}</td></tr>
+        <tr><td><code>len(history) &gt; 12</code></td><td>12 → 2</td><td>앞에서 말한 내 이름을 튜링이 기억하는지</td><td>{text("adv1d")}</td></tr>
+      </table></div>
+      <details class="easy"><summary>temperature가 뭐예요?</summary><div>
+        <p>다음 단어를 고를 때 얼마나 <b>모험</b>할지 정하는 값이에요. 낮으면(0.2) 가장 확률 높은 단어를 주로 골라 답이 안정적이고, 높으면(1.0) 덜 흔한 단어도 골라 답이 다양해지지만 환각이 늘 수 있어요.</p>
+      </div></details>
+    </div>
+
+    <div class="step">
+      <h3><span class="tag">2단계</span>함수 고치기 — 검색 점수를 눈으로 보기</h3>
+      <p><code>chat()</code> 함수에서 자료를 고르는 부분에 <code>print</code> 한 줄을 넣으면, 질문할 때마다 어떤 자료가 몇 점으로 뽑혔는지 화면에 나와요.</p>
+      {code(CODE_PRINT)}
+      <div class="field">점수가 가장 높았던 질문과 가장 낮았던 질문 {text("adv2a")}</div>
+
+      <h3 style="margin-top:18px">도전: 2글자 대신 3글자로 자르면?</h3>
+      <p><code>tokenize</code> 함수의 <code>2</code>를 <code>3</code>으로 바꿔 보세요. 그런데 그냥 바꾸면 <b>2글자짜리 낱말(예: ‘학교’, ‘수학’)이 사라지는 문제</b>가 생겨요. 왜 그럴까요? 고쳐 보세요.</p>
+      {code(CODE_TOK)}
+      <details class="easy"><summary>정답 예시 보기</summary><div>
+        {code(CODE_TOK_ANS)}
+        <p class="note">range(len(word) - 2)는 ‘학교’(2글자)에서 range(0)이 되어 조각이 하나도 안 나와요. 그래서 짧은 낱말은 따로 처리해야 해요.</p>
+      </div></details>
+      <div class="field">2글자와 3글자, 어느 쪽이 우리 질문에 더 잘 맞았나요? 근거는? {text("adv2b")}</div>
+    </div>
+  </section>
+"""
+
+ADV4 = f"""
+  <section class="block adv">
+    <h2><span class="no adv-no">선택 심화</span>자동 검증 프로그램 eval.py 만들기 (3단계)</h2>
+    <p class="tip">1단계의 질문 10개를 손으로 하나씩 묻는 대신, <b>반복문으로 자동으로 묻고 결과를 표(CSV)로 저장</b>하는 프로그램을 만들어요. 고1 정보에서 배운 반복문 · 리스트 · 파일 저장이 그대로 쓰여요.</p>
+
+    <h3>준비물</h3>
+    <ul>
+      <li><a href="../assets/code/eval_starter.py" download>eval_starter.py</a> — 빈칸 ①~⑤를 채우는 학생용</li>
+      <li><a href="../assets/code/questions.csv" download>questions.csv</a> — 검증 질문 틀 (우리 모둠 질문으로 바꾸기)</li>
+      <li><a href="../assets/code/eval.py" download>eval.py</a> — 완성본 (막히면 참고, 교사용)</li>
+    </ul>
+    <p class="note">세 파일을 <code>persona-core</code> 폴더(app.py와 같은 곳)에 넣어요.</p>
+
+    <div class="step">
+      <h3><span class="tag">순서</span>실행하고 비교하기</h3>
+      {code(CODE_RUN)}
+      <p>before.csv와 after.csv를 열어 <b>‘판정’ 칸</b>(정확 / 사실 오류 / 지어낸 답 / 어색한 말투)을 채우고, 위 4단계 정답률 표에 옮겨 적어요.</p>
+    </div>
+
+    <details class="easy"><summary>빈칸 힌트 보기</summary><div>
+      <ul>
+        <li>① 질문을 2글자 조각으로 자르는 함수 이름은? (app.py에서 가져왔어요)</li>
+        <li>② 점수가 0<b>보다 클 때</b>만 자료로 인정해요.</li>
+        <li>③ 질문 목록이 들어 있는 변수 이름은?</li>
+        <li>④ 지금 질문과 검색된 자료가 담긴 변수 이름을 넣어요.</li>
+        <li>⑤ 여러 줄(rows)을 한꺼번에 쓰는 메서드예요.</li>
+      </ul>
+    </div></details>
+    <details class="easy"><summary>왜 질문을 하나씩 차례로 보내나요?</summary><div>
+      <p>우리 수업의 모델 서버는 <b>한 번에 한 질문만</b> 처리하도록 설정돼 있어요. 반복문은 앞 질문의 답을 받은 뒤에 다음 질문을 보내니까, 손으로 순서를 정할 필요가 없어요.</p>
+    </div></details>
+
+    <div class="field">--dry-run 결과: 예상한 자료와 다르게 검색된 질문과 그 이유 {text("adv3a")}</div>
+    <div class="field">수정 전 · 후 비교에서 가장 크게 좋아진 점 {text("adv3b")}</div>
+    <div class="field">자동화해 보니 좋은 점과 여전히 사람이 해야 하는 일 {area("adv3c", "예) 판정은 사람이 직접 근거와 비교해야 한다", 70)}</div>
+  </section>
+"""
+
 # ------------------------------------------------------------------ 4차시
 judge = '<select name="{n}"><option value="">선택</option><option>정확</option><option>사실 오류</option><option>지어낸 답</option><option>어색한 말투</option></select>'
 L4 = f"""
@@ -489,14 +605,14 @@ PAGES = {
         "언어 모델(딥러닝)이 서버에서 답을 만드는 구조를 설명할 수 있다."],
         [("도입", "암기 시험 vs 오픈북 시험, app.py로 튜링과 첫 인사"),
          ("전개", "검색될 자료 예측 → CLI 대화 → 예측과 비교 → 빗나간 질문 분석"),
-         ("정리", "app.py = 찾기(BM25) + 말하기(EXAONE)")], L3),
+         ("정리", "app.py = 찾기(BM25) + 말하기(EXAONE)")], L3 + ADV3),
     4: ("4. 인공지능 프로젝트", [
         "페르소나 AI의 답변에서 환각을 찾아 근거 자료와 비교해 원인을 분석할 수 있다.",
         "평가 결과를 반영해 data.json과 app.py의 프롬프트를 고치고 성능을 개선할 수 있다.",
         "실존 인물을 흉내 내는 AI의 윤리적 문제를 설명할 수 있다."],
         [("도입", "애플 로고 함정 질문으로 환각 경험하기"),
          ("전개", "검증 질문 10개 → 환각 기록표 → data.json·app.py 수정 → 재검증"),
-         ("정리", "누구의 책임일까? AI임을 알리는 안내 문구 정하기")], L4),
+         ("정리", "누구의 책임일까? AI임을 알리는 안내 문구 정하기")], L4 + ADV4),
     5: ("4. 인공지능 프로젝트", [
         "완성한 페르소나를 웹 채팅이나 Roblox NPC로 연결하여 실행할 수 있다.",
         "평가 기준에 따라 다른 모둠의 페르소나를 평가하고 피드백할 수 있다.",

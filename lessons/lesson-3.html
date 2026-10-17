@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>3차시 · 튜링과 첫 대화: 찾아보고 답하는 AI | 즐겨라 제주</title>
 <meta name="description" content="앨런 튜링 페르소나 AI 프로젝트 3차시 수업 자료 겸 학습지" />
-<link rel="stylesheet" href="lesson.css" />
+<link rel="stylesheet" href="lesson.css?v=adv" />
 </head>
 <body data-lesson="lesson-3">
 <header class="topbar">
@@ -93,12 +93,63 @@
     <p class="note">빗나간 질문은 버리지 말고 남겨 두세요. 4차시 ‘페르소나 디버깅’의 재료가 돼요.</p>
   </section>
 
+  <section class="block adv">
+    <h2><span class="no adv-no">선택 심화</span>app.py를 직접 고쳐 보기 (1·2단계)</h2>
+    <p class="tip">여기부터는 <b>선택 과제</b>예요. 기본 활동을 마친 모둠이나 코드를 더 다뤄 보고 싶은 학생이 도전해요. 고치기 전에 꼭 <b>app.py를 복사해 두고</b> 시작하세요.</p>
+
+    <div class="step">
+      <h3><span class="tag">1단계</span>값 바꾸기 — 숫자 하나로 답이 어떻게 달라질까?</h3>
+      <div class="table-wrap"><table class="sheet">
+        <tr><th style="width:22%">바꿀 곳 (app.py)</th><th style="width:22%">원래 값 → 바꿀 값</th><th>관찰할 것</th><th style="width:26%">관찰 결과</th></tr>
+        <tr><td><code>OPENING</code></td><td>첫인사 문장 → 우리 모둠 인사</td><td>CLI 첫 화면이 바뀌는지</td><td><input type="text" name="adv1a" placeholder="" /></td></tr>
+        <tr><td><code>k=1</code> (make_retriever)</td><td>1 → 2</td><td>참고 자료가 2건 들어가면 답이 더 풍부해질까, 엉뚱해질까?</td><td><input type="text" name="adv1b" placeholder="" /></td></tr>
+        <tr><td><code>temperature=0.2</code></td><td>0.2 → 1.0</td><td>같은 질문을 3번 했을 때 답이 얼마나 달라지는지</td><td><input type="text" name="adv1c" placeholder="" /></td></tr>
+        <tr><td><code>len(history) &gt; 12</code></td><td>12 → 2</td><td>앞에서 말한 내 이름을 튜링이 기억하는지</td><td><input type="text" name="adv1d" placeholder="" /></td></tr>
+      </table></div>
+      <details class="easy"><summary>temperature가 뭐예요?</summary><div>
+        <p>다음 단어를 고를 때 얼마나 <b>모험</b>할지 정하는 값이에요. 낮으면(0.2) 가장 확률 높은 단어를 주로 골라 답이 안정적이고, 높으면(1.0) 덜 흔한 단어도 골라 답이 다양해지지만 환각이 늘 수 있어요.</p>
+      </div></details>
+    </div>
+
+    <div class="step">
+      <h3><span class="tag">2단계</span>함수 고치기 — 검색 점수를 눈으로 보기</h3>
+      <p><code>chat()</code> 함수에서 자료를 고르는 부분에 <code>print</code> 한 줄을 넣으면, 질문할 때마다 어떤 자료가 몇 점으로 뽑혔는지 화면에 나와요.</p>
+      <div class="example">        for doc in docs:
+            index = doc.metadata[&quot;index&quot;]
+            print(f&quot;[검색] {doc.metadata[&#x27;evidence&#x27;][:25]}… 점수 {scores[index]:.2f}&quot;)   # ← 이 줄 추가
+            if scores[index] &gt; 0:
+                evidence_parts.append(doc.metadata[&quot;evidence&quot;])</div>
+      <div class="field">점수가 가장 높았던 질문과 가장 낮았던 질문 <input type="text" name="adv2a" placeholder="" /></div>
+
+      <h3 style="margin-top:18px">도전: 2글자 대신 3글자로 자르면?</h3>
+      <p><code>tokenize</code> 함수의 <code>2</code>를 <code>3</code>으로 바꿔 보세요. 그런데 그냥 바꾸면 <b>2글자짜리 낱말(예: ‘학교’, ‘수학’)이 사라지는 문제</b>가 생겨요. 왜 그럴까요? 고쳐 보세요.</p>
+      <div class="example">    for word in words:
+        if len(word) == 1:                       # ← 힌트: 이 조건을 어떻게 바꿔야 할까?
+            tokens.append(word)
+        else:
+            for index in range(len(word) - 1):   # ← 3글자로 자르려면?
+                token = word[index:index + 2]    # ← 3글자로 자르려면?
+                tokens.append(token)</div>
+      <details class="easy"><summary>정답 예시 보기</summary><div>
+        <div class="example">    for word in words:
+        if len(word) &lt;= 3:          # 3글자 이하는 통째로 넣는다
+            tokens.append(word)
+        else:
+            for index in range(len(word) - 2):
+                token = word[index:index + 3]
+                tokens.append(token)</div>
+        <p class="note">range(len(word) - 2)는 ‘학교’(2글자)에서 range(0)이 되어 조각이 하나도 안 나와요. 그래서 짧은 낱말은 따로 처리해야 해요.</p>
+      </div></details>
+      <div class="field">2글자와 3글자, 어느 쪽이 우리 질문에 더 잘 맞았나요? 근거는? <input type="text" name="adv2b" placeholder="" /></div>
+    </div>
+  </section>
+
   <div class="actions">
     <button type="button" data-action="print">🖨️ 인쇄 · PDF로 저장</button>
     <button type="button" class="ghost" data-action="reset">적은 내용 모두 지우기</button>
   </div>
   <p class="saved">적은 내용은 이 브라우저에 자동 저장돼요. 제출할 때는 ‘인쇄 · PDF로 저장’을 이용하세요.</p>
 </main>
-<script src="lesson.js"></script>
+<script src="lesson.js?v=adv"></script>
 </body>
 </html>

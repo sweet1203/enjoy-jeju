@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261017-extend" />
+  <link rel="stylesheet" href="css/style.css?v=20261017-adv" />
 </head>
 <body>
   <header class="nav">
@@ -142,6 +142,23 @@
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div class="plan-block adv-block">
+        <h3>💻 선택 심화 · 코드 작성 단계</h3>
+        <p class="adv-lead">기본 수업(프롬프트 · data.json 작성)은 그대로 진행하고, 코드를 더 다뤄 보고 싶은 모둠은 아래 단계로 넓혀 갑니다. 각 단계는 해당 차시 학습지 아래쪽 <b>‘선택 심화’</b> 칸에 있어요.</p>
+        <div class="table-wrap">
+          <table class="plan-table">
+            <thead><tr><th>단계</th><th>학생이 하는 일</th><th>교사가 미리 제공할 것</th><th>차시</th></tr></thead>
+            <tbody>
+              <tr><td>0. 설정</td><td>SYSTEM_PROMPT와 data.json 작성 <span class="muted">(기본 수업)</span></td><td>켜 둔 모델 서버, 모둠별 app.py 사본</td><td>1~2</td></tr>
+              <tr><td>1. 값 바꾸기</td><td><code>OPENING</code>, 검색 개수 <code>k</code>, <code>temperature</code>, 대화 기억 길이를 바꿔 보고 답 비교</td><td>바꿀 곳을 표시한 app.py, 관찰 기록표</td><td><a href="lessons/lesson-3.html">3</a></td></tr>
+              <tr><td>2. 함수 고치기</td><td>검색 점수를 <code>print</code>로 출력, <code>tokenize</code>를 3글자 자르기로 고치기</td><td>빈칸 · 힌트가 있는 코드 조각</td><td><a href="lessons/lesson-3.html">3</a></td></tr>
+              <tr><td>3. 새 코드 쓰기</td><td>검증 질문을 반복문으로 자동 질문하고 CSV로 저장하는 <code>eval.py</code> 완성 → 수정 전 · 후 비교</td><td><a href="assets/code/eval_starter.py" download>eval_starter.py</a> (빈칸 5개) · <a href="assets/code/questions.csv" download>questions.csv</a> · <a href="assets/code/eval.py" download>eval.py</a> (완성본)</td><td><a href="lessons/lesson-4.html">4</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="plan-note"><b>운영 전 확인</b> 모둠마다 app.py를 실행하려면 VESSL JupyterLab 터미널을 모둠별로 열거나 교사 화면에서 차례로 실행합니다. 지금 서버 설정(<code>--max-num-seqs 1</code>)은 한 번에 한 질문만 받으므로, 여러 모둠이 동시에 쓰려면 이 값을 늘리고 GPU 메모리가 버티는지 미리 시험해 보세요. <code>eval.py --dry-run</code>은 모델 서버 없이 검색만 확인하므로 서버를 기다리는 동안 먼저 해 볼 수 있어요.</p>
       </div>
     </section>
 
@@ -301,7 +318,7 @@
   </footer>
 
 
-  <script src="js/data.js?v=20261017-extend"></script>
-  <script src="js/main.js?v=20261017-extend"></script>
+  <script src="js/data.js?v=20261017-adv"></script>
+  <script src="js/main.js?v=20261017-adv"></script>
 </body>
 </html>
