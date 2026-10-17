@@ -39,7 +39,7 @@ img { max-width: 100%; }
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
-.logo { font-size: 1.4rem; color: var(--tangerine-dark); text-decoration: none; }
+.logo { font-family: var(--font-wave); font-weight: 400; font-size: 1.7rem; color: var(--tangerine-dark); text-decoration: none; }
 .nav-links { display: flex; gap: 20px; }
 .nav-links a { color: var(--basalt); text-decoration: none; font-weight: 500; }
 .nav-links a:hover { color: var(--tangerine-dark); }
@@ -51,22 +51,22 @@ img { max-width: 100%; }
   background: linear-gradient(160deg, #ffb45c 0%, var(--tangerine) 45%, #e8692a 100%);
   color: #fff;
   text-align: center;
-  padding: 90px 20px 140px;
+  padding: 72px 28px 130px;
   overflow: hidden;
 }
 .hero-inner { position: relative; z-index: 1; }
-.hero-kicker { margin: 0; font-family: var(--font-myungjo); font-weight: 400; font-size: 1.15rem; opacity: 0.95; }
+.hero-kicker { margin: 0; font-family: var(--font-myungjo); font-weight: 400; font-size: clamp(1.15rem, 1.7vw, 1.5rem); opacity: 0.95; }
 .hero h1 { font-family: var(--font-wave); font-size: clamp(3.2rem, 11vw, 6.5rem); margin: 4px 0 8px; line-height: 1.1; text-shadow: 0 4px 0 rgba(0,0,0,0.08); }
 .hero h1 span { color: var(--canola); }
-.hero-sub { font-family: var(--font-myungjo); font-size: 1.2rem; margin: 0 0 28px; }
+.hero-sub { word-break: keep-all; font-family: var(--font-myungjo); font-size: clamp(1.2rem, 1.9vw, 1.6rem); line-height: 1.6; margin: 0 0 32px; }
 /* 메인 상단: 글(왼쪽) + 뒤집히는 사진 카드(오른쪽) */
 .hero-top {
   display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 48px;
-  max-width: 1080px; margin: 0 auto;
+  max-width: 1380px; margin: 0 auto; padding: 0 56px;
 }
 .hero-text { text-align: center; }
-.hero-text h1 { white-space: nowrap; font-size: clamp(3rem, 6vw, 5.2rem) !important; }
-@media (max-width: 860px) { .hero-text h1 { font-size: clamp(3rem, 13vw, 5.2rem) !important; } }
+.hero-text h1 { white-space: nowrap; font-size: clamp(3.2rem, 6.8vw, 7rem) !important; }
+@media (max-width: 860px) { .hero-text h1 { font-size: clamp(3rem, 15vw, 6rem) !important; } }
 .flip-card {
   position: relative; display: block; width: 100%; padding: 0; border: 0; background: none;
   cursor: pointer; perspective: 1600px; -webkit-tap-highlight-color: transparent;
@@ -92,8 +92,8 @@ img { max-width: 100%; }
 .flip-card:focus-visible { outline: 3px solid var(--canola); outline-offset: 6px; border-radius: 22px; }
 @media (prefers-reduced-motion: reduce) { .flip-inner { transition: none; } }
 @media (max-width: 860px) {
-  .hero-top { grid-template-columns: 1fr; gap: 28px; }
-  .flip-card { max-width: 520px; margin: 0 auto; }
+  .hero-top { grid-template-columns: 1fr; gap: 28px; padding: 0 12px; }
+  .flip-card { max-width: 640px; margin: 0 auto; }
 }
 
 .hero-img {
