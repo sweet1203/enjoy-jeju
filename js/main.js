@@ -171,22 +171,50 @@ async function saveHwpx(btn) {
   }
 }
 
-// 자료실
-$("#resource-list").innerHTML = (typeof LESSON_PAGES !== "undefined" ? `
+// 자료실 — 차시 카드 + 지도안 미리보기(한글 파일 모양 그대로)
+$("#resource-list").innerHTML = `
   <div class="lesson-pages">${LESSON_PAGES.map((p) => `
-    <div class="lesson-page">
+    <div class="lesson-page" data-no="${p.no}">
       <a class="lp-main" href="${esc(p.href)}">
         <span class="lp-no">${p.no}차시</span>
         <b>${esc(p.title)}</b>
         <small>${esc(p.desc)}</small>
         <span class="lp-go">수업 자료 · 학습지 열기 →</span>
       </a>
-      ${p.plan ? `<a class="lp-plan" href="${esc(p.plan)}" download="${p.no}차시_교수학습지도안.hwp">📎 ${p.no}차시 지도안 (.hwp)</a>` : ""}
-    </div>`).join("")}</div>` : "") + LESSONS.map((l) => `
-  <div class="resource-item">
-    <span>${l.icon} <b>${esc(l.title)}</b> <small>${esc(l.teacher || "")}</small></span>
-    <span class="resource-files">PPT <em>(업로드 예정)</em></span>
-  </div>`).join("");
+      ${p.planImg ? `<button type="button" class="lp-plan" data-no="${p.no}" aria-expanded="false" aria-controls="plan-viewer">📄 ${p.no}차시 지도안 보기</button>` : ""}
+    </div>`).join("")}</div>
+  <div class="plan-viewer" id="plan-viewer" hidden></div>`;
+
+const viewer = $("#plan-viewer");
+let shownPlan = null;
+function showPlan(no) {
+  const p = LESSON_PAGES.find((x) => x.no === no);
+  const same = shownPlan === no && !viewer.hidden;
+  document.querySelectorAll(".lp-plan").forEach((b) => {
+    const on = !same && Number(b.dataset.no) === no;
+    b.setAttribute("aria-expanded", String(on));
+    b.closest(".lesson-page").classList.toggle("on", on);
+    b.textContent = `📄 ${b.dataset.no}차시 지도안 ${on ? "닫기" : "보기"}`;
+  });
+  if (same) { viewer.hidden = true; shownPlan = null; return; }
+  shownPlan = no;
+  viewer.innerHTML = `
+    <div class="pv-head">
+      <b>${p.no}차시 교수·학습 지도안</b>
+      <span class="pv-actions">
+        <a class="btn-mini" href="${esc(p.plan)}" download="${p.no}차시_교수학습지도안.hwp">⬇ 한글 파일 받기</a>
+        <button type="button" class="btn-mini ghost pv-close">닫기 ✕</button>
+      </span>
+    </div>
+    <div class="pv-paper"><img src="${esc(p.planImg)}" alt="${p.no}차시 교수·학습 지도안 (한글 문서 미리보기)" /></div>`;
+  viewer.hidden = false;
+  viewer.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+$("#resource-list").addEventListener("click", (e) => {
+  const b = e.target.closest(".lp-plan");
+  if (b) showPlan(Number(b.dataset.no));
+  if (e.target.closest(".pv-close")) showPlan(shownPlan);
+});
 
 // 팀 소개
 $("#team-grid").innerHTML = TEAM.map((m) => `
