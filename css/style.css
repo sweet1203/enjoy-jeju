@@ -84,6 +84,11 @@ img { max-width: 100%; }
 .section h2 { font-family: var(--font-myungjo); font-size: 2.2rem; letter-spacing: -0.05em; margin: 0 0 6px; text-align: center; }
 .section-desc { text-align: center; color: var(--muted); margin: 0 0 36px; }
 
+/* 수업계획안 안내 문구: 오른쪽으로 14글자만큼 들여쓰기 (넓은 화면에서만) */
+@media (min-width: 1100px) {
+  #lessons .section-desc { width: fit-content; margin-left: auto; margin-right: auto; position: relative; left: 14em; }
+}
+
 /* 프로젝트 소개 */
 .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 32px; }
 .about-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
@@ -109,7 +114,7 @@ img { max-width: 100%; }
 }
 .lesson-card:hover { transform: translateY(-4px); border-color: var(--tangerine); }
 .lesson-icon { font-size: 2.2rem; }
-.lesson-card h3 { margin: 4px 0 0; font-size: 1.45rem; }
+.lesson-card h3 { margin: 4px 0 0; font-family: var(--font-myungjo); font-weight: 700; font-size: 1.45rem; letter-spacing: -0.03em; word-break: keep-all; }
 .lesson-card p { margin: 0; color: var(--muted); flex: 1; }
 .lesson-meta { font-size: 0.88rem; color: var(--sea); font-weight: 700; margin-top: 8px; }
 .tag {

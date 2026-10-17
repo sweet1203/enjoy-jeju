@@ -20,9 +20,8 @@ links.addEventListener("click", (e) => {
 function renderLessons() {
   $("#lesson-grid").innerHTML = LESSONS.map((l) => `
     <button class="lesson-card" data-id="${l.id}" aria-expanded="false" aria-controls="lesson-detail">
-      <span class="lesson-icon">${l.icon}</span>
       <span class="tag">${esc(l.area)}</span>
-      <h3>${esc(l.title)}</h3>
+      <h3>${l.icon} ${esc(l.title)}</h3>
       <p>${val(l.summary)}</p>
       <span class="lesson-meta">${[l.grade, l.periods, l.teacher].filter(Boolean).map(esc).join(" · ") || "세부 내용 작성 예정"}</span>
       <span class="lesson-open">자세히 보기 ▼</span>
