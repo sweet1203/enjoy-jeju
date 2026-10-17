@@ -244,6 +244,7 @@ img { max-width: 100%; }
   border: 0; border-radius: 999px; padding: 8px 16px;
   background: var(--sea); color: #fff; box-shadow: 0 4px 0 #145c77;
 }
+a.btn-mini { text-decoration: none; display: inline-block; }
 .btn-mini:hover { transform: translateY(2px); box-shadow: 0 2px 0 #145c77; }
 .btn-mini:disabled { opacity: .6; cursor: progress; }
 .btn-mini.ghost { background: #f2f2f2; color: var(--muted); box-shadow: none; }
@@ -255,6 +256,7 @@ img { max-width: 100%; }
 .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .flow > div { background: var(--paper); border-radius: 12px; padding: 12px; }
 .flow b { color: var(--tangerine-dark); }
+.flow p { word-break: keep-all; font-size: 0.95rem; }
 
 /* 모바일 */
 @media (max-width: 760px) {

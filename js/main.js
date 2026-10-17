@@ -40,12 +40,13 @@ function detailHTML(l) {
         <h3 class="detail-title">${l.icon} ${esc(l.title)}</h3>
       </div>
       <div class="detail-actions">
+        ${l.file ? `<a class="btn-mini" href="${esc(l.file.href)}" download="${esc(l.file.name)}">📎 지도안 원본(.hwp)</a>` : ""}
         <button class="btn-mini hwp-btn" data-id="${l.id}">📄 한글 파일로 저장</button>
         <button class="btn-mini ghost fold-btn">접기 ▲</button>
       </div>
     </div>
     <table class="info-table">
-      <tr><th>교과</th><td>정보</td><th>대상</th><td>${val(l.grade)}</td></tr>
+      <tr><th>교과</th><td>${esc(l.subject || "정보")}</td><th>대상</th><td>${val(l.grade)}</td></tr>
       <tr><th>차시</th><td>${val(l.periods)}</td><th>담당</th><td>${val(l.teacher)}</td></tr>
     </table>
     <h4>성취기준</h4><p>${val(l.standards)}</p>
@@ -94,7 +95,7 @@ function exportHTML(l) {
   return `
     <h1 style="text-align:center;">${esc(l.title)} 수업계획안</h1>
     <table style="width:100%;border-collapse:collapse;">
-      <tr><td ${head}>교과</td><td ${cell}>정보</td><td ${head}>대상</td><td ${cell}>${plain(l.grade)}</td></tr>
+      <tr><td ${head}>교과</td><td ${cell}>${esc(l.subject || "정보")}</td><td ${head}>대상</td><td ${cell}>${plain(l.grade)}</td></tr>
       <tr><td ${head}>차시</td><td ${cell}>${plain(l.periods)}</td><td ${head}>담당</td><td ${cell}>${plain(l.teacher)}</td></tr>
       <tr><td ${head}>영역</td><td ${cell} colspan="3">${esc(l.area)}</td></tr>
     </table>
@@ -135,7 +136,7 @@ async function saveHwpx(btn) {
 $("#resource-list").innerHTML = LESSONS.map((l) => `
   <div class="resource-item">
     <span>${l.icon} <b>${esc(l.title)}</b> <small>${esc(l.teacher || "")}</small></span>
-    <span class="resource-files">활동지 · PPT · 루브릭 <em>(업로드 예정)</em></span>
+    <span class="resource-files">${l.file ? `<a href="${esc(l.file.href)}" download="${esc(l.file.name)}">📎 ${esc(l.file.label)} (.hwp)</a> · ` : ""}활동지 · PPT <em>(업로드 예정)</em></span>
   </div>`).join("");
 
 // 팀 소개
