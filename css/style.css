@@ -59,6 +59,43 @@ img { max-width: 100%; }
 .hero h1 { font-family: var(--font-wave); font-size: clamp(3.2rem, 11vw, 6.5rem); margin: 4px 0 8px; line-height: 1.1; text-shadow: 0 4px 0 rgba(0,0,0,0.08); }
 .hero h1 span { color: var(--canola); }
 .hero-sub { font-family: var(--font-myungjo); font-size: 1.2rem; margin: 0 0 28px; }
+/* 메인 상단: 글(왼쪽) + 뒤집히는 사진 카드(오른쪽) */
+.hero-top {
+  display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 48px;
+  max-width: 1080px; margin: 0 auto;
+}
+.hero-text { text-align: center; }
+.hero-text h1 { white-space: nowrap; font-size: clamp(3rem, 6vw, 5.2rem) !important; }
+@media (max-width: 860px) { .hero-text h1 { font-size: clamp(3rem, 13vw, 5.2rem) !important; } }
+.flip-card {
+  position: relative; display: block; width: 100%; padding: 0; border: 0; background: none;
+  cursor: pointer; perspective: 1600px; -webkit-tap-highlight-color: transparent;
+}
+.flip-inner {
+  position: relative; display: block; width: 100%; aspect-ratio: 1187 / 880;
+  transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(.2, .7, .2, 1);
+}
+.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+.flip-face {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  border-radius: 22px; border: 6px solid #fff; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #fff;
+}
+.flip-back { transform: rotateY(180deg); }
+.flip-hint {
+  position: absolute; right: 14px; bottom: 14px; z-index: 2;
+  background: rgba(20, 30, 35, 0.6); color: #fff; font-size: 0.85rem; font-weight: 500;
+  padding: 3px 12px; border-radius: 999px; pointer-events: none;
+}
+.flip-card:hover .flip-inner { transform: rotateY(8deg); }
+.flip-card.flipped:hover .flip-inner { transform: rotateY(172deg); }
+.flip-card:focus-visible { outline: 3px solid var(--canola); outline-offset: 6px; border-radius: 22px; }
+@media (prefers-reduced-motion: reduce) { .flip-inner { transition: none; } }
+@media (max-width: 860px) {
+  .hero-top { grid-template-columns: 1fr; gap: 28px; }
+  .flip-card { max-width: 520px; margin: 0 auto; }
+}
+
 .hero-img {
   display: block; width: min(860px, 100%); margin: 44px auto 0;
   border-radius: 28px; border: 6px solid #fff;

@@ -31,10 +31,22 @@
     <!-- 메인 -->
     <section class="hero">
       <div class="hero-inner">
-        <p class="hero-kicker">정보 교사 6인의 AI 수업 프로젝트</p>
-        <h1>즐겨라 <span>제주</span></h1>
-        <p class="hero-sub">앨런 튜링과 대화하는 페르소나 AI 제작 및 활용<br />수업계획안을 함께 나눕니다.</p>
-        <a class="btn" href="#lessons">수업계획안 보러 가기 →</a>
+        <div class="hero-top">
+          <div class="hero-text">
+            <p class="hero-kicker">정보 교사 6인의 AI 수업 프로젝트</p>
+            <h1>즐겨라 <span>제주</span></h1>
+            <p class="hero-sub">앨런 튜링과 대화하는 페르소나 AI 제작 및 활용<br />수업계획안을 함께 나눕니다.</p>
+            <a class="btn" href="#lessons">수업계획안 보러 가기 →</a>
+          </div>
+          <!-- 누르면 뒤집히는 사진 카드 (앞: 흑백, 뒤: 컬러) -->
+          <button class="flip-card" type="button" aria-pressed="false" aria-label="사진을 눌러 뒤집기">
+            <span class="flip-inner">
+              <img class="flip-face flip-front" src="assets/turing-front.webp" alt="앨런 튜링과 캐릭터 친구들 (흑백)" />
+              <img class="flip-face flip-back" src="assets/turing-back.webp" alt="앨런 튜링과 캐릭터 친구들 (컬러)" />
+            </span>
+            <span class="flip-hint">눌러서 뒤집기 ↻</span>
+          </button>
+        </div>
         <img class="hero-img" src="assets/hero.webp" alt="팀 속전속결 6인의 캐릭터 단체 사진" />
       </div>
       <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">

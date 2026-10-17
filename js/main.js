@@ -16,6 +16,14 @@ links.addEventListener("click", (e) => {
   if (e.target.tagName === "A") links.classList.remove("open");
 });
 
+// 메인 사진 카드: 누르면 180도 뒤집기
+document.querySelectorAll(".flip-card").forEach((card) => {
+  card.addEventListener("click", () => {
+    const on = card.classList.toggle("flipped");
+    card.setAttribute("aria-pressed", String(on));
+  });
+});
+
 // 수업계획안 카드
 function renderLessons() {
   $("#lesson-grid").innerHTML = LESSONS.map((l) => `
