@@ -1,11 +1,12 @@
-/* 글꼴: 제목 = 제주고딕, 각주·설명 = 배달의민족 꾸불림체 */
-@import url("https://cdn.jsdelivr.net/npm/@noonnu/jeju-gothic/index.css");
+/* 글꼴: 큰 제목 = 꾸불림체, 작은 제목·버튼 = 주아체, 본문 = 고운돋움, 각주 = 개구체 */
+@import url("https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=Gaegu:wght@400;700&display=swap");
 @import url("https://cdn.jsdelivr.net/gh/fonts-archive/BMKkubulim/BMKkubulim.css");
 
-
 :root {
-  --font-title: "Jeju Gothic", "Noto Sans KR", sans-serif;
-  --font-note: "BM Kkubulim", "Noto Sans KR", sans-serif;
+  --font-display: "BM Kkubulim", "Jua", sans-serif;
+  --font-title: "Jua", sans-serif;
+  --font-body: "Gowun Dodum", "Noto Sans KR", sans-serif;
+  --font-note: "Gaegu", "Gowun Dodum", sans-serif;
   --tangerine: #f28c28;
   --tangerine-dark: #d96f0e;
   --sea: #1e7fa3;
@@ -23,16 +24,21 @@
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 body {
   margin: 0;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: var(--font-body);
   color: var(--basalt);
   background: var(--paper);
   line-height: 1.7;
 }
-h1, h2, h3, .logo, .btn, .role, .motto-text { font-family: var(--font-title); font-weight: 400; }
+h3, .btn, .role, .chip, .tag { font-family: var(--font-title); font-weight: 400; }
 
-/* 각주·설명 문구 */
+/* 큰 제목: 꾸불꾸불 파도 느낌 */
+h1, h2, .logo, .motto-text { font-family: var(--font-display); font-weight: 400; letter-spacing: 0.01em; }
+
+/* 각주·설명: 손글씨 느낌 */
 .hero-kicker, .section-desc, .motto-label, .region, .line,
-.scene figcaption, .resource-item small, .footer, .todo { font-family: var(--font-note); }
+.scene figcaption, .resource-item small, .footer, .todo {
+  font-family: var(--font-note); font-size: 1.12em; font-weight: 700;
+}
 img { max-width: 100%; }
 
 /* 상단 메뉴 */
@@ -99,7 +105,7 @@ img { max-width: 100%; }
 .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 28px; }
 .chip {
   border: 1.5px solid var(--sea); background: #fff; color: var(--sea);
-  padding: 6px 16px; border-radius: 999px; cursor: pointer; font: inherit; font-weight: 500;
+  padding: 6px 16px; border-radius: 999px; cursor: pointer; font: inherit; font-family: var(--font-title); font-weight: 400;
 }
 .chip.active, .chip:hover { background: var(--sea); color: #fff; }
 
@@ -156,7 +162,7 @@ img { max-width: 100%; }
 }
 .motto-label { margin: 0; color: var(--sea); font-size: 0.95rem; }
 .motto-text { margin: 6px 0 0; font-size: 1.35rem; color: var(--tangerine-dark); line-height: 1.5; }
-.subject { font-family: "Noto Sans KR", sans-serif; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+.subject { font-family: var(--font-body); font-size: 0.8rem; font-weight: 500; color: var(--muted); }
 .role-desc { margin: 0; color: var(--sea); font-weight: 700; font-size: 0.9rem; }
 .line { margin: 8px 0 0; color: var(--muted); font-size: 0.9rem; }
 
