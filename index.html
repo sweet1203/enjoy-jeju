@@ -17,6 +17,7 @@
     <nav class="nav-links">
       <a href="#team">교사 소개</a>
       <a href="#about">프로젝트 소개</a>
+      <a href="#plan">수업 설계</a>
       <a href="#lessons">수업계획안</a>
       <a href="#resources">자료실</a>
       <a href="#feedback">의견 남기기</a>
@@ -75,8 +76,66 @@
       </figure>
     </section>
 
+    <!-- 수업 설계 -->
+    <section id="plan" class="section section-tint">
+      <h2>🗺️ 수업 설계</h2>
+      <p class="section-desc">2022 개정 「인공지능 기초」 · 총 5차시 프로젝트</p>
+
+      <div class="plan-block">
+        <h3>👩‍🎓 대상 학생</h3>
+        <dl class="plan-target">
+          <div><dt>학년</dt><dd>고등학교 2학년 (일반고)</dd></div>
+          <div><dt>과목</dt><dd>인공지능 기초 (진로선택) 수강생</dd></div>
+          <div><dt>선수 학습</dt><dd>고1 「정보」에서 파이썬 기초(변수, 조건문, 반복문, 리스트)와 데이터 다루기를 배운 상태</dd></div>
+        </dl>
+      </div>
+
+      <div class="plan-block">
+        <h3>📶 차시별로 필요한 수준</h3>
+        <div class="table-wrap">
+          <table class="plan-table">
+            <thead><tr><th>차시</th><th>학생이 할 수 있어야 하는 것</th><th>이 수업에서 새로 배우는 것</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>인터넷 자료를 찾아 요약하기</td><td>튜링 테스트, 페르소나 개념</td></tr>
+              <tr><td>2</td><td>리스트·딕셔너리 구조 이해</td><td>JSON 형식으로 자료 정리하기</td></tr>
+              <tr><td>3</td><td>명령어를 보고 그대로 입력하기</td><td>터미널(CLI) 사용, 서버와 클라이언트 구조, RAG 개념</td></tr>
+              <tr><td>4</td><td>결과를 비교하고 문제점 찾기</td><td>프롬프트 수정, 환각 찾기</td></tr>
+              <tr><td>5</td><td>모둠 협업</td><td>웹·Roblox 연결, 동료 평가</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="plan-note"><b>필요 없는 것</b> GPU 서버 설정, vLLM 실행, 모델 학습은 교사가 미리 준비해요. 학생은 켜져 있는 서버에 접속만 하면 됩니다.</p>
+      </div>
+
+      <div class="plan-block">
+        <h3>📚 5차시 수업 계획</h3>
+        <div class="table-wrap">
+          <table class="plan-table">
+            <thead><tr><th>차시</th><th>활동</th><th>참고 단원</th><th>핵심 성취기준</th><th>연계 성취기준</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>앨런 튜링 조사 &amp; 페르소나 작성</td><td>1. 인공지능의 이해</td>
+                <td><b>[12인기01-01]</b> 인공지능의 지능적 판단 이해, 문제 해결 사례 비교·분석</td>
+                <td>[12인기04-02] 프로젝트 수행 계획 구안</td></tr>
+              <tr><td>2</td><td>생애·업적·어록 조사 → data.json 정리</td><td>2. 인공지능과 학습</td>
+                <td><b>[12인기02-01]</b> 문제 해결에 필요한 데이터 선정·수집</td>
+                <td>[12인기02-02] 데이터 가공, 핵심 속성 추출<br />[12인기01-05] 규칙과 사실로 지식 표현</td></tr>
+              <tr><td>3</td><td>RAG 개념, CLI로 튜링 페르소나와 대화</td><td>1. 인공지능의 이해<br />2. 인공지능과 학습</td>
+                <td><b>[12인기01-04]</b> 정보 이용 탐색 알고리즘 적용</td>
+                <td>[12인기01-03] 맹목적 탐색과 정보 이용 탐색 비교<br />[12인기02-05] 딥러닝 특성 이해, 활용 분야 탐색</td></tr>
+              <tr><td>4</td><td>말투·성격 수정, 환각 찾아 고치기</td><td>4. 인공지능 프로젝트<br />3. 사회적 영향</td>
+                <td><b>[12인기04-04]</b> 평가 결과를 반영해 성능 개선</td>
+                <td>[12인기03-04] 윤리적 딜레마 분석 (틀린 사실을 실존 인물의 말처럼 하는 문제)</td></tr>
+              <tr><td>5</td><td>웹·Roblox NPC 연결, 모둠 간 "튜링다움" 평가</td><td>4. 인공지능 프로젝트<br />3. 사회적 영향</td>
+                <td><b>[12인기04-03]</b> 협력적 문제 해결로 인공지능 소프트웨어 개발</td>
+                <td>[12인기03-03] 비판적 자세로 인간과 AI의 공존 방안 도출</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- 수업계획안 -->
-    <section id="lessons" class="section section-tint">
+    <section id="lessons" class="section">
       <h2>📝 수업계획안</h2>
       <p class="section-desc">카드를 누르면 상세 계획안이 아래로 펼쳐지고, 한글 파일로도 받을 수 있어요.</p>
       <div class="lesson-grid" id="lesson-grid"></div>
@@ -84,7 +143,7 @@
     </section>
 
     <!-- 자료실 -->
-    <section id="resources" class="section">
+    <section id="resources" class="section section-tint">
       <h2>📂 자료실</h2>
       <p class="section-desc">활동지 · PPT · 평가 루브릭을 내려받을 수 있습니다.</p>
       <div class="resource-list" id="resource-list"></div>
@@ -95,7 +154,7 @@
     </section>
 
     <!-- 의견 -->
-    <section id="feedback" class="section section-tint">
+    <section id="feedback" class="section">
       <h2>💬 의견 남기기</h2>
       <p class="section-desc">수업에 써 보신 후기나 개선 의견을 들려주세요.</p>
       <a class="btn" id="feedback-btn" href="#" target="_blank" rel="noopener">의견 보내기</a>
