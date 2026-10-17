@@ -190,14 +190,14 @@ img { max-width: 100%; }
   background: #fff; border: 3px solid #cfd4d6; transition: all .25s;
 }
 .spy a span {
-  font-family: "Jua", sans-serif; font-size: 0.9rem; white-space: nowrap;
-  background: rgba(255, 255, 255, 0.85); padding: 1px 10px; border-radius: 999px;
+  font-family: var(--font-myungjo); font-size: 1.05rem; letter-spacing: -0.05em; white-space: nowrap;
+  background: rgba(255, 255, 255, 0.85); padding: 2px 12px; border-radius: 999px;
   opacity: 0; transform: translateX(6px); transition: all .25s;
 }
 .spy:hover a span, .spy a.active span { opacity: 1; transform: none; }
 .spy a.passed::after { border-color: var(--tangerine); }
 .spy a.active::after { background: var(--tangerine); border-color: #fff; box-shadow: 0 0 0 3px var(--tangerine); transform: scale(1.15); }
-.spy a.active span { background: var(--tangerine); color: #fff; font-size: 1rem; box-shadow: 0 4px 10px rgba(217, 111, 14, 0.25); }
+.spy a.active span { background: var(--tangerine); color: #fff; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(217, 111, 14, 0.25); }
 .spy a:hover span { color: var(--tangerine-dark); }
 .spy a.active:hover span { color: #fff; }
 
@@ -238,5 +238,6 @@ img { max-width: 100%; }
   .spy { right: 8px; --gap: 30px; }
   .spy a::after { width: 12px; height: 12px; border-width: 2px; }
   .spy-track { right: 5px; width: 3px; }
-  .spy a span { font-size: 0.8rem; }
+  .spy a span { font-size: 0.9rem; }
+  .spy a.active span { font-size: 1rem; }
 }
