@@ -32,6 +32,28 @@ function renderLessons() {
 const detail = $("#lesson-detail");
 let openId = null;
 
+// 수업 흐름을 한글 지도안 표 모양으로: [제목] 줄은 소제목, 그 아래 줄들은 테두리 상자
+function stageHTML(text) {
+  if (!text || !String(text).trim()) return `<p>${val("")}</p>`;
+  const out = []; let box = [];
+  const flush = () => { if (box.length) out.push(`<div class="plan-box">${box.map((t) => `<p class="${/^\s*[-0-9]/.test(t) ? "sub" : ""}">${esc(t.trim())}</p>`).join("")}</div>`); box = []; };
+  for (const line of String(text).split("\n")) {
+    if (!line.trim()) { flush(); continue; }
+    if (/^\s*\[.*\]\s*$/.test(line)) { flush(); out.push(`<p class="plan-head">${esc(line.trim())}</p>`); }
+    else box.push(line);
+  }
+  flush();
+  return out.join("");
+}
+function flowTable(l) {
+  const fm = l.flowMaterials || {};
+  const row = (name, key) => `<tr><th class="stage">${name}</th><td class="act">${stageHTML(l.flow[key])}</td><td class="mat">${fm[key] ? esc(fm[key]) : ""}</td></tr>`;
+  return `<div class="table-wrap"><table class="hwp-flow">
+    <thead><tr><th>학습단계</th><th>교수 · 학습 활동</th><th>학습자료 및 비고사항</th></tr></thead>
+    <tbody>${row("도 입", "intro")}${row("전 개", "main")}${row("정 리", "close")}</tbody>
+  </table></div>`;
+}
+
 function detailHTML(l) {
   return `
     <div class="detail-head">
@@ -52,11 +74,7 @@ function detailHTML(l) {
     <h4>성취기준</h4><p>${val(l.standards)}</p>
     <h4>학습 목표</h4>${l.goals.length ? `<ul>${l.goals.map((g) => `<li>${esc(g)}</li>`).join("")}</ul>` : `<p>${val("")}</p>`}
     <h4>수업 흐름</h4>
-    <div class="flow">
-      <div><b>도입</b><p>${val(l.flow.intro)}</p></div>
-      <div><b>전개</b><p>${val(l.flow.main)}</p></div>
-      <div><b>정리</b><p>${val(l.flow.close)}</p></div>
-    </div>
+    ${flowTable(l)}
     <h4>평가 계획</h4><p>${val(l.assessment)}</p>
     <h4>준비물 · 자료</h4><p>${val(l.materials)}</p>
     <h4>💡 수업 팁</h4><p>${val(l.tips)}</p>`;
@@ -103,9 +121,10 @@ function exportHTML(l) {
     ${h("2. 학습 목표")}${l.goals.length ? `<ol>${l.goals.map((g) => `<li>${esc(g)}</li>`).join("")}</ol>` : "<p>작성 예정</p>"}
     ${h("3. 수업 흐름")}
     <table style="width:100%;border-collapse:collapse;">
-      <tr><td ${head}>도입</td><td ${cell}>${plain(l.flow.intro)}</td></tr>
-      <tr><td ${head}>전개</td><td ${cell}>${plain(l.flow.main)}</td></tr>
-      <tr><td ${head}>정리</td><td ${cell}>${plain(l.flow.close)}</td></tr>
+      <tr><td ${head}>학습단계</td><td ${head}>교수 · 학습 활동</td><td ${head}>학습자료 및 비고사항</td></tr>
+      <tr><td ${head}>도입</td><td ${cell}>${plain(l.flow.intro)}</td><td ${cell}>${plain((l.flowMaterials || {}).intro)}</td></tr>
+      <tr><td ${head}>전개</td><td ${cell}>${plain(l.flow.main)}</td><td ${cell}>${plain((l.flowMaterials || {}).main)}</td></tr>
+      <tr><td ${head}>정리</td><td ${cell}>${plain(l.flow.close)}</td><td ${cell}>${plain((l.flowMaterials || {}).close)}</td></tr>
     </table>
     ${h("4. 평가 계획")}<p>${plain(l.assessment)}</p>
     ${h("5. 준비물 · 자료")}<p>${plain(l.materials)}</p>

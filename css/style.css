@@ -224,6 +224,18 @@ img { max-width: 100%; }
 .plan-note { margin: 14px 0 0; padding: 10px 14px; background: #fff1e0; border-radius: 12px; font-size: 0.95rem; }
 .plan-note b { color: var(--tangerine-dark); margin-right: 6px; }
 
+/* 수업 흐름: 한글 지도안 표 모양 */
+.hwp-flow { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 0.95rem; line-height: 1.7; border: 2px solid var(--basalt); }
+.hwp-flow th, .hwp-flow td { border: 1px solid var(--basalt); padding: 10px 12px; vertical-align: middle; }
+.hwp-flow thead th { background: var(--sea-light); font-weight: 700; text-align: center; border-bottom: 3px double var(--basalt); }
+.hwp-flow th.stage { width: 12%; text-align: center; font-weight: 700; letter-spacing: 0.6em; white-space: nowrap; }
+.hwp-flow td.act { width: 64%; vertical-align: top; }
+.hwp-flow td.mat { width: 24%; white-space: pre-line; vertical-align: middle; }
+.hwp-flow .plan-head { margin: 4px 0 6px; font-weight: 700; }
+.hwp-flow .plan-box { border: 1px solid var(--basalt); padding: 8px 12px; margin: 0 0 12px; }
+.hwp-flow .plan-box p { margin: 0; white-space: normal; word-break: keep-all; }
+.hwp-flow .plan-box p.sub { padding-left: 1.2em; }
+
 /* 상세 계획안 (아래로 펼침) */
 .lesson-open { font-size: 0.85rem; color: var(--tangerine-dark); font-weight: 700; }
 .lesson-card[aria-expanded="true"] { border-color: var(--tangerine); }
