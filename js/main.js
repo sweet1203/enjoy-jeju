@@ -173,6 +173,7 @@ async function saveHwpx(btn) {
 
 // 자료실 — 차시 카드 + 지도안 미리보기(한글 파일 모양 그대로)
 $("#resource-list").innerHTML = `
+  <a class="res-setup" href="lessons/setup.html"><b>🔑 실습 준비 · 튜링 실행 따라하기 카드</b><span>각자 VESSL 로그인 → 작업공간 → 터미널 실행 → 고치고 다시 실행 · 자주 나는 오류 (1~3차시)</span></a>
   <div class="lesson-pages">${LESSON_PAGES.map((p) => `
     <div class="lesson-page" data-no="${p.no}">
       <a class="lp-main" href="${esc(p.href)}">

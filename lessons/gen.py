@@ -11,7 +11,7 @@ TITLES = {
 }
 
 def shell(n, unit, goals, flow, body):
-    nav = "".join(f'<a href="lesson-{i}.html"{" class=\"on\"" if i == n else ""}>{i}차시</a>' for i in range(1, 6))
+    nav = '<a href="setup.html">따라하기</a>' + "".join(f'<a href="lesson-{i}.html"{" class=\"on\"" if i == n else ""}>{i}차시</a>' for i in range(1, 6))
     goals_html = "".join(f"<li>{g}</li>" for g in goals)
     flow_html = "".join(f"<div><b>{k}</b><p>{v}</p></div>" for k, v in flow)
     return f"""<!doctype html>
@@ -21,7 +21,7 @@ def shell(n, unit, goals, flow, body):
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{n}차시 · {TITLES[n]} | 즐겨라 제주</title>
 <meta name="description" content="앨런 튜링 페르소나 AI 프로젝트 {n}차시 수업 자료 겸 학습지" />
-<link rel="stylesheet" href="lesson.css?v=adv" />
+<link rel="stylesheet" href="lesson.css?v=setup" />
 </head>
 <body data-lesson="lesson-{n}">
 <header class="topbar">
@@ -53,7 +53,7 @@ def shell(n, unit, goals, flow, body):
   </div>
   <p class="saved">적은 내용은 이 브라우저에 자동 저장돼요. 제출할 때는 ‘인쇄 · PDF로 저장’을 이용하세요.</p>
 </main>
-<script src="lesson.js?v=adv"></script>
+<script src="lesson.js?v=setup"></script>
 </body>
 </html>
 """
@@ -158,6 +158,14 @@ L1 = f"""
   </section>
 
   <section class="block">
+    <h2><span class="no">활동 4</span>VESSL 첫 접속 (5분)</h2>
+    <p>3차시부터는 <b>각자 자기 컴퓨터에서</b> 튜링 프로그램을 열어요. 설치할 것은 없고, 크롬으로 VESSL에 로그인하면 돼요. 오늘은 작업공간을 열어 보는 데까지만 해요.</p>
+    {choices("login", ["크롬에서 VESSL에 로그인했다", "선생님이 알려 준 수업 조직(Organization)을 골랐다", "내 작업공간(Workspace)을 찾아 Running 상태로 켰다", "JupyterLab을 열었다", "왼쪽 파일 목록에서 persona-core 폴더를 찾았다"])}
+    <div class="field">막힌 단계와 화면에 나온 말 {text("loginIssue", "막힌 곳이 없으면 비워 두세요")}</div>
+    <p class="note">자세한 방법: <a href="setup.html#s1">튜링 실행 따라하기 카드 ①②</a> · 다 쓴 작업공간은 선생님 안내에 따라 Stop을 눌러 꺼 둬요.</p>
+  </section>
+
+  <section class="block">
     <h2><span class="no">정리</span>스스로 평가하기</h2>
     {self_eval("se", ["튜링 테스트(모방 게임)가 무엇인지 내 말로 설명할 수 있다.", "출처를 밝히며 튜링에 대해 조사했다.", "‘모르는 것’과 ‘대답하지 않을 것’의 차이를 설명할 수 있다."])}
     <div class="field">오늘 새롭게 알게 된 점 한 줄 {text("learned")}</div>
@@ -237,8 +245,15 @@ L2 = f"""
     <p>모둠 data.json 전체를 붙여 넣으면 형식이 맞는지 바로 알려 줘요.</p>
     {area("jsoncheck", '{"documents": [ ... ]}', 160)}
     <p class="status"></p>
-    <details class="easy"><summary>검사를 통과했다면? app.py로 확인하기</summary><div>
-      <p>선생님 서버에서 <code>python persona-core/app.py</code>를 실행하면 맨 처음에 <code>참고 자료 N건</code>이라는 메시지가 나와요. 우리가 쓴 문서 수만큼 늘었다면 성공!</p>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">활동 5</span>내 작업공간에 data.json 올리기 (10분)</h2>
+    <p>검사를 통과한 모둠 data.json을 <b>각자 자기 VESSL 작업공간</b>에 넣어요. 다음 차시에 튜링이 이 자료를 찾아보고 답해요.</p>
+    {choices("upload", ["VESSL에 로그인해 내 작업공간의 JupyterLab을 열었다", "persona-core/data.json을 Duplicate 해서 data_backup.json으로 이름을 바꿔 두었다", "data.json을 열어 내용을 모두 지우고 검사를 통과한 JSON을 붙여 넣었다", "Ctrl+S로 저장했다 (탭의 ● 표시가 사라짐)"])}
+    <details class="easy"><summary>시간이 남으면: 자료가 잘 들어갔는지 확인하기</summary><div>
+      <p>JupyterLab에서 <b>File → New → Terminal</b>을 열고 <code>python persona-core/app.py</code>를 입력해요. 맨 아래에 <code>참고 자료 N건</code>이 나오면, N이 우리 모둠 문서 수와 같은지 확인해요. 확인했으면 <kbd>Ctrl</kbd>+<kbd>C</kbd>로 끝내요.</p>
+      <p class="note">오류가 나면 <a href="setup.html#s3">따라하기 카드 ③</a>과 ‘자주 나는 오류’를 보세요.</p>
     </div></details>
   </section>
 
@@ -246,7 +261,7 @@ L2 = f"""
     <h2><span class="no">정리</span>스스로 평가하기</h2>
     {self_eval("se", ["출처를 확인하며 필요한 자료를 골라 모았다.", "자료를 id · content · keywords 구조의 JSON으로 정리했다.", "학생들이 물을 법한 키워드를 뽑았다."])}
     <div class="field">발표할 문서 1건: 어떤 질문에 쓰일 자료인가요? {text("present")}</div>
-    <p class="note">기억하기: 자료가 틀리면 AI도 틀려요. 다음 차시에는 이 자료를 찾아서 답하는 RAG와 CLI 대화를 해 봐요.</p>
+    <p class="note">기억하기: 자료가 틀리면 AI도 틀려요. 다음 차시에는 내 작업공간에서 튜링을 직접 실행해, 이 자료를 찾아서 답하는지 확인해요.</p>
   </section>
 """
 
@@ -255,6 +270,20 @@ topics = ["T01 출생 · 가족", "T02 셔번 학교 · 자전거 등교", "T03 
           "T07 블레츨리 파크(비밀 업무)", "T08 꽃가루 알레르기 · 방독면", "T09 장거리 달리기 · 마라톤", "T10 국립물리연구소 · ACE", "T11 맨체스터 · 페란티 마크 1", "T12 「계산 기계와 지능」 · 모방 게임",
           "T13 기계의 실수에 대한 강연", "T14 체스 프로그램 투로챔프", "T15 제퍼슨의 반론", "T16 생물의 무늬 연구", "T17 1952년 재판을 앞둔 상황", "T18 친구에게 보낸 편지"]
 L3 = f"""
+  <section class="block">
+    <h2><span class="no">도입</span>따라 하며 튜링 열기 (10분)</h2>
+    <p>선생님 화면을 보면서 <b>각자 자기 컴퓨터에서</b> 한 단계씩 따라 해요. 막히면 손을 들고, 옆 친구와 함께 확인해요.</p>
+    <ol>
+      <li>VESSL 로그인 → 내 작업공간(Running) → <b>JupyterLab</b> 열기 <span class="note">(1차시에 해 본 그대로)</span></li>
+      <li><b>File → New → Terminal</b>로 터미널 열기</li>
+      <li><code>ls</code> 입력 → 목록에 <code>persona-core</code>가 보이는지 확인</li>
+      <li><code>python persona-core/app.py</code> 입력 → 튜링의 첫인사가 나오면 내 이름을 말하며 인사하기</li>
+      <li>끝낼 때는 <kbd>Ctrl</kbd>+<kbd>C</kbd></li>
+    </ol>
+    {choices("open", ["터미널을 열었다", "app.py를 실행해 첫인사를 받았다", "Ctrl+C로 끝냈다가 ↑ 키와 Enter로 다시 실행해 봤다"])}
+    <p class="note">자세한 방법과 오류 대처: <a href="setup.html#s4">튜링 실행 따라하기 카드 ④</a></p>
+  </section>
+
   <section class="block">
     <h2><span class="no">개념</span>오늘 알아 둘 것</h2>
     <div class="concepts">
@@ -284,7 +313,7 @@ L3 = f"""
     <details class="easy"><summary>질문을 왜 두 번 넣나요? 서버는 또 뭔가요?</summary><div>
       <p>app.py는 검색할 때 <code>지금 질문 + 지금 질문 + 직전 질문</code>을 써요. 지금 질문을 두 번 넣어 더 중요하게 보고, 직전 질문으로 앞의 주제도 이어 가요. “그럼 그때는요?”처럼 짧은 질문도 앞 맥락으로 찾을 수 있게요.</p>
       <p><b>서버</b>는 AI 모델(EXAONE)을 켜 두고 질문을 받으면 답을 돌려주는 컴퓨터예요. 선생님이 VESSL의 GPU 컴퓨터에서 <b>vLLM</b>이라는 프로그램으로 켜 둬요. 우리가 쓰는 app.py는 그 서버에 질문을 보내는 쪽(클라이언트)이에요.</p>
-      <p class="note">이 서버는 <b>한 번에 한 질문만</b> 처리하도록 설정돼 있어서, 모둠 대표가 순서대로 질문해야 해요.</p>
+      <p class="note">AI가 답을 만드는 데 몇 초 걸려요. 서버가 바쁘면 질문을 차례로 처리해서 더 늦어질 수 있으니, 답이 나올 때까지 기다렸다가 다음 질문을 해요.</p>
     </div></details>
   </section>
 
@@ -295,7 +324,7 @@ L3 = f"""
 
   <section class="block">
     <h2><span class="no">활동</span>검색 예측 기록지</h2>
-    <p>① 질문을 정하고 어떤 자료가 검색될지 <b>예측</b> → ② 모둠 대표가 CLI에서 질문하고 답을 기록 → ③ 예측과 비교해요.</p>
+    <p>① 모둠이 질문 5개를 정하고 어떤 자료가 검색될지 <b>예측</b> → ② 질문을 나눠 맡아 <b>각자 내 터미널</b>에서 묻고 답을 기록 → ③ 예측과 비교해요.</p>
     <div class="table-wrap"><table class="sheet">
       <tr><th style="width:5%">번호</th><th style="width:30%">질문</th><th style="width:13%">예측 자료</th><th>튜링의 답 (요약)</th><th style="width:13%">예측 결과</th></tr>
       <tr class="ex"><td class="c">예</td><td>자전거로 학교 간 적 있어요?</td><td class="c">T02</td><td>13살 첫 등교 날 총파업 때문에 자전거로 갔다고 답함</td><td class="c">적중</td></tr>
@@ -311,7 +340,20 @@ L3 = f"""
   </section>
 
   <section class="block">
-    <h2><span class="no">정리</span>스스로 평가하기</h2>
+    <h2><span class="no">정리</span>고치고 다시 실행하기 (4차시 준비)</h2>
+    <p>4차시에는 data.json과 프롬프트를 고쳐서 다시 물어봐요. 오늘 그 동작을 한 번 연습해 둬요.</p>
+    <ol>
+      <li>왼쪽 목록에서 <code>persona-core/app.py</code>를 더블클릭해 열기</li>
+      <li><code>OPENING = "..."</code> 줄에서 <b>따옴표 안 문장만</b> 우리 모둠 인사로 바꾸기</li>
+      <li><kbd>Ctrl</kbd>+<kbd>S</kbd>로 저장 → 터미널에서 <kbd>Ctrl</kbd>+<kbd>C</kbd> → <kbd>↑</kbd> → <kbd>Enter</kbd></li>
+      <li>튜링의 첫인사가 바뀌었는지 확인</li>
+    </ol>
+    <div class="field">바꾼 첫인사 {text("opening")}</div>
+    <p class="tip">💡 고친 내용은 <b>저장하고 다시 실행해야</b> 반영돼요.</p>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">평가</span>스스로 평가하기</h2>
     {self_eval("se", ["RAG가 ‘찾기 + 말하기’로 이루어진다는 것을 설명할 수 있다.", "질문에 맞는 자료를 예측하고 실제 결과와 비교했다.", "모델 서버와 app.py가 어떻게 연결되는지 설명할 수 있다."])}
     <div class="field">한 줄 정리: app.py = 찾기(______) + 말하기(______) {text("sum")}</div>
     <p class="note">빗나간 질문은 버리지 말고 남겨 두세요. 4차시 ‘페르소나 디버깅’의 재료가 돼요.</p>
@@ -381,7 +423,7 @@ ADV3 = f"""
     <div class="step">
       <h3><span class="tag">2단계</span>함수 고치기 — 검색 점수를 눈으로 보기</h3>
       <p><code>chat()</code> 함수에서 자료를 고르는 부분에 <code>print</code> 한 줄을 넣으면, 질문할 때마다 어떤 자료가 몇 점으로 뽑혔는지 화면에 나와요.</p>
-      <p class="tip">🖥️ <b>어디서 실행하나요?</b> <code>chat()</code>은 튜링의 답까지 받아야 끝나서 <b>모델 서버가 있는 교사 화면</b>에서 실행해요. 고친 app.py를 <code>app_모둠명.py</code>로 저장해 선생님께 내면 차례로 실행해 줘요. 아래 ‘3글자 자르기’ 도전은 모델 없이 <b>내 자리(Colab · 학교 PC)</b>에서 <code>eval.py --dry-run</code>으로 확인할 수 있어요.</p>
+      <p class="tip">💻 <b>어디서 실행하나요?</b> 오늘 튜링을 실행한 <b>내 작업공간</b>에서 해요. 고치기 전에 app.py를 Duplicate 해서 원본을 남겨 두고, 고친 뒤에는 저장 → 다시 실행하면 질문할 때마다 점수가 함께 나와요.</p>
       {code(CODE_PRINT)}
       <div class="field">점수가 가장 높았던 질문과 가장 낮았던 질문 {text("adv2a")}</div>
 
@@ -593,21 +635,21 @@ PAGES = {
         "페르소나가 대답하지 않을 내용을 정하고 그 이유를 설명할 수 있다."],
         [("도입", "“기계는 생각할 수 있을까?” 모방 게임 소개, 오늘날 AI는 통과했을지 투표"),
          ("전개", "튜링 조사 → 시점·말투·모르는 것·대답하지 않을 것 정하기 → 프롬프트 초안"),
-         ("정리", "‘모르는 것’과 ‘대답하지 않을 것’의 차이 정리, 초안 공유")], L1),
+         ("정리", "‘모르는 것’과 ‘대답하지 않을 것’의 차이 정리, 초안 공유, VESSL 첫 접속")], L1),
     2: ("2. 인공지능과 학습", [
         "페르소나에 필요한 자료를 선정하고 출처를 확인하여 수집할 수 있다.",
         "수집한 자료를 id, content, keywords 구조의 JSON으로 정리할 수 있다.",
         "검색이 잘 되도록 자료마다 핵심 키워드를 뽑을 수 있다."],
         [("도입", "자료 없이 / 자료와 함께 답한 두 결과 비교하기"),
          ("전개", "주제별로 나누기 → 3인칭 content 쓰기 → 키워드 뽑기 → JSON 검사"),
-         ("정리", "문서 1건 발표, 출처 확인의 중요성")], L2),
+         ("정리", "문서 1건 발표, 내 작업공간에 data.json 올리기")], L2),
     3: ("1. 인공지능의 이해", [
         "검색 후 답하기(RAG)의 과정을 정보 이용 탐색의 관점에서 설명할 수 있다.",
         "질문에 맞는 자료가 검색될지 예측하고 CLI 대화로 확인할 수 있다.",
         "언어 모델(딥러닝)이 서버에서 답을 만드는 구조를 설명할 수 있다."],
-        [("도입", "암기 시험 vs 오픈북 시험, app.py로 튜링과 첫 인사"),
+        [("도입", "암기 시험 vs 오픈북 시험, 따라 하며 내 터미널에서 튜링 실행"),
          ("전개", "검색될 자료 예측 → CLI 대화 → 예측과 비교 → 빗나간 질문 분석"),
-         ("정리", "app.py = 찾기(BM25) + 말하기(EXAONE)")], L3 + ADV3),
+         ("정리", "app.py = 찾기(BM25) + 말하기(EXAONE), 고치고 다시 실행 연습")], L3 + ADV3),
     4: ("4. 인공지능 프로젝트", [
         "페르소나 AI의 답변에서 환각을 찾아 근거 자료와 비교해 원인을 분석할 수 있다.",
         "평가 결과를 반영해 data.json과 app.py의 프롬프트를 고치고 성능을 개선할 수 있다.",

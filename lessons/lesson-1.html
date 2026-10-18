@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>1차시 · 튜링 페르소나 설계도 만들기 | 즐겨라 제주</title>
 <meta name="description" content="앨런 튜링 페르소나 AI 프로젝트 1차시 수업 자료 겸 학습지" />
-<link rel="stylesheet" href="lesson.css?v=adv" />
+<link rel="stylesheet" href="lesson.css?v=setup" />
 </head>
 <body data-lesson="lesson-1">
 <header class="topbar">
   <a class="home" href="../index.html#resources">🍊 즐겨라 제주</a>
-  <nav class="lesson-nav" aria-label="차시 이동"><a href="lesson-1.html" class="on">1차시</a><a href="lesson-2.html">2차시</a><a href="lesson-3.html">3차시</a><a href="lesson-4.html">4차시</a><a href="lesson-5.html">5차시</a></nav>
+  <nav class="lesson-nav" aria-label="차시 이동"><a href="setup.html">따라하기</a><a href="lesson-1.html" class="on">1차시</a><a href="lesson-2.html">2차시</a><a href="lesson-3.html">3차시</a><a href="lesson-4.html">4차시</a><a href="lesson-5.html">5차시</a></nav>
 </header>
 <main>
   <div class="hero">
@@ -28,7 +28,7 @@
     <h2>오늘의 학습 목표</h2>
     <ol class="goals"><li>튜링 테스트(모방 게임)의 뜻을 알고 지능적 판단의 기준을 설명할 수 있다.</li><li>앨런 튜링을 조사하여 페르소나의 시점·말투·지식의 한계를 정할 수 있다.</li><li>페르소나가 대답하지 않을 내용을 정하고 그 이유를 설명할 수 있다.</li></ol>
     <h3>오늘의 흐름</h3>
-    <div class="flow3"><div><b>도입</b><p>“기계는 생각할 수 있을까?” 모방 게임 소개, 오늘날 AI는 통과했을지 투표</p></div><div><b>전개</b><p>튜링 조사 → 시점·말투·모르는 것·대답하지 않을 것 정하기 → 프롬프트 초안</p></div><div><b>정리</b><p>‘모르는 것’과 ‘대답하지 않을 것’의 차이 정리, 초안 공유</p></div></div>
+    <div class="flow3"><div><b>도입</b><p>“기계는 생각할 수 있을까?” 모방 게임 소개, 오늘날 AI는 통과했을지 투표</p></div><div><b>전개</b><p>튜링 조사 → 시점·말투·모르는 것·대답하지 않을 것 정하기 → 프롬프트 초안</p></div><div><b>정리</b><p>‘모르는 것’과 ‘대답하지 않을 것’의 차이 정리, 초안 공유, VESSL 첫 접속</p></div></div>
   </section>
 
   <section class="block">
@@ -109,6 +109,14 @@
   </section>
 
   <section class="block">
+    <h2><span class="no">활동 4</span>VESSL 첫 접속 (5분)</h2>
+    <p>3차시부터는 <b>각자 자기 컴퓨터에서</b> 튜링 프로그램을 열어요. 설치할 것은 없고, 크롬으로 VESSL에 로그인하면 돼요. 오늘은 작업공간을 열어 보는 데까지만 해요.</p>
+    <div class="choices"><label><input type="checkbox" name="login0" value="0" /> <span>크롬에서 VESSL에 로그인했다</span></label><label><input type="checkbox" name="login1" value="1" /> <span>선생님이 알려 준 수업 조직(Organization)을 골랐다</span></label><label><input type="checkbox" name="login2" value="2" /> <span>내 작업공간(Workspace)을 찾아 Running 상태로 켰다</span></label><label><input type="checkbox" name="login3" value="3" /> <span>JupyterLab을 열었다</span></label><label><input type="checkbox" name="login4" value="4" /> <span>왼쪽 파일 목록에서 persona-core 폴더를 찾았다</span></label></div>
+    <div class="field">막힌 단계와 화면에 나온 말 <input type="text" name="loginIssue" placeholder="막힌 곳이 없으면 비워 두세요" /></div>
+    <p class="note">자세한 방법: <a href="setup.html#s1">튜링 실행 따라하기 카드 ①②</a> · 다 쓴 작업공간은 선생님 안내에 따라 Stop을 눌러 꺼 둬요.</p>
+  </section>
+
+  <section class="block">
     <h2><span class="no">정리</span>스스로 평가하기</h2>
     <div class="table-wrap"><table class="sheet self"><tr><th>평가 내용</th><th>잘함</th><th>보통</th><th>노력</th></tr><tr><td>튜링 테스트(모방 게임)가 무엇인지 내 말로 설명할 수 있다.</td><td class="c"><input type="radio" name="se0" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se0" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se0" value="노력" aria-label="노력" /></td></tr><tr><td>출처를 밝히며 튜링에 대해 조사했다.</td><td class="c"><input type="radio" name="se1" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se1" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se1" value="노력" aria-label="노력" /></td></tr><tr><td>‘모르는 것’과 ‘대답하지 않을 것’의 차이를 설명할 수 있다.</td><td class="c"><input type="radio" name="se2" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se2" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se2" value="노력" aria-label="노력" /></td></tr></table></div>
     <div class="field">오늘 새롭게 알게 된 점 한 줄 <input type="text" name="learned" placeholder="" /></div>
@@ -121,6 +129,6 @@
   </div>
   <p class="saved">적은 내용은 이 브라우저에 자동 저장돼요. 제출할 때는 ‘인쇄 · PDF로 저장’을 이용하세요.</p>
 </main>
-<script src="lesson.js?v=adv"></script>
+<script src="lesson.js?v=setup"></script>
 </body>
 </html>

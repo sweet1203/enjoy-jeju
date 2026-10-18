@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@noonnu/maplestory-otf-bold@0.1.0/index.css" />
-  <link rel="stylesheet" href="css/style.css?v=20261018-maple3" />
+  <link rel="stylesheet" href="css/style.css?v=20261018-setup" />
 </head>
 <body>
   <header class="nav">
@@ -119,15 +119,22 @@
           <table class="plan-table">
             <thead><tr><th>차시</th><th>학생이 할 수 있어야 하는 것</th><th>이 수업에서 새로 배우는 것</th></tr></thead>
             <tbody>
-              <tr><td>1</td><td>인터넷 자료를 찾아 요약하기</td><td>튜링 테스트, 페르소나 개념</td></tr>
-              <tr><td>2</td><td>리스트·딕셔너리 구조 이해</td><td>JSON 형식으로 자료 정리하기</td></tr>
-              <tr><td>3</td><td>명령어를 보고 그대로 입력하기</td><td>터미널(CLI) 사용, 서버와 클라이언트 구조, RAG 개념</td></tr>
+              <tr><td>1</td><td>인터넷 자료를 찾아 요약하기</td><td>튜링 테스트, 페르소나 개념 · <b>VESSL 로그인과 작업공간 열기</b></td></tr>
+              <tr><td>2</td><td>리스트·딕셔너리 구조 이해</td><td>JSON 형식으로 자료 정리하기 · <b>JupyterLab에서 data.json 올리고 저장하기</b></td></tr>
+              <tr><td>3</td><td>명령어를 보고 그대로 입력하기</td><td>터미널(CLI)에서 app.py 실행 · <b>고치고 다시 실행하기</b>, 서버와 클라이언트 구조, RAG 개념</td></tr>
               <tr><td>4</td><td>결과를 비교하고 문제점 찾기</td><td>프롬프트 수정, 환각 찾기</td></tr>
               <tr><td>5</td><td>모둠 협업</td><td>웹·Roblox 연결, 동료 평가</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="plan-note"><b>필요 없는 것</b> GPU 서버 설정, vLLM 실행, 모델 학습은 교사가 미리 준비해요. 학생은 켜져 있는 서버에 접속만 하면 됩니다.</p>
+        <p class="plan-note"><b>설치는 없어요</b> 학생은 학교 컴퓨터의 크롬으로 <b>각자 VESSL에 로그인</b>해 작업공간(JupyterLab)을 열고 실습합니다. GPU 서버 설정, vLLM 실행, 모델 학습은 교사가 미리 준비해요.</p>
+        <div class="setup-path">
+          <div><b>1차시 끝 · 5분</b>VESSL 로그인 → 작업공간 → JupyterLab 열어 보기</div>
+          <div><b>2차시 끝 · 10분</b>검사를 통과한 data.json을 내 작업공간에 붙여 넣고 저장</div>
+          <div><b>3차시 도입 · 10분</b>교사 화면을 따라 터미널에서 <code>python persona-core/app.py</code> 실행</div>
+          <div><b>3차시 정리</b>OPENING 한 줄 고치기 → 저장 → 다시 실행 (4차시 준비)</div>
+        </div>
+        <p class="setup-link"><a class="btn-mini" href="lessons/setup.html">🔑 튜링 실행 따라하기 카드 열기 →</a> 접속 · 실행 · 고치고 다시 실행 · 자주 나는 오류를 한 장에 모았어요.</p>
       </div>
 
       <div class="plan-block">
@@ -158,24 +165,14 @@
 
       <div class="plan-block adv-block">
         <h3>💻 선택 심화 · 코드 작성 단계</h3>
-        <p class="adv-lead">기본 수업(프롬프트 · data.json 작성)은 모두 함께 하고, 코드를 더 다뤄 보고 싶은 학생이나 모둠만 아래 단계를 골라 이어 갑니다. 단계마다 <b>모델 서버가 필요한지</b>가 달라서 실행하는 곳을 둘로 나눴어요.</p>
-        <div class="run-where">
-          <div>
-            <b>💻 내 자리에서 · Colab 또는 학교 PC</b>
-            <p>모델 없이 되는 일이에요. 코드 읽고 고치기, <code>eval.py --dry-run</code>으로 <b>어떤 자료가 몇 점으로 검색되는지</b> 확인하기. 브라우저와 구글 계정만 있으면 됩니다.</p>
-          </div>
-          <div>
-            <b>🖥️ 교사 화면에서 · VESSL 작업공간</b>
-            <p>튜링의 <b>답</b>이 필요한 일이에요. 학생이 고친 파일을 제출하면 교사가 작업공간에 올려 차례로 실행하고, 결과를 TV로 함께 봅니다. 학생은 VESSL에 접속하지 않아요.</p>
-          </div>
-        </div>
+        <p class="adv-lead">기본 수업(프롬프트 · data.json 작성)은 모두 함께 하고, 코드를 더 다뤄 보고 싶은 학생이나 모둠만 아래 단계를 골라 이어 갑니다. 모두 3차시에 익힌 대로 <b>내 작업공간의 터미널</b>에서 고치고 다시 실행해요. 고치기 전에 원본 파일을 Duplicate 해 두세요.</p>
         <div class="table-wrap">
           <table class="plan-table">
-            <thead><tr><th>단계</th><th>학생이 하는 일</th><th>실행하는 곳</th><th>교사가 미리 줄 것</th><th>차시</th></tr></thead>
+            <thead><tr><th>단계</th><th>학생이 하는 일</th><th>교사가 미리 줄 것</th><th>차시</th></tr></thead>
             <tbody>
-              <tr><td>1. 값 바꾸기</td><td><code>OPENING</code>, 검색 개수 <code>k</code>, <code>temperature</code>, 대화 기억 길이 중 <b>하나</b>를 골라 바꾸고 같은 질문의 답 비교</td><td>🖥️ 교사 화면<br /><span class="muted">모둠당 2~3분, 차례로</span></td><td>바꿀 곳을 표시한 app.py, 관찰 기록표</td><td><a href="lessons/lesson-3.html">3</a></td></tr>
-              <tr><td>2. 함수 고치기</td><td><code>tokenize</code>를 3글자 자르기로 고치고, 검색 점수가 어떻게 달라지는지 확인</td><td>💻 내 자리<br /><span class="muted"><code>--dry-run</code></span></td><td>빈칸 · 힌트가 있는 코드 조각</td><td><a href="lessons/lesson-3.html">3</a></td></tr>
-              <tr><td>3. 새 코드 쓰기</td><td><code>eval_starter.py</code>의 빈칸 5개를 채워 자동 검증 프로그램 완성 → 수정 전 · 후 비교</td><td>💻 내 자리에서 완성 · 검색 확인<br />→ 🖥️ 교사 화면에서 답 받기</td><td><a class="code-peek" href="assets/code/eval_starter.py">eval_starter.py</a> · <a class="code-peek" href="assets/code/questions.csv">questions.csv</a> · <a class="code-peek" href="assets/code/eval.py">eval.py</a> (완성본)</td><td><a href="lessons/lesson-4.html">4</a></td></tr>
+              <tr><td>1. 값 바꾸기</td><td><code>OPENING</code>, 검색 개수 <code>k</code>, <code>temperature</code>, 대화 기억 길이를 바꿔 보고 같은 질문의 답 비교</td><td>바꿀 곳을 표시한 app.py, 관찰 기록표</td><td><a href="lessons/lesson-3.html">3</a></td></tr>
+              <tr><td>2. 함수 고치기</td><td>검색 점수를 <code>print</code>로 출력, <code>tokenize</code>를 3글자 자르기로 고쳐 점수 변화 확인</td><td>빈칸 · 힌트가 있는 코드 조각</td><td><a href="lessons/lesson-3.html">3</a></td></tr>
+              <tr><td>3. 새 코드 쓰기</td><td><code>eval_starter.py</code>의 빈칸 5개를 채워 자동 검증 프로그램 완성 → 수정 전 · 후 비교</td><td><a class="code-peek" href="assets/code/eval_starter.py">eval_starter.py</a> · <a class="code-peek" href="assets/code/questions.csv">questions.csv</a> · <a class="code-peek" href="assets/code/eval.py">eval.py</a> (완성본)</td><td><a href="lessons/lesson-4.html">4</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -183,8 +180,7 @@
           <div class="cv-head"><b class="cv-name"></b><span class="cv-btns"><button type="button" class="cv-copy">📋 복사</button><a class="cv-down" download>⬇ 내려받기</a><button type="button" class="cv-close" aria-label="닫기">✕</button></span></div>
           <div class="cv-body"></div>
         </div>
-        <p class="plan-note"><b>Colab 준비</b> 첫 칸에서 <code>!pip install langchain-community langchain-openai rank_bm25</code>를 실행하고, app.py · data.json · eval_starter.py · questions.csv를 같은 폴더에 올립니다. <code>--dry-run</code>은 모델을 부르지 않아 GPU가 없어도 돌아가요.</p>
-        <p class="plan-note"><b>교사 화면 운영</b> 모델 서버는 한 번에 한 질문씩 처리하므로 eval.py(질문 10개)는 모둠당 1~2분 걸립니다. 모둠 파일은 <code>app_모둠명.py</code>, <code>after_모둠명.csv</code>처럼 이름을 나눠 받아 두고, 다른 활동 시간에 차례로 돌려 결과 CSV를 돌려주세요.</p>
+        <p class="plan-note"><b>운영 팁</b> <code>eval.py --dry-run</code>은 모델을 부르지 않고 검색만 확인해서 빠르게 돌아가요. 모델 서버가 바쁠 때는 dry-run으로 먼저 확인하고, 답이 필요한 비교는 질문 10개를 한 번에 돌려 결과 CSV로 봅니다.</p>
       </div>
     </section>
 
@@ -238,7 +234,7 @@
             <div><dt>차시</dt><dd>4차시 (고등학교 5차시에서 코드 · 터미널 단계를 빼고 체험과 판단 중심으로 재구성)</dd></div>
             <div><dt>핵심 아이디어</dt><dd>학생은 코드도, 서버 주소도 다루지 않는다. 손으로 <b>인물 카드</b>(말투 · 모르는 것 · 답하지 않을 것)와 <b>사실 카드</b>(자료)를 만들고, AI와의 대화는 <b>교사 화면 하나를 반 전체가 함께 보며</b> 한다.</dd></div>
           </dl>
-          <p class="plan-note"><b>왜 교사 화면 하나로?</b> 튜링 AI는 교사의 VESSL 작업공간 안에서 돌아가서, 주소만 나눠 준다고 학생 기기에서 바로 열리지 않아요. 학생마다 계정을 만들려면 만 14세 미만은 보호자 동의도 필요합니다. 그래서 중학교에서는 <b>교사가 실행하고 학생은 질문과 판단을 맡는</b> 방식으로 바꿨어요. 학생 기기가 없어도 종이 카드로 모두 진행할 수 있습니다.</p>
+          <p class="plan-note"><b>왜 교사 화면 하나로?</b> 튜링 AI는 VESSL 작업공간 안에서 돌아가서, 주소만 나눠 준다고 열리지 않고 <b>학생마다 VESSL 계정으로 로그인</b>해야 해요(고등학교 수업 방식). 중학생은 만 14세 미만이 있어 계정을 만들려면 보호자 동의가 필요합니다. 그래서 중학교에서는 <b>교사가 실행하고 학생은 질문과 판단을 맡는</b> 방식으로 바꿨어요. 학생 기기가 없어도 종이 카드로 모두 진행할 수 있습니다.</p>
         </div>
 
         <div class="plan-block">
@@ -341,7 +337,7 @@
           <dl class="plan-target">
             <div><dt>대상</dt><dd>5차시 기본 수업을 마친 고등학교 2학년 중 코드 심화를 원하는 모둠 (동아리 · 방과후 · 추가 2~3차시)</dd></div>
             <div><dt>목표</dt><dd>대화 프로그램 <code>app.py</code>의 <b>chat() 함수를 직접 고쳐</b> 기능을 더하고, 4차시에서 찾은 환각과 윤리 문제를 <b>코드로</b> 해결한다.</dd></div>
-            <div><dt>실행 환경</dt><dd>코드 고치기와 검색 확인(<code>--dry-run</code>)은 Colab · 학교 PC에서, 튜링의 답이 필요한 확인은 교사의 VESSL 작업공간에서 차례로. 동아리 · 방과후처럼 인원이 적으면 교사가 모둠별 터미널을 열어 줄 수 있어요.</dd></div>
+            <div><dt>실행 환경</dt><dd>기본 수업과 같이 학생이 각자 VESSL 작업공간에서 <code>app.py</code>를 복사해 고치고 터미널에서 실행합니다. 처음이라면 <a href="lessons/setup.html">따라하기 카드</a>부터.</dd></div>
             <div><dt>성취기준</dt><dd>[12인기04-03] 협력적 문제 해결로 인공지능 소프트웨어 개발 · [12인기04-04] 사회적 영향을 고려해 개발하고 성능 개선 · [12인기01-04] 정보 이용 탐색 알고리즘 적용</dd></div>
           </dl>
         </div>
@@ -407,7 +403,7 @@ def expand_query(text):
               <thead><tr><th>차시</th><th>활동</th></tr></thead>
               <tbody>
                 <tr><td>1</td><td><b>코드 읽기와 계획</b> app.py의 chat() 흐름을 순서도로 그리기 → 미션 2~3개 고르고 역할 나누기 → app.py를 복사해 <code>app_우리모둠.py</code>로 작업</td></tr>
-                <tr><td>2</td><td><b>구현과 검증</b> 미션 구현 → <code>--dry-run</code>으로 검색 변화 확인 (내 자리) → 교사 화면에서 <code>eval.py</code>로 수정 전 · 후 비교</td></tr>
+                <tr><td>2</td><td><b>구현과 검증</b> 미션 구현 → <code>--dry-run</code>으로 검색 변화 확인 → <code>eval.py</code>로 수정 전 · 후 비교</td></tr>
                 <tr><td>3</td><td><b>발표</b> 고친 코드와 전 · 후 결과, 미션 6의 ‘프롬프트 규칙 vs 코드 규칙’ 토의 결과 공유</td></tr>
               </tbody>
             </table>
@@ -423,7 +419,7 @@ def expand_query(text):
   </footer>
 
 
-  <script src="js/data.js?v=20261018-maple3"></script>
-  <script src="js/main.js?v=20261018-maple3"></script>
+  <script src="js/data.js?v=20261018-setup"></script>
+  <script src="js/main.js?v=20261018-setup"></script>
 </body>
 </html>

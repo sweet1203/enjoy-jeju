@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>2차시 · 튜링 자료집 data.json 만들기 | 즐겨라 제주</title>
 <meta name="description" content="앨런 튜링 페르소나 AI 프로젝트 2차시 수업 자료 겸 학습지" />
-<link rel="stylesheet" href="lesson.css?v=adv" />
+<link rel="stylesheet" href="lesson.css?v=setup" />
 </head>
 <body data-lesson="lesson-2">
 <header class="topbar">
   <a class="home" href="../index.html#resources">🍊 즐겨라 제주</a>
-  <nav class="lesson-nav" aria-label="차시 이동"><a href="lesson-1.html">1차시</a><a href="lesson-2.html" class="on">2차시</a><a href="lesson-3.html">3차시</a><a href="lesson-4.html">4차시</a><a href="lesson-5.html">5차시</a></nav>
+  <nav class="lesson-nav" aria-label="차시 이동"><a href="setup.html">따라하기</a><a href="lesson-1.html">1차시</a><a href="lesson-2.html" class="on">2차시</a><a href="lesson-3.html">3차시</a><a href="lesson-4.html">4차시</a><a href="lesson-5.html">5차시</a></nav>
 </header>
 <main>
   <div class="hero">
@@ -28,7 +28,7 @@
     <h2>오늘의 학습 목표</h2>
     <ol class="goals"><li>페르소나에 필요한 자료를 선정하고 출처를 확인하여 수집할 수 있다.</li><li>수집한 자료를 id, content, keywords 구조의 JSON으로 정리할 수 있다.</li><li>검색이 잘 되도록 자료마다 핵심 키워드를 뽑을 수 있다.</li></ol>
     <h3>오늘의 흐름</h3>
-    <div class="flow3"><div><b>도입</b><p>자료 없이 / 자료와 함께 답한 두 결과 비교하기</p></div><div><b>전개</b><p>주제별로 나누기 → 3인칭 content 쓰기 → 키워드 뽑기 → JSON 검사</p></div><div><b>정리</b><p>문서 1건 발표, 출처 확인의 중요성</p></div></div>
+    <div class="flow3"><div><b>도입</b><p>자료 없이 / 자료와 함께 답한 두 결과 비교하기</p></div><div><b>전개</b><p>주제별로 나누기 → 3인칭 content 쓰기 → 키워드 뽑기 → JSON 검사</p></div><div><b>정리</b><p>문서 1건 발표, 내 작업공간에 data.json 올리기</p></div></div>
   </section>
 
   <section class="block">
@@ -112,8 +112,15 @@
     <p>모둠 data.json 전체를 붙여 넣으면 형식이 맞는지 바로 알려 줘요.</p>
     <textarea name="jsoncheck" placeholder="{&quot;documents&quot;: [ ... ]}" style="min-height:160px"></textarea>
     <p class="status"></p>
-    <details class="easy"><summary>검사를 통과했다면? app.py로 확인하기</summary><div>
-      <p>선생님 서버에서 <code>python persona-core/app.py</code>를 실행하면 맨 처음에 <code>참고 자료 N건</code>이라는 메시지가 나와요. 우리가 쓴 문서 수만큼 늘었다면 성공!</p>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">활동 5</span>내 작업공간에 data.json 올리기 (10분)</h2>
+    <p>검사를 통과한 모둠 data.json을 <b>각자 자기 VESSL 작업공간</b>에 넣어요. 다음 차시에 튜링이 이 자료를 찾아보고 답해요.</p>
+    <div class="choices"><label><input type="checkbox" name="upload0" value="0" /> <span>VESSL에 로그인해 내 작업공간의 JupyterLab을 열었다</span></label><label><input type="checkbox" name="upload1" value="1" /> <span>persona-core/data.json을 Duplicate 해서 data_backup.json으로 이름을 바꿔 두었다</span></label><label><input type="checkbox" name="upload2" value="2" /> <span>data.json을 열어 내용을 모두 지우고 검사를 통과한 JSON을 붙여 넣었다</span></label><label><input type="checkbox" name="upload3" value="3" /> <span>Ctrl+S로 저장했다 (탭의 ● 표시가 사라짐)</span></label></div>
+    <details class="easy"><summary>시간이 남으면: 자료가 잘 들어갔는지 확인하기</summary><div>
+      <p>JupyterLab에서 <b>File → New → Terminal</b>을 열고 <code>python persona-core/app.py</code>를 입력해요. 맨 아래에 <code>참고 자료 N건</code>이 나오면, N이 우리 모둠 문서 수와 같은지 확인해요. 확인했으면 <kbd>Ctrl</kbd>+<kbd>C</kbd>로 끝내요.</p>
+      <p class="note">오류가 나면 <a href="setup.html#s3">따라하기 카드 ③</a>과 ‘자주 나는 오류’를 보세요.</p>
     </div></details>
   </section>
 
@@ -121,7 +128,7 @@
     <h2><span class="no">정리</span>스스로 평가하기</h2>
     <div class="table-wrap"><table class="sheet self"><tr><th>평가 내용</th><th>잘함</th><th>보통</th><th>노력</th></tr><tr><td>출처를 확인하며 필요한 자료를 골라 모았다.</td><td class="c"><input type="radio" name="se0" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se0" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se0" value="노력" aria-label="노력" /></td></tr><tr><td>자료를 id · content · keywords 구조의 JSON으로 정리했다.</td><td class="c"><input type="radio" name="se1" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se1" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se1" value="노력" aria-label="노력" /></td></tr><tr><td>학생들이 물을 법한 키워드를 뽑았다.</td><td class="c"><input type="radio" name="se2" value="잘함" aria-label="잘함" /></td><td class="c"><input type="radio" name="se2" value="보통" aria-label="보통" /></td><td class="c"><input type="radio" name="se2" value="노력" aria-label="노력" /></td></tr></table></div>
     <div class="field">발표할 문서 1건: 어떤 질문에 쓰일 자료인가요? <input type="text" name="present" placeholder="" /></div>
-    <p class="note">기억하기: 자료가 틀리면 AI도 틀려요. 다음 차시에는 이 자료를 찾아서 답하는 RAG와 CLI 대화를 해 봐요.</p>
+    <p class="note">기억하기: 자료가 틀리면 AI도 틀려요. 다음 차시에는 내 작업공간에서 튜링을 직접 실행해, 이 자료를 찾아서 답하는지 확인해요.</p>
   </section>
 
   <div class="actions">
@@ -130,6 +137,6 @@
   </div>
   <p class="saved">적은 내용은 이 브라우저에 자동 저장돼요. 제출할 때는 ‘인쇄 · PDF로 저장’을 이용하세요.</p>
 </main>
-<script src="lesson.js?v=adv"></script>
+<script src="lesson.js?v=setup"></script>
 </body>
 </html>

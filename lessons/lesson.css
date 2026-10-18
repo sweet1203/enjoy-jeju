@@ -200,3 +200,6 @@ table.self td:first-child { width: 58%; }
   .table-wrap { overflow: visible; }
   table.sheet { min-width: 0; }
 }
+
+/* 키보드 키 표시 */
+kbd { font-family: var(--mono); font-size: .85em; background: #fff; border: 1px solid #cfc7bb; border-bottom-width: 2px; border-radius: 5px; padding: 0 5px; }

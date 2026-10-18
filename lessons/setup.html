@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>튜링 실행 따라하기 카드 | 즐겨라 제주</title>
+<meta name="description" content="앨런 튜링 페르소나 AI 프로젝트 · 학생이 각자 컴퓨터에서 VESSL 작업공간을 열고 app.py를 실행하는 방법" />
+<link rel="stylesheet" href="lesson.css?v=setup" />
+<style>
+  .stepcard { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .stepcard > li { position: relative; padding: 12px 14px 12px 50px; background: #fbfdfe; border: 1px solid var(--line); border-radius: 12px; }
+  .stepcard > li::before { counter-increment: s; content: counter(s); position: absolute; left: 14px; top: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--sea); color: #fff; font-size: .8rem; font-weight: 700; display: grid; place-items: center; }
+  .stepcard > li b:first-child { display: block; color: var(--sea-dark); }
+  .stepcard .example { margin-top: 8px; }
+  .when { display: inline-block; font-size: .78rem; font-weight: 700; color: #fff; background: var(--tangerine); border-radius: 6px; padding: 1px 8px; margin-left: 6px; vertical-align: 2px; }
+  kbd { font-family: var(--mono); font-size: .85em; background: #fff; border: 1px solid #cfc7bb; border-bottom-width: 2px; border-radius: 5px; padding: 0 5px; }
+  .map { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .map > div { background: var(--sea-light); border-radius: 10px; padding: 10px 12px; font-size: .92rem; }
+  .map b { display: block; color: var(--sea-dark); }
+  @media (max-width: 720px) { .map { grid-template-columns: 1fr 1fr; } .stepcard > li { padding-left: 44px; } }
+</style>
+</head>
+<body data-lesson="setup">
+<header class="topbar">
+  <a class="home" href="../index.html#resources">🍊 즐겨라 제주</a>
+  <nav class="lesson-nav" aria-label="차시 이동"><a href="setup.html" class="on">따라하기</a><a href="lesson-1.html">1차시</a><a href="lesson-2.html">2차시</a><a href="lesson-3.html">3차시</a><a href="lesson-4.html">4차시</a><a href="lesson-5.html">5차시</a></nav>
+</header>
+<main>
+  <div class="hero">
+    <span class="badge">앨런 튜링 페르소나 AI · 실습 준비</span>
+    <h1>튜링 실행 따라하기 카드</h1>
+    <p class="unit">내 컴퓨터에서 VESSL 작업공간을 열고, 튜링 프로그램(app.py)을 실행하는 방법</p>
+  </div>
+
+  <section class="block">
+    <h2>먼저 알아 둘 것</h2>
+    <p><b>설치할 프로그램은 없어요.</b> 튜링 프로그램과 AI 모델은 인터넷 너머의 GPU 컴퓨터(VESSL 작업공간)에 들어 있고, 우리는 <b>크롬 브라우저로 각자 로그인해서</b> 그 컴퓨터를 써요.</p>
+    <div class="map">
+      <div><b>1차시 끝</b>①② 로그인하고 작업공간 열어 보기</div>
+      <div><b>2차시 끝</b>③ 우리 data.json 올리기</div>
+      <div><b>3차시 도입</b>④ 터미널에서 튜링 실행하기</div>
+      <div><b>3차시 정리 · 4차시</b>⑤ 고치고 다시 실행하기</div>
+    </div>
+    <h3>준비물</h3>
+    <ul>
+      <li>학교 컴퓨터의 <b>크롬</b> 브라우저</li>
+      <li>내 <b>VESSL 계정</b> (가입한 이메일과 비밀번호)</li>
+      <li>선생님이 알려 준 <b>수업 조직(Organization) 이름</b>과 <b>작업공간(Workspace) 이름</b></li>
+    </ul>
+    <div class="field">우리 반 조직 이름 / 작업공간 이름 (선생님이 알려 준 대로 적기) <input type="text" name="wsname" placeholder="예) jeju-ai / turing-2반-07" /></div>
+  </section>
+
+  <section class="block" id="s1">
+    <h2><span class="no">①</span>VESSL 로그인 <span class="when">1차시</span></h2>
+    <ol class="stepcard">
+      <li><b>VESSL 접속</b>크롬 주소창에 <code>vessl.ai</code>를 입력하고 오른쪽 위 <b>Log in</b>을 눌러요.</li>
+      <li><b>로그인</b>내 이메일과 비밀번호로 로그인해요. 처음이라면 선생님이 보낸 <b>초대 메일</b>의 링크를 먼저 눌러 수업 조직에 들어가요.</li>
+      <li><b>수업 조직 고르기</b>왼쪽 위 조직 이름을 눌러 <b>선생님이 알려 준 조직</b>으로 바꿔요. 다른 조직에 있으면 작업공간이 보이지 않아요.</li>
+    </ol>
+  </section>
+
+  <section class="block" id="s2">
+    <h2><span class="no">②</span>작업공간 열기 <span class="when">1차시</span></h2>
+    <ol class="stepcard">
+      <li><b>Workspaces 메뉴</b>왼쪽 메뉴의 <b>Workspaces</b>에서 내 작업공간을 찾아요.</li>
+      <li><b>상태 확인</b>상태가 <b>Running</b>이면 다음으로! <b>Stopped</b>라면 <b>Start</b>를 누르고 Running이 될 때까지 기다려요(몇 분 걸릴 수 있어요).</li>
+      <li><b>JupyterLab 열기</b>작업공간 이름을 누른 뒤 <b>JupyterLab</b> 버튼을 눌러요. 새 탭에 JupyterLab 화면이 열려요.</li>
+      <li><b>폴더 확인</b>왼쪽 파일 목록에 <b><code>persona-core</code></b> 폴더가 보이면 준비 끝! 그 안에 <code>app.py</code>와 <code>data.json</code>이 있어요.</li>
+    </ol>
+    <p class="note">작업공간을 다 쓰고 나면 선생님 안내에 따라 <b>Stop</b>을 눌러 꺼 둬요. 켜 두면 GPU가 계속 쓰여요.</p>
+  </section>
+
+  <section class="block" id="s3">
+    <h2><span class="no">③</span>우리 data.json 올리기 <span class="when">2차시</span></h2>
+    <ol class="stepcard">
+      <li><b>원본 복사해 두기</b><code>persona-core</code> 폴더의 <code>data.json</code>을 오른쪽 클릭 → <b>Duplicate</b>. 생긴 파일 이름을 <code>data_backup.json</code>으로 바꿔요. 실수해도 되돌릴 수 있어요.</li>
+      <li><b>data.json 열기</b><code>data.json</code>을 더블클릭해서 열어요.</li>
+      <li><b>바꿔 넣기</b>2차시 학습지 <b>JSON 형식 검사기</b>를 통과한 모둠 data.json 전체를 복사해서, 열린 파일의 내용을 모두 지우고(<kbd>Ctrl</kbd>+<kbd>A</kbd> → <kbd>Delete</kbd>) 붙여 넣어요.</li>
+      <li><b>저장</b><kbd>Ctrl</kbd>+<kbd>S</kbd>. 탭 이름 옆의 ● 표시가 사라지면 저장된 거예요.</li>
+    </ol>
+  </section>
+
+  <section class="block" id="s4">
+    <h2><span class="no">④</span>터미널에서 튜링 실행하기 <span class="when">3차시</span></h2>
+    <ol class="stepcard">
+      <li><b>터미널 열기</b>JupyterLab 위 메뉴 <b>File → New → Terminal</b> (또는 Launcher 화면의 <b>Terminal</b> 아이콘).</li>
+      <li><b>위치 확인</b>아래 명령을 치고 <kbd>Enter</kbd>. 목록에 <code>persona-core</code>가 보이면 맞는 곳이에요.
+        <div class="example">ls</div></li>
+      <li><b>튜링 실행</b>아래 명령을 그대로 쳐요.
+        <div class="example">python persona-core/app.py</div>
+        시작 안내와 튜링의 첫인사가 나오면 성공! 내 이름을 소개하며 대화를 시작해요.</li>
+      <li><b>끝내기</b>대화를 마치려면 <kbd>Ctrl</kbd>+<kbd>C</kbd>.</li>
+    </ol>
+    <p class="note">답이 바로 안 나와도 괜찮아요. AI가 답을 만드는 데 몇 초 걸려요. 같은 서버를 여러 명이 쓰면 차례로 처리해서 더 늦어질 수 있어요.</p>
+  </section>
+
+  <section class="block" id="s5">
+    <h2><span class="no">⑤</span>고치고 다시 실행하기 <span class="when">3차시 정리 · 4차시</span></h2>
+    <ol class="stepcard">
+      <li><b>파일 열기</b>왼쪽 목록에서 <code>persona-core/app.py</code>(또는 <code>data.json</code>)을 더블클릭해요.</li>
+      <li><b>고치기</b>연습: <code>OPENING = "..."</code> 줄의 <b>따옴표 안 문장만</b> 우리 모둠 인사로 바꿔요. 따옴표는 지우지 않아요.</li>
+      <li><b>저장</b><kbd>Ctrl</kbd>+<kbd>S</kbd></li>
+      <li><b>다시 실행</b>터미널에서 <kbd>Ctrl</kbd>+<kbd>C</kbd>로 끝내고, <kbd>↑</kbd> 키를 누르면 방금 친 명령이 다시 나와요. <kbd>Enter</kbd>!</li>
+      <li><b>확인</b>튜링의 첫인사가 바뀌었으면 성공. 4차시에는 같은 방법으로 data.json과 SYSTEM_PROMPT를 고쳐요.</li>
+    </ol>
+    <p class="tip">💡 <b>고친 내용은 다시 실행해야 반영돼요.</b> 저장만 하고 실행 중인 대화에 계속 물으면 예전 내용으로 답해요.</p>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">도움</span>자주 나는 오류</h2>
+    <div class="table-wrap"><table class="sheet">
+      <tr><th style="width:36%">화면에 이렇게 나오면</th><th>이렇게 해 봐요</th></tr>
+      <tr><td>작업공간이 목록에 없어요</td><td>왼쪽 위 <b>조직 이름</b>이 수업 조직인지 확인. 초대 메일을 수락했는지 확인.</td></tr>
+      <tr><td><code>No such file or directory</code></td><td><code>ls</code>로 지금 위치에 <code>persona-core</code>가 있는지 확인. 명령의 철자와 띄어쓰기(<code>persona-core/app.py</code>) 확인.</td></tr>
+      <tr><td><code>JSONDecodeError</code></td><td>data.json 형식 오류예요. 2차시 학습지 <b>JSON 검사기</b>에 다시 넣어 쉼표 · 따옴표 · 괄호를 고쳐요. 급하면 <code>data_backup.json</code> 내용으로 되돌려요.</td></tr>
+      <tr><td><code>SyntaxError</code></td><td>app.py를 고치다 따옴표나 괄호가 빠졌어요. 오류 메시지에 나온 줄 번호를 찾아 확인해요.</td></tr>
+      <tr><td><code>Connection error</code> / 답이 계속 안 나와요</td><td>모델 서버가 준비되지 않았어요. 손을 들어 선생님께 알려요. (선생님 확인용: <code>curl -s localhost:8000/v1/models</code>)</td></tr>
+      <tr><td>한글이 이상하게 지워져요</td><td><kbd>Enter</kbd>로 일단 보내고 다시 입력해요.</td></tr>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <h2><span class="no">체크</span>나는 어디까지 해 봤나요?</h2>
+    <div class="choices">
+      <label><input type="checkbox" name="ck0" value="0" /> <span>① VESSL에 로그인하고 수업 조직을 골랐다</span></label>
+      <label><input type="checkbox" name="ck1" value="1" /> <span>② JupyterLab을 열고 persona-core 폴더를 찾았다</span></label>
+      <label><input type="checkbox" name="ck2" value="2" /> <span>③ 우리 data.json을 붙여 넣고 저장했다</span></label>
+      <label><input type="checkbox" name="ck3" value="3" /> <span>④ 터미널에서 app.py를 실행해 첫인사를 받았다</span></label>
+      <label><input type="checkbox" name="ck4" value="4" /> <span>⑤ 파일을 고치고 다시 실행해 바뀐 것을 확인했다</span></label>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button type="button" data-action="print">🖨️ 인쇄 · PDF로 저장</button>
+    <button type="button" class="ghost" data-action="reset">적은 내용 모두 지우기</button>
+  </div>
+  <p class="saved">체크한 내용은 이 브라우저에 자동 저장돼요.</p>
+</main>
+<script src="lesson.js?v=setup"></script>
+</body>
+</html>
