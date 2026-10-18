@@ -203,13 +203,8 @@ img { max-width: 100%; }
 
 /* ===== 교사 소개: 제주 게임 맵 ===== */
 #team.jeju-map { position: relative; overflow: hidden; max-width: none; padding-bottom: 150px;
-  background: #0a62d8 url("../assets/map/jeju-pixel.png") center bottom / 1920px auto repeat-x; image-rendering: pixelated; }
-.hero .wave { fill: #0a62d8; }
-#team .map-cliff { position: absolute; bottom: 0; z-index: 0; height: auto; image-rendering: pixelated; pointer-events: none; }
-#team .map-cliff.l { left: -60px; width: 222px; }
-#team .map-cliff.r { right: -60px; width: 228px; }
-@media (max-width: 720px) { #team .map-cliff.l { left: -56px; width: 148px; } #team .map-cliff.r { right: -56px; width: 152px; } }
-#team.jeju-map > .map-content { image-rendering: auto; }
+  background: #1678dc url("../assets/map/jeju-bg.webp") center bottom / auto 920px repeat-x; }
+.hero .wave { fill: #1678dc; }
 #team .map-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
 #team .map-content { position: relative; z-index: 1; max-width: 1072px; margin: 0 auto; }
 #team h2 { color: #fff; text-shadow: 0 3px 0 #1d4f86, 0 0 12px rgba(0,40,90,.35); }
@@ -222,7 +217,8 @@ img { max-width: 100%; }
 .motto.quest .motto-label b { color: #fff; }
 .motto.quest .motto-text { color: #fff; }
 
-#team .map-stage { align-items: end; grid-template-columns: repeat(3, 1fr); gap: 56px 0; max-width: 1040px; margin: 64px auto 0; }
+#team .map-stage { grid-template-columns: repeat(3, 1fr); gap: 46px 34px; max-width: 1000px; margin: 64px auto 0; }
+.npc:nth-child(3n+2) { margin-top: -26px; }
 .member.npc { background: none; box-shadow: none; padding: 0; border-radius: 0; }
 .npc { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; }
 .npc-bubble {
@@ -257,9 +253,14 @@ img { max-width: 100%; }
 }
 .npc-name small { color: #ffe08a; font-size: 11px; margin-left: 2px; }
 .npc-ground {
-  width: 100%; height: 78px; margin-top: -20px; position: relative; z-index: 1;
-  background: #454a50 url("../assets/map/tile-pixel.png") repeat-x 0 0 / 120px 78px; image-rendering: pixelated;
-  box-shadow: inset 0 -6px 0 rgba(0,0,0,.25);
+  width: 210px; height: 34px; margin-top: -24px; position: relative; z-index: 1; border-radius: 6px;
+  background:
+    linear-gradient(#79c94b 0 9px, #5aa43a 9px 12px, transparent 12px),
+    radial-gradient(circle at 20% 70%, #2c3134 0 3px, transparent 4px),
+    radial-gradient(circle at 55% 55%, #2c3134 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 80% 78%, #2c3134 0 3px, transparent 4px),
+    linear-gradient(#4b5257, #3a4044);
+  box-shadow: inset 0 -4px 0 rgba(0,0,0,.25), 0 6px 0 rgba(0,0,0,.12);
 }
 @keyframes npc-idle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 @keyframes npc-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
@@ -267,7 +268,10 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) { .npc img.npc-sprite, .npc-bubble { animation: none !important; } }
 @media (max-width: 760px) {
   #team.jeju-map { padding-bottom: 90px; }
-  #team .map-stage { grid-template-columns: repeat(2, 1fr); gap: 30px 0; margin-top: 36px; }
+  #team .map-stage { grid-template-columns: repeat(2, 1fr); gap: 26px 10px; margin-top: 36px; }
+  .npc:nth-child(3n+2) { margin-top: 0; }
+  .npc:nth-child(2n) { margin-top: 18px; }
+  .npc-ground { width: 140px; }
   .motto.quest .motto-text { font-size: 1.25rem; }
   .npc-bubble { min-width: 0; width: 100%; font-size: 11.5px; padding: 6px 8px; }
   .npc img.npc-sprite { height: 88px; max-width: 110px; }
@@ -493,7 +497,7 @@ a.btn-mini { text-decoration: none; display: inline-block; }
 .run-where b { color: var(--sea); }
 .run-where p { margin: 4px 0 0; font-size: .93rem; }
 #extend .plan-table.ms-flow td:nth-child(3) { color: var(--muted); font-size: .92rem; }
-@media (max-width: 720px) { #team.jeju-map { background-size: 1280px auto; } .run-where { grid-template-columns: 1fr; } .hook { padding: 22px 16px 18px; } }
+@media (max-width: 720px) { #team.jeju-map { background-size: auto 760px; } .run-where { grid-template-columns: 1fr; } .hook { padding: 22px 16px 18px; } }
 
 /* 교사 소개 제목만 메이플스토리체 */
 #team h2 { font-family: "MaplestoryOTFBold", "Jua", sans-serif; }
