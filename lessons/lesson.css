@@ -203,3 +203,5 @@ table.self td:first-child { width: 58%; }
 
 /* 키보드 키 표시 */
 kbd { font-family: var(--mono); font-size: .85em; background: #fff; border: 1px solid #cfc7bb; border-bottom-width: 2px; border-radius: 5px; padding: 0 5px; }
+.code-box { max-height: 420px; overflow: auto; margin: 8px 0 12px; }
+a.code-peek::after { content: " ▾"; font-size: .8em; }

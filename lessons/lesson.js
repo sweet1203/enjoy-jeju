@@ -132,3 +132,20 @@
   load();
   refresh();
 })();
+
+// 코드 파일 미리보기 (내려받지 않고 펼쳐 보기)
+document.querySelectorAll("a.code-peek").forEach((link) => {
+  link.addEventListener("click", async (ev) => {
+    ev.preventDefault();
+    const box = link.closest("section").querySelector(".code-box");
+    if (!box) return;
+    const url = link.getAttribute("href");
+    if (!box.hidden && box.dataset.src === url) { box.hidden = true; return; }
+    box.dataset.src = url; box.hidden = false; box.textContent = "불러오는 중…";
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(res.status);
+      box.textContent = "📄 " + url.split("/").pop() + "\n\n" + (await res.text()).replace(/^\uFEFF/, "");
+    } catch (e) { box.textContent = "파일을 불러오지 못했어요."; }
+  });
+});

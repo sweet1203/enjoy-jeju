@@ -53,7 +53,7 @@ def shell(n, unit, goals, flow, body):
   </div>
   <p class="saved">적은 내용은 이 브라우저에 자동 저장돼요. 제출할 때는 ‘인쇄 · PDF로 저장’을 이용하세요.</p>
 </main>
-<script src="lesson.js?v=setup"></script>
+<script src="lesson.js?v=peek"></script>
 </body>
 </html>
 """
@@ -446,11 +446,12 @@ ADV4 = f"""
 
     <h3>준비물</h3>
     <ul>
-      <li><a href="../assets/code/eval_starter.py" download>eval_starter.py</a> — 빈칸 ①~⑤를 채우는 학생용</li>
-      <li><a href="../assets/code/questions.csv" download>questions.csv</a> — 검증 질문 틀 (우리 모둠 질문으로 바꾸기)</li>
-      <li><a href="../assets/code/eval.py" download>eval.py</a> — 완성본 (막히면 참고, 교사용)</li>
+      <li><a class="code-peek" href="../assets/code/eval_starter.py">eval_starter.py</a> — 빈칸 ①~⑤를 채우는 학생용</li>
+      <li><a class="code-peek" href="../assets/code/questions.csv">questions.csv</a> — 검증 질문 틀 (우리 모둠 질문으로 바꾸기)</li>
+      <li><a class="code-peek" href="../assets/code/eval.py">eval.py</a> — 완성본 (막히면 참고, 교사용)</li>
     </ul>
-    <p class="note">세 파일을 <code>persona-core</code> 폴더(app.py와 같은 곳)에 넣어요.</p>
+    <pre class="example code-box" hidden></pre>
+    <p class="note">파일 이름을 누르면 내용이 펼쳐져요. 내 작업공간의 <code>persona-core</code> 폴더(app.py와 같은 곳)에 같은 이름으로 새 파일을 만들고 붙여 넣어요.</p>
 
     <div class="step">
       <h3><span class="tag">순서</span>실행하고 비교하기</h3>

@@ -82,11 +82,11 @@ function detailHTML(l) {
         <h3 class="detail-title">${l.icon} ${esc(l.title)}</h3>
       </div>
       <div class="detail-actions">
-        ${l.file ? `<a class="btn-mini" href="${esc(l.file.href)}" download="${esc(l.file.name)}">📎 지도안 원본(.hwp)</a>` : ""}
-        <button class="btn-mini hwp-btn" data-id="${l.id}">📄 한글 파일로 저장</button>
+        ${l.file ? `<button type="button" class="btn-mini plan-peek" data-img="${esc(l.file.href.replace(/\.hwp$/, ".webp"))}">📄 지도안 미리보기</button>` : ""}
         <button class="btn-mini ghost fold-btn">접기 ▲</button>
       </div>
     </div>
+    <div class="pv-paper plan-peek-box" hidden></div>
     <table class="info-table">
       <tr><th>교과</th><td>${esc(l.subject || "정보")}</td><th>대상</th><td>${val(l.grade)}</td></tr>
       <tr><th>차시</th><td>${val(l.periods)}</td><th>담당</th><td>${val(l.teacher)}</td></tr>
@@ -118,8 +118,14 @@ $("#lesson-grid").addEventListener("click", (e) => {
 });
 detail.addEventListener("click", (e) => {
   if (e.target.closest(".fold-btn")) toggleLesson(openId);
-  const hwp = e.target.closest(".hwp-btn");
-  if (hwp) saveHwpx(hwp);
+  const peek = e.target.closest(".plan-peek");
+  if (peek) {
+    const box = detail.querySelector(".plan-peek-box");
+    const open = box.hidden;
+    if (open && !box.innerHTML) box.innerHTML = `<img src="${peek.dataset.img}" alt="교수·학습 지도안 (한글 문서 미리보기)" />`;
+    box.hidden = !open;
+    peek.textContent = open ? "📄 지도안 닫기" : "📄 지도안 미리보기";
+  }
 });
 
 // 한글(.hwpx) 파일 만들기 — 버튼을 누를 때만 변환 라이브러리를 불러옵니다.
@@ -203,7 +209,6 @@ function showPlan(no) {
     <div class="pv-head">
       <b>${p.no}차시 교수·학습 지도안</b>
       <span class="pv-actions">
-        <a class="btn-mini" href="${esc(p.plan)}" download="${p.no}차시_교수학습지도안.hwp">⬇ 한글 파일 받기</a>
         <button type="button" class="btn-mini ghost pv-close">닫기 ✕</button>
       </span>
     </div>
@@ -288,8 +293,6 @@ document.querySelectorAll("a.code-peek").forEach((link) => {
     peers.forEach((a) => a.classList.toggle("on", a === link));
     viewer.dataset.src = url;
     viewer.querySelector(".cv-name").textContent = "📄 " + name;
-    const down = viewer.querySelector(".cv-down");
-    down.href = url; down.setAttribute("download", name);
     const body = viewer.querySelector(".cv-body");
     body.textContent = "불러오는 중…";
     viewer.hidden = false;

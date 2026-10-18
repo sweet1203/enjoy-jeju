@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@noonnu/maplestory-otf-bold@0.1.0/index.css" />
-  <link rel="stylesheet" href="css/style.css?v=20261018-oreum" />
+  <link rel="stylesheet" href="css/style.css?v=20261018-peek2" />
 </head>
 <body>
   <header class="nav">
@@ -175,7 +175,7 @@
           </table>
         </div>
         <div class="code-viewer" hidden>
-          <div class="cv-head"><b class="cv-name"></b><span class="cv-btns"><button type="button" class="cv-copy">📋 복사</button><a class="cv-down" download>⬇ 내려받기</a><button type="button" class="cv-close" aria-label="닫기">✕</button></span></div>
+          <div class="cv-head"><b class="cv-name"></b><span class="cv-btns"><button type="button" class="cv-copy">📋 복사</button><button type="button" class="cv-close" aria-label="닫기">✕</button></span></div>
           <div class="cv-body"></div>
         </div>
         <p class="plan-note"><b>운영 팁</b> <code>eval.py --dry-run</code>은 모델을 부르지 않고 검색만 확인해서 빠르게 돌아가요. 모델 서버가 바쁠 때는 dry-run으로 먼저 확인하고, 답이 필요한 비교는 질문 10개를 한 번에 돌려 결과 CSV로 봅니다.</p>
@@ -406,7 +406,11 @@ def expand_query(text):
               </tbody>
             </table>
           </div>
-          <p class="plan-note"><b>평가 관점</b> 기능 동작(미션 성공 기준) · 근거 기반 개선(전 · 후 비교) · 코드 설명(왜 그 줄을 그곳에 넣었는지) · 협업 기록. 교사용 예시 답안 <a href="assets/code/app_missions.py" download>app_missions.py</a>에는 미션 1~6이 모두 들어 있어요. 원본 app.py와 같은 폴더에 두고 <code>python persona-core/app_missions.py</code>로 실행합니다.</p>
+          <p class="plan-note"><b>평가 관점</b> 기능 동작(미션 성공 기준) · 근거 기반 개선(전 · 후 비교) · 코드 설명(왜 그 줄을 그곳에 넣었는지) · 협업 기록. 교사용 예시 답안 <a class="code-peek" href="assets/code/app_missions.py">app_missions.py</a>에는 미션 1~6이 모두 들어 있어요. 원본 app.py와 같은 폴더에 두고 <code>python persona-core/app_missions.py</code>로 실행합니다.</p>
+          <div class="code-viewer" hidden>
+          <div class="cv-head"><b class="cv-name"></b><span class="cv-btns"><button type="button" class="cv-copy">📋 복사</button><button type="button" class="cv-close" aria-label="닫기">✕</button></span></div>
+          <div class="cv-body"></div>
+        </div>
         </div>
       </div>
     </section>
@@ -417,7 +421,7 @@ def expand_query(text):
   </footer>
 
 
-  <script src="js/data.js?v=20261018-oreum"></script>
-  <script src="js/main.js?v=20261018-oreum"></script>
+  <script src="js/data.js?v=20261018-peek2"></script>
+  <script src="js/main.js?v=20261018-peek2"></script>
 </body>
 </html>
