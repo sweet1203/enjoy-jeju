@@ -216,15 +216,17 @@ $("#resource-list").addEventListener("click", (e) => {
   if (e.target.closest(".pv-close")) showPlan(shownPlan);
 });
 
-// 팀 소개
-$("#team-grid").innerHTML = TEAM.map((m) => `
-  <div class="member">
-    <img src="${m.img}" alt="${esc(m.name)} 캐릭터" loading="lazy" />
-    <span class="role">${esc(m.role)}</span>
-    <h3>${esc(m.name)} <small class="subject">정보 교사</small></h3>
-    <p class="role-desc">${esc(m.roleDesc)}</p>
-    ${m.school ? `<p class="region">🏫 ${esc(m.school)}</p>` : ""}
-    ${m.region ? `<p class="region">📍 ${esc(m.region)}</p>` : ""}
+// 팀 소개 — 제주 게임 맵 위의 캐릭터, 머리 위에 소개 말풍선
+$("#team-grid").innerHTML = TEAM.map((m, i) => `
+  <div class="member npc" style="--d:${(i % 3) * 0.35}s">
+    <div class="npc-bubble">
+      <p class="npc-role"><span>${esc(m.role)}</span> ${esc(m.roleDesc)}</p>
+      ${m.school ? `<p>🏫 ${esc(m.school)}</p>` : ""}
+      ${m.region ? `<p>📍 ${esc(m.region)}</p>` : ""}
+    </div>
+    <img class="npc-sprite" src="${m.img}" alt="${esc(m.name)} 선생님 캐릭터" loading="lazy" />
+    <p class="npc-name">${esc(m.name)} <small>정보 교사</small></p>
+    <div class="npc-ground" aria-hidden="true"></div>
   </div>`).join("");
 
 // 의견 나누기 (패들릿)

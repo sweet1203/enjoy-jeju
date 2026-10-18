@@ -200,6 +200,82 @@ img { max-width: 100%; }
 @media (max-width: 760px) { .pv-paper { padding: 10px; border-radius: 10px; } }
 .lesson-page .lp-go { font-size: 0.85rem; font-weight: 700; color: var(--sea); margin-top: 6px; }
 
+
+/* ===== 교사 소개: 제주 게임 맵 ===== */
+#team.jeju-map { position: relative; overflow: hidden; max-width: none; background: #c9ecff; padding-bottom: 120px; }
+#team .map-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+#team .map-content { position: relative; z-index: 1; max-width: 1072px; margin: 0 auto; }
+#team h2 { color: #14506a; text-shadow: 0 2px 0 rgba(255,255,255,.8); }
+#team .section-desc { color: #24566b; font-weight: 500; }
+.motto.quest {
+  background: rgba(24, 38, 66, .88); border: 3px solid #f2c94c; border-radius: 10px; color: #fff;
+  box-shadow: 0 0 0 3px rgba(24,38,66,.88), 0 10px 24px rgba(0,0,0,.25);
+}
+.motto.quest .motto-label { color: #ffe08a; font-family: Galmuri11, var(--font-myungjo), sans-serif; }
+.motto.quest .motto-label b { color: #fff; }
+.motto.quest .motto-text { color: #fff; }
+
+#team .map-stage { grid-template-columns: repeat(3, 1fr); gap: 46px 34px; max-width: 1000px; margin: 64px auto 0; }
+.member.npc { background: none; box-shadow: none; padding: 0; border-radius: 0; }
+.npc { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; }
+.npc:nth-child(3n+2) { margin-top: -26px; }
+.npc-bubble {
+  position: relative; background: #fffef8; border: 2px solid #2b2f3a; border-radius: 10px;
+  padding: 8px 12px 9px; min-width: 190px; max-width: 250px; margin-bottom: 14px;
+  font-family: Galmuri11, "Noto Sans KR", sans-serif; font-size: 13px; line-height: 1.55; color: #2b2f3a;
+  box-shadow: 0 3px 0 #2b2f3a; animation: npc-float 3.2s ease-in-out infinite; animation-delay: var(--d);
+  word-break: keep-all;
+}
+.npc-bubble::after {
+  content: ""; position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%);
+  border: 8px solid transparent; border-top-color: #2b2f3a; border-bottom: 0;
+}
+.npc-bubble::before {
+  content: ""; position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%); z-index: 1;
+  border: 6px solid transparent; border-top-color: #fffef8; border-bottom: 0;
+}
+.npc-bubble p { margin: 0; }
+.npc-role { font-family: Galmuri11, sans-serif; font-weight: 700; color: #14506a; margin-bottom: 2px !important; }
+.npc-role span { background: var(--tangerine); color: #fff; border-radius: 4px; padding: 0 6px; margin-right: 4px; font-weight: 400; }
+.npc img.npc-sprite {
+  border: 0; border-radius: 0; background: none; margin: 0;
+  height: 140px; width: auto; max-width: 170px; object-fit: contain; display: block;
+  filter: drop-shadow(0 4px 0 rgba(0,0,0,.12)); animation: npc-idle 1.6s steps(2) infinite; animation-delay: var(--d);
+  transition: transform .2s; cursor: pointer; position: relative; z-index: 2;
+}
+.npc:hover img.npc-sprite { animation: npc-jump .5s ease-out; }
+.npc-name {
+  margin: 6px 0 0; position: relative; z-index: 2;
+  background: rgba(24, 28, 38, .82); color: #fff; border-radius: 5px; padding: 2px 10px;
+  font-family: Galmuri11, "Noto Sans KR", sans-serif; font-size: 14px; letter-spacing: .5px;
+}
+.npc-name small { color: #ffe08a; font-size: 11px; margin-left: 2px; }
+.npc-ground {
+  width: 210px; height: 34px; margin-top: -24px; position: relative; z-index: 1; border-radius: 6px;
+  background:
+    linear-gradient(#79c94b 0 9px, #5aa43a 9px 12px, transparent 12px),
+    radial-gradient(circle at 20% 70%, #2c3134 0 3px, transparent 4px),
+    radial-gradient(circle at 55% 55%, #2c3134 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 80% 78%, #2c3134 0 3px, transparent 4px),
+    linear-gradient(#4b5257, #3a4044);
+  box-shadow: inset 0 -4px 0 rgba(0,0,0,.25), 0 6px 0 rgba(0,0,0,.12);
+}
+@keyframes npc-idle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes npc-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes npc-jump { 0% { transform: translateY(0); } 40% { transform: translateY(-22px); } 100% { transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .npc img.npc-sprite, .npc-bubble { animation: none !important; } }
+@media (max-width: 760px) {
+  #team.jeju-map { padding-bottom: 90px; }
+  #team .map-stage { grid-template-columns: repeat(2, 1fr); gap: 26px 10px; margin-top: 36px; }
+  .motto.quest .motto-text { font-size: 1.25rem; }
+  .npc:nth-child(3n+2) { margin-top: 0; }
+  .npc:nth-child(2n) { margin-top: 18px; }
+  .npc-bubble { min-width: 0; width: 100%; font-size: 11.5px; padding: 6px 8px; }
+  .npc img.npc-sprite { height: 88px; max-width: 110px; }
+  .npc-ground { width: 140px; }
+  .npc-name { font-size: 12.5px; }
+}
+
 /* 팀 */
 .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 760px; margin: 0 auto; }
 .member {
@@ -387,8 +463,6 @@ a.btn-mini { text-decoration: none; display: inline-block; }
   .nav-links a { padding: 12px 16px; border-top: 1px solid var(--line); }
   .section { padding: 60px 16px; }
   .lesson-grid { grid-template-columns: 1fr; }
-  .team-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .member img { width: 90px; height: 90px; }
   .flow { grid-template-columns: 1fr; }
   .lesson-detail { padding: 20px 16px; }
   .plan-block { padding: 18px 16px; }
