@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css" />
-  <link rel="stylesheet" href="css/style.css?v=20261018-map2" />
+  <link rel="stylesheet" href="css/style.css?v=20261018-hook" />
 </head>
 <body>
   <header class="nav">
@@ -141,6 +141,12 @@
     <!-- 프로젝트 소개 -->
     <section id="about" class="section">
       <h2>💡 프로젝트 소개</h2>
+      <div class="hook">
+        <p class="hook-label">오늘의 질문</p>
+        <p class="hook-q">“AI는 정말 <em>알고</em> 대답할까,<br />아니면 <em>찾아보고</em> 대답할까?”</p>
+        <p class="hook-copy">외워서 말하는 AI는 모르면 지어내고, 찾아보고 말하는 AI는 근거를 댑니다.<br />튜링에게 물어보세요. 튜링은 <b>여러분이 만든 자료</b>를 펼쳐 보고 답합니다.</p>
+        <p class="hook-one"><span>이 수업의 한마디</span> AI는 우리가 준 자료만큼 정확해진다</p>
+      </div>
       <div class="about-grid">
         <div class="about-card">
           <h3>왜 이 수업인가요?</h3>
@@ -220,19 +226,29 @@
 
       <div class="plan-block adv-block">
         <h3>💻 선택 심화 · 코드 작성 단계</h3>
-        <p class="adv-lead">기본 수업(프롬프트 · data.json 작성)은 그대로 진행하고, 코드를 더 다뤄 보고 싶은 모둠은 아래 단계로 넓혀 갑니다. 각 단계는 해당 차시 학습지 아래쪽 <b>‘선택 심화’</b> 칸에 있어요.</p>
+        <p class="adv-lead">기본 수업(프롬프트 · data.json 작성)은 모두 함께 하고, 코드를 더 다뤄 보고 싶은 학생이나 모둠만 아래 단계를 골라 이어 갑니다. 단계마다 <b>모델 서버가 필요한지</b>가 달라서 실행하는 곳을 둘로 나눴어요.</p>
+        <div class="run-where">
+          <div>
+            <b>💻 내 자리에서 · Colab 또는 학교 PC</b>
+            <p>모델 없이 되는 일이에요. 코드 읽고 고치기, <code>eval.py --dry-run</code>으로 <b>어떤 자료가 몇 점으로 검색되는지</b> 확인하기. 브라우저와 구글 계정만 있으면 됩니다.</p>
+          </div>
+          <div>
+            <b>🖥️ 교사 화면에서 · VESSL 작업공간</b>
+            <p>튜링의 <b>답</b>이 필요한 일이에요. 학생이 고친 파일을 제출하면 교사가 작업공간에 올려 차례로 실행하고, 결과를 TV로 함께 봅니다. 학생은 VESSL에 접속하지 않아요.</p>
+          </div>
+        </div>
         <div class="table-wrap">
           <table class="plan-table">
-            <thead><tr><th>단계</th><th>학생이 하는 일</th><th>교사가 미리 제공할 것</th><th>차시</th></tr></thead>
+            <thead><tr><th>단계</th><th>학생이 하는 일</th><th>실행하는 곳</th><th>교사가 미리 줄 것</th><th>차시</th></tr></thead>
             <tbody>
-              <tr><td>0. 설정</td><td>SYSTEM_PROMPT와 data.json 작성 <span class="muted">(기본 수업)</span></td><td>켜 둔 모델 서버, 모둠별 app.py 사본</td><td>1~2</td></tr>
-              <tr><td>1. 값 바꾸기</td><td><code>OPENING</code>, 검색 개수 <code>k</code>, <code>temperature</code>, 대화 기억 길이를 바꿔 보고 답 비교</td><td>바꿀 곳을 표시한 app.py, 관찰 기록표</td><td><a href="lessons/lesson-3.html">3</a></td></tr>
-              <tr><td>2. 함수 고치기</td><td>검색 점수를 <code>print</code>로 출력, <code>tokenize</code>를 3글자 자르기로 고치기</td><td>빈칸 · 힌트가 있는 코드 조각</td><td><a href="lessons/lesson-3.html">3</a></td></tr>
-              <tr><td>3. 새 코드 쓰기</td><td>검증 질문을 반복문으로 자동 질문하고 CSV로 저장하는 <code>eval.py</code> 완성 → 수정 전 · 후 비교</td><td><a href="assets/code/eval_starter.py" download>eval_starter.py</a> (빈칸 5개) · <a href="assets/code/questions.csv" download>questions.csv</a> · <a href="assets/code/eval.py" download>eval.py</a> (완성본)</td><td><a href="lessons/lesson-4.html">4</a></td></tr>
+              <tr><td>1. 값 바꾸기</td><td><code>OPENING</code>, 검색 개수 <code>k</code>, <code>temperature</code>, 대화 기억 길이 중 <b>하나</b>를 골라 바꾸고 같은 질문의 답 비교</td><td>🖥️ 교사 화면<br /><span class="muted">모둠당 2~3분, 차례로</span></td><td>바꿀 곳을 표시한 app.py, 관찰 기록표</td><td><a href="lessons/lesson-3.html">3</a></td></tr>
+              <tr><td>2. 함수 고치기</td><td><code>tokenize</code>를 3글자 자르기로 고치고, 검색 점수가 어떻게 달라지는지 확인</td><td>💻 내 자리<br /><span class="muted"><code>--dry-run</code></span></td><td>빈칸 · 힌트가 있는 코드 조각</td><td><a href="lessons/lesson-3.html">3</a></td></tr>
+              <tr><td>3. 새 코드 쓰기</td><td><code>eval_starter.py</code>의 빈칸 5개를 채워 자동 검증 프로그램 완성 → 수정 전 · 후 비교</td><td>💻 내 자리에서 완성 · 검색 확인<br />→ 🖥️ 교사 화면에서 답 받기</td><td><a href="assets/code/eval_starter.py" download>eval_starter.py</a> · <a href="assets/code/questions.csv" download>questions.csv</a> · <a href="assets/code/eval.py" download>eval.py</a> (완성본)</td><td><a href="lessons/lesson-4.html">4</a></td></tr>
             </tbody>
           </table>
         </div>
-        <p class="plan-note"><b>운영 전 확인</b> 모둠마다 app.py를 실행하려면 VESSL JupyterLab 터미널을 모둠별로 열거나 교사 화면에서 차례로 실행합니다. 지금 서버 설정(<code>--max-num-seqs 1</code>)은 한 번에 한 질문만 받으므로, 여러 모둠이 동시에 쓰려면 이 값을 늘리고 GPU 메모리가 버티는지 미리 시험해 보세요. <code>eval.py --dry-run</code>은 모델 서버 없이 검색만 확인하므로 서버를 기다리는 동안 먼저 해 볼 수 있어요.</p>
+        <p class="plan-note"><b>Colab 준비</b> 첫 칸에서 <code>!pip install langchain-community langchain-openai rank_bm25</code>를 실행하고, app.py · data.json · eval_starter.py · questions.csv를 같은 폴더에 올립니다. <code>--dry-run</code>은 모델을 부르지 않아 GPU가 없어도 돌아가요.</p>
+        <p class="plan-note"><b>교사 화면 운영</b> 모델 서버는 한 번에 한 질문씩 처리하므로 eval.py(질문 10개)는 모둠당 1~2분 걸립니다. 모둠 파일은 <code>app_모둠명.py</code>, <code>after_모둠명.csv</code>처럼 이름을 나눠 받아 두고, 다른 활동 시간에 차례로 돌려 결과 CSV를 돌려주세요.</p>
       </div>
     </section>
 
@@ -283,9 +299,10 @@
           <h3>🏫 트랙 1. 중학생이 만나는 ‘튜링 카드’ AI</h3>
           <dl class="plan-target">
             <div><dt>대상 · 과목</dt><dd>중학교 2~3학년 · 2022 개정 「정보」 (인공지능 · 디지털 문화 영역), 「도덕」 연계</dd></div>
-            <div><dt>차시</dt><dd>4차시 (고등학교 5차시에서 코드·터미널 단계를 빼고 체험과 판단 중심으로 재구성)</dd></div>
-            <div><dt>핵심 아이디어</dt><dd>학생은 코드를 다루지 않고 <b>인물 카드</b>(말투·모르는 것·대답하지 않을 것)와 <b>사실 카드</b>(자료)를 만든다. 교사가 미리 켜 둔 <b>웹 채팅</b>에 카드를 넣어 대화하고, 틀린 답을 찾아 고친다.</dd></div>
+            <div><dt>차시</dt><dd>4차시 (고등학교 5차시에서 코드 · 터미널 단계를 빼고 체험과 판단 중심으로 재구성)</dd></div>
+            <div><dt>핵심 아이디어</dt><dd>학생은 코드도, 서버 주소도 다루지 않는다. 손으로 <b>인물 카드</b>(말투 · 모르는 것 · 답하지 않을 것)와 <b>사실 카드</b>(자료)를 만들고, AI와의 대화는 <b>교사 화면 하나를 반 전체가 함께 보며</b> 한다.</dd></div>
           </dl>
+          <p class="plan-note"><b>왜 교사 화면 하나로?</b> 튜링 AI는 교사의 VESSL 작업공간 안에서 돌아가서, 주소만 나눠 준다고 학생 기기에서 바로 열리지 않아요. 학생마다 계정을 만들려면 만 14세 미만은 보호자 동의도 필요합니다. 그래서 중학교에서는 <b>교사가 실행하고 학생은 질문과 판단을 맡는</b> 방식으로 바꿨어요. 학생 기기가 없어도 종이 카드로 모두 진행할 수 있습니다.</p>
         </div>
 
         <div class="plan-block">
@@ -294,11 +311,11 @@
             <table class="plan-table compare">
               <thead><tr><th>고등학교 (인공지능 기초)</th><th>중학교 (정보)</th></tr></thead>
               <tbody>
-                <tr><td>터미널(CLI)에서 app.py 실행</td><td>교사가 켜 둔 <b>웹 채팅 화면</b>에서 대화 (주소만 공유)</td></tr>
+                <tr><td>학생이 터미널(CLI)에서 app.py 실행</td><td><b>교사가 실행</b>한 화면을 TV로 함께 보고, 모둠 대표가 나와 질문 입력</td></tr>
                 <tr><td>시스템 프롬프트를 한 문단으로 작성</td><td>빈칸 채우기형 <b>인물 카드</b> (보기에서 고르고 한 줄 쓰기)</td></tr>
-                <tr><td>data.json 직접 작성 · 형식 검사</td><td>양식에 사실 카드를 쓰면 <b>JSON이 자동으로 만들어지는</b> 학습지 사용 (2차시 학습지 기능)</td></tr>
-                <tr><td>BM25 · tokenize · RAG 개념 설명</td><td>“AI가 오픈북 시험을 본다” 비유와 2글자 자르기 체험만</td></tr>
-                <tr><td>검증 질문 10개 · 정답률 계산</td><td>모둠별 <b>질문 5개</b>, 맞음/틀림 ○× 기록</td></tr>
+                <tr><td>data.json 직접 작성 · 형식 검사</td><td><b>사실 카드</b> 5장. 2차시 웹 학습지에 쓰면 JSON이 자동으로 만들어져 패들릿에 붙여 내고, 기기가 없으면 종이 카드를 교사가 옮겨 적기</td></tr>
+                <tr><td>BM25 · tokenize · RAG 개념 설명</td><td><b>‘사람 튜링’ 놀이</b>로 몸으로 체험 (카드만 보고 답하는 친구 = 찾아보고 답하는 AI)</td></tr>
+                <tr><td>검증 질문 10개 · 정답률 계산</td><td>모둠별 <b>질문 카드 5장</b>, 맞음/틀림 ○× 기록</td></tr>
                 <tr><td>책임 소재 · 공존 방안 토론</td><td>‘인물 AI 사용 약속’ 만들기 (도덕 [9도03-07] 연계)</td></tr>
               </tbody>
             </table>
@@ -306,19 +323,19 @@
         </div>
 
         <div class="plan-block">
-          <h3>📚 4차시 수업 흐름</h3>
+          <h3>🧒 4차시, 중학생은 실제로 이렇게 해요</h3>
           <div class="table-wrap">
-            <table class="plan-table">
-              <thead><tr><th>차시</th><th>활동</th><th>성취기준</th></tr></thead>
+            <table class="plan-table ms-flow">
+              <thead><tr><th>차시</th><th>학생이 하는 일</th><th>교사가 하는 일</th><th>성취기준</th></tr></thead>
               <tbody>
-                <tr><td>1</td><td><b>누가 사람일까?</b> 친구 · 교사 · 챗봇의 답을 섞은 블라인드 채팅으로 모방 게임 체험, 인공지능의 뜻과 특징 정리</td><td>[9정04-01] 인공지능의 개념과 특성을 설명하고 인공지능 소프트웨어를 구별한다.</td></tr>
-                <tr><td>2</td><td><b>튜링 카드 만들기</b> 인물 카드(시대 · 말투 · 모르는 것 · 대답하지 않을 것)와 사실 카드 5장 작성, 출처 적기</td><td>[9정04-02] 인공지능 학습에서 데이터의 중요성을 이해하고, 필요한 데이터를 수집하여 분류한다.</td></tr>
-                <tr><td>3</td><td><b>우리 튜링과 대화하기</b> 카드를 웹 채팅에 넣고 질문 5개로 대화, 카드가 있을 때와 없을 때 답 비교</td><td>[9정04-03] 다양한 데이터를 활용하여 인공지능 시스템을 구성하고 적용한다.</td></tr>
-                <tr><td>4</td><td><b>틀린 답 고치기와 약속</b> ○× 기록으로 지어낸 답 찾기 → 카드 고치기, 출처 · 사생활 보호를 담은 ‘인물 AI 사용 약속’ 3가지</td><td>[9정04-05] 데이터의 수집과 활용에서 발생하는 윤리적인 문제의 해결 방안을 구상한다.<br />[9정05-03] 개인 정보 및 권리와 저작권 보호 실천</td></tr>
+                <tr><td>1</td><td><b>누가 AI일까?</b> 모둠이 튜링에게 묻고 싶은 질문을 쪽지에 쓴다 → 화면에 뜬 답 A · B · C (친구 답, 선생님 답, AI 답) 중 AI를 골라 이유를 적는다 → 인공지능의 뜻과 특징 정리</td><td>쉬는 시간에 받은 질문 2~3개를 튜링 AI에 넣고, 사람 답과 섞어 화면에 띄움</td><td>[9정04-01] 인공지능의 개념과 특성을 설명하고 인공지능 소프트웨어를 구별한다.</td></tr>
+                <tr><td>2</td><td><b>튜링 카드 만들기</b> 인물 카드 1장(시대 · 말투 · 모르는 것 · 답하지 않을 것)과 사실 카드 5장(한 문장 사실 + 출처 + 찾을 낱말)을 쓴다</td><td>카드를 걷어 수업 후 모둠별 <code>data_모둠명.json</code>으로 저장 (웹 학습지를 쓰면 붙여 넣기만)</td><td>[9정04-02] 인공지능 학습에서 데이터의 중요성을 이해하고, 필요한 데이터를 수집하여 분류한다.</td></tr>
+                <tr><td>3</td><td><b>① ‘사람 튜링’ 놀이</b> 모둠원 1명이 사실 카드만 보고 답하고, 나머지가 질문한다. 카드에 없는 걸 물으면 어떻게 될까?<br /><b>② 우리 튜링과 대화</b> 모둠 대표가 교사 화면에서 질문 카드 2~3장을 입력하고, 나머지는 ○×를 기록한다. 같은 질문을 ‘기본 자료’ 튜링에게도 해서 비교한다</td><td>모둠 차례마다 data.json을 그 모둠 파일로 바꾸고 app.py를 다시 실행 (10초 안팎). 모델 서버는 켠 그대로 둠</td><td>[9정04-03] 다양한 데이터를 활용하여 인공지능 시스템을 구성하고 적용한다.</td></tr>
+                <tr><td>4</td><td><b>틀린 답 고치기와 약속</b> × 표시한 답의 원인을 찾는다 (카드에 없었나? 카드가 틀렸나?) → 카드를 고쳐 다시 확인 → 출처 · 사생활 보호를 담은 ‘인물 AI 사용 약속’ 3가지</td><td>고친 카드를 반영해 같은 질문을 다시 보여 줌</td><td>[9정04-05] 데이터의 수집과 활용에서 발생하는 윤리적인 문제의 해결 방안을 구상한다.<br />[9정05-03] 개인 정보 및 권리와 저작권 보호 실천</td></tr>
               </tbody>
             </table>
           </div>
-          <p class="plan-note"><b>운영 팁</b> 웹 채팅 서버는 교사가 VESSL에서 한 번만 켜고, 모둠별 카드는 교사가 모아 서버에 반영합니다. 학생 기기에는 설치할 것이 없습니다. 실존 인물의 사생활 질문에는 답하지 않는 규칙을 꼭 함께 안내하세요.</p>
+          <p class="plan-note"><b>운영 팁</b> 학생 기기에는 설치하거나 접속할 것이 없습니다. 3차시는 한 모둠이 교사 화면을 쓰는 동안 다른 모둠은 ‘사람 튜링’ 놀이를 하도록 짜면 기다리는 시간이 없어요. 실존 인물의 사생활 질문에는 답하지 않는 규칙을 꼭 함께 안내하세요.</p>
         </div>
       </div>
 
@@ -359,7 +376,7 @@
                 <tr><td>3</td><td>정보</td><td><b>찾아보고 답하는 AI</b> RAG 원리와 CLI 대화, 검색 예측 (기존 3차시)</td></tr>
                 <tr><td>4</td><td>윤리</td><td><b>인물 AI의 윤리 쟁점</b> 고인의 동의와 인격, 사생활 보호, 사실과 다른 말을 인물의 말처럼 하는 문제. 칸트의 의무론(인격을 수단으로만 대하지 말라)과 공리주의(교육적 이익과 피해)로 각각 판단해 보기</td></tr>
                 <tr><td>5</td><td>정보</td><td><b>환각 디버깅</b> 검증 질문 · 환각 기록표 · 정답률 비교 (기존 4차시). 윤리 시간에 정한 기준을 거절 규칙과 안내 문구로 프롬프트에 반영</td></tr>
-                <tr><td>6</td><td>정보</td><td><b>공개와 상호 평가</b> 웹 · Roblox NPC로 공개, ‘튜링다움’과 함께 ‘윤리 기준 준수’ 항목도 평가</td></tr>
+                <tr><td>6</td><td>정보</td><td><b>공개와 상호 평가</b> 교사 화면에서 모둠별 튜링을 차례로 웹 · Roblox NPC로 띄워 대화하고, ‘튜링다움’과 함께 ‘윤리 기준 준수’ 항목도 평가</td></tr>
                 <tr><td>7</td><td>윤리</td><td><b>우리 반 인물 AI 윤리 가이드라인</b> 투명성(AI임을 밝힘) · 사실 확인 · 사생활 존중 · 책임 소재를 담은 가이드라인 작성과 발표, 과학기술자의 사회적 책임 성찰</td></tr>
               </tbody>
             </table>
@@ -388,6 +405,7 @@
           <dl class="plan-target">
             <div><dt>대상</dt><dd>5차시 기본 수업을 마친 고등학교 2학년 중 코드 심화를 원하는 모둠 (동아리 · 방과후 · 추가 2~3차시)</dd></div>
             <div><dt>목표</dt><dd>대화 프로그램 <code>app.py</code>의 <b>chat() 함수를 직접 고쳐</b> 기능을 더하고, 4차시에서 찾은 환각과 윤리 문제를 <b>코드로</b> 해결한다.</dd></div>
+            <div><dt>실행 환경</dt><dd>코드 고치기와 검색 확인(<code>--dry-run</code>)은 Colab · 학교 PC에서, 튜링의 답이 필요한 확인은 교사의 VESSL 작업공간에서 차례로. 동아리 · 방과후처럼 인원이 적으면 교사가 모둠별 터미널을 열어 줄 수 있어요.</dd></div>
             <div><dt>성취기준</dt><dd>[12인기04-03] 협력적 문제 해결로 인공지능 소프트웨어 개발 · [12인기04-04] 사회적 영향을 고려해 개발하고 성능 개선 · [12인기01-04] 정보 이용 탐색 알고리즘 적용</dd></div>
           </dl>
         </div>
@@ -453,7 +471,7 @@ def expand_query(text):
               <thead><tr><th>차시</th><th>활동</th></tr></thead>
               <tbody>
                 <tr><td>1</td><td><b>코드 읽기와 계획</b> app.py의 chat() 흐름을 순서도로 그리기 → 미션 2~3개 고르고 역할 나누기 → app.py를 복사해 <code>app_우리모둠.py</code>로 작업</td></tr>
-                <tr><td>2</td><td><b>구현과 검증</b> 미션 구현 → <code>eval.py</code>로 수정 전 · 후 비교, <code>--dry-run</code>으로 검색 변화 확인</td></tr>
+                <tr><td>2</td><td><b>구현과 검증</b> 미션 구현 → <code>--dry-run</code>으로 검색 변화 확인 (내 자리) → 교사 화면에서 <code>eval.py</code>로 수정 전 · 후 비교</td></tr>
                 <tr><td>3</td><td><b>발표</b> 고친 코드와 전 · 후 결과, 미션 6의 ‘프롬프트 규칙 vs 코드 규칙’ 토의 결과 공유</td></tr>
               </tbody>
             </table>
@@ -469,7 +487,7 @@ def expand_query(text):
   </footer>
 
 
-  <script src="js/data.js?v=20261018-map2"></script>
-  <script src="js/main.js?v=20261018-map2"></script>
+  <script src="js/data.js?v=20261018-hook"></script>
+  <script src="js/main.js?v=20261018-hook"></script>
 </body>
 </html>
