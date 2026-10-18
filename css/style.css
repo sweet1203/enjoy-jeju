@@ -599,3 +599,10 @@ a.btn-mini { text-decoration: none; display: inline-block; }
 .res-table td.res-btns { white-space: nowrap; }
 .res-table td.res-btns .btn-mini { font-size: .9rem; padding: 6px 12px; margin: 2px 0; }
 .res-table td:first-child { vertical-align: middle; }
+
+/* 자료실 코드 파일 카드: 누르면 아래에 미리보기 */
+.code-peek.code-card { display: block; width: 100%; margin: 0; padding: 12px 14px; border: 2px solid var(--line); border-radius: 12px; background: var(--paper); color: inherit; text-align: left; white-space: normal; font-weight: 400; }
+.code-peek.code-card::after { content: "누르면 미리보기 ▾"; display: block; margin-top: 4px; font-size: .78rem; color: var(--sea); }
+.code-peek.code-card:hover { border-color: var(--sea); background: var(--paper); }
+.code-peek.code-card.on { border-color: #14506a; background: #eef7fb; color: inherit; }
+.code-peek.code-card.on::after { content: "닫기 ▴"; color: #14506a; }

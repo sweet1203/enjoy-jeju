@@ -242,7 +242,11 @@ $("#resource-list").innerHTML = `
     </tbody>
   </table></div>`;
 $("#code-list").innerHTML = `<div class="tc-links">${CODE_FILES.map((f) => `
-  <a class="tc-link" href="${esc(f.href)}" download><b>⬇ ${esc(f.name)}</b><span>${esc(f.desc)}</span></a>`).join("")}</div>`;
+  <button type="button" class="tc-link code-peek code-card" data-src="${esc(f.href)}"><b>📄 ${esc(f.name)}</b><span>${esc(f.desc)}</span></button>`).join("")}</div>
+  <div class="code-viewer" hidden>
+    <div class="cv-head"><b class="cv-name"></b><span class="cv-btns"><button type="button" class="cv-copy">📋 복사</button><button type="button" class="cv-close" aria-label="닫기">✕</button></span></div>
+    <div class="cv-body"></div>
+  </div>`;
 
 // 팀 소개 — 제주 게임 맵 위의 캐릭터, 머리 위에 소개 말풍선
 $("#team-grid").innerHTML = TEAM.map((m, i) => `
@@ -323,7 +327,7 @@ document.querySelectorAll(".code-peek").forEach((link) => {
         body.replaceChildren(pre);
       }
     } catch (e) {
-      body.textContent = "파일을 불러오지 못했어요. ‘내려받기’로 열어 보세요.";
+      body.textContent = "파일을 불러오지 못했어요. 잠시 후 다시 눌러 보세요.";
     }
     viewer.scrollIntoView({ behavior: "smooth", block: "nearest" });
   });
