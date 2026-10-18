@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@noonnu/maplestory-otf-bold@0.1.0/index.css" />
-  <link rel="stylesheet" href="css/style.css?v=20261018-peek2" />
+  <link rel="stylesheet" href="css/style.css?v=20261018-first" />
 </head>
 <body>
   <header class="nav">
@@ -57,6 +57,37 @@
 
     <!-- 교사 소개 -->
     <section id="team" class="section jeju-map">
+      <svg class="map-bg" viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMax slice" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="mSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc8f2"/><stop offset=".6" stop-color="#c9ecff"/><stop offset="1" stop-color="#e9f8ff"/></linearGradient>
+          <linearGradient id="mSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3fb1d8"/><stop offset="1" stop-color="#1f86b5"/></linearGradient>
+          <linearGradient id="mHalla" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fa9a0"/><stop offset="1" stop-color="#5f8f7f"/></linearGradient>
+          <g id="mCloud"><ellipse cx="0" cy="0" rx="70" ry="26" fill="#fff"/><ellipse cx="-40" cy="8" rx="44" ry="20" fill="#fff"/><ellipse cx="44" cy="10" rx="48" ry="18" fill="#fff"/><ellipse cx="6" cy="-16" rx="40" ry="22" fill="#fff"/></g>
+          <g id="mTree"><rect x="-7" y="10" width="14" height="46" fill="#6b4a2b"/><circle cx="0" cy="0" r="42" fill="#2f7d3c"/><circle cx="-24" cy="12" r="28" fill="#358a44"/><circle cx="24" cy="12" r="28" fill="#2c7337"/><circle cx="-14" cy="-10" r="7" fill="#f39a1e"/><circle cx="16" cy="-4" r="7" fill="#f39a1e"/><circle cx="-26" cy="18" r="7" fill="#f6a832"/><circle cx="6" cy="20" r="7" fill="#f39a1e"/><circle cx="28" cy="20" r="6" fill="#f6a832"/><circle cx="2" cy="-26" r="6" fill="#f6a832"/></g>
+          <g id="mStone"><rect x="-26" y="-58" width="52" height="16" rx="8" fill="#5c6166"/><path d="M-22 -46 Q-30 -40 -28 -10 L-28 40 Q0 50 28 40 L28 -10 Q30 -40 22 -46 Z" fill="#6f757a"/><circle cx="-10" cy="-26" r="5" fill="#3e4245"/><circle cx="10" cy="-26" r="5" fill="#3e4245"/><ellipse cx="0" cy="-12" rx="7" ry="9" fill="#5c6166"/><path d="M-20 4 Q0 14 20 4" stroke="#3e4245" stroke-width="4" fill="none"/><circle cx="-6" cy="-40" r="2" fill="#4e5357"/><circle cx="12" cy="0" r="2" fill="#4e5357"/><circle cx="-14" cy="22" r="2.5" fill="#4e5357"/></g>
+        </defs>
+        <rect width="1440" height="1000" fill="url(#mSky)"/>
+        <use href="#mCloud" x="220" y="120" opacity=".95"/>
+        <use href="#mCloud" x="760" y="80" opacity=".9" transform="scale(1)"/>
+        <use href="#mCloud" x="1230" y="160" opacity=".85"/>
+        <use href="#mCloud" x="520" y="230" opacity=".7"/>
+        <path d="M60 640 Q420 300 720 330 Q1020 300 1380 640 Z" fill="url(#mHalla)"/>
+        <path d="M620 352 Q720 316 820 352 Q790 372 760 360 Q720 378 690 362 Q656 374 620 352 Z" fill="#f4fbff"/>
+        <path d="M1110 640 L1150 560 Q1160 540 1185 538 L1290 538 Q1315 540 1325 560 L1365 640 Z" fill="#6c9a6a"/>
+        <path d="M1170 560 Q1238 548 1305 560" stroke="#557d54" stroke-width="6" fill="none"/>
+        <rect y="600" width="1440" height="400" fill="url(#mSea)"/>
+        <g stroke="#bfe9f7" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8">
+          <path d="M80 660 q20 -10 40 0 t40 0"/><path d="M420 700 q20 -10 40 0 t40 0"/><path d="M900 650 q20 -10 40 0 t40 0"/><path d="M1220 720 q20 -10 40 0 t40 0"/><path d="M640 760 q20 -10 40 0 t40 0"/>
+        </g>
+        <path d="M0 820 Q240 780 480 805 Q760 835 1000 800 Q1240 770 1440 800 L1440 1000 L0 1000 Z" fill="#9bd06a"/>
+        <path d="M0 860 Q300 830 620 855 Q960 880 1440 845 L1440 1000 L0 1000 Z" fill="#7dbb4f"/>
+        <g fill="#ffd84d"><circle cx="300" cy="880" r="6"/><circle cx="318" cy="892" r="6"/><circle cx="336" cy="878" r="6"/><circle cx="1080" cy="890" r="6"/><circle cx="1098" cy="878" r="6"/><circle cx="1116" cy="894" r="6"/><circle cx="700" cy="905" r="6"/><circle cx="718" cy="915" r="6"/></g>
+        <use href="#mTree" x="110" y="820"/>
+        <use href="#mTree" x="1330" y="810"/>
+        <use href="#mTree" x="1240" y="850" transform="translate(0 0)"/>
+        <use href="#mStone" x="220" y="880"/>
+        <use href="#mStone" x="1160" y="890"/>
+      </svg>
       <div class="map-content">
         <h2>👩‍🏫 교사 소개</h2>
         <p class="section-desc">빠르게 만들고, 제대로 나누고, 수업을 즐기는 정보 교사 6인</p>
@@ -421,7 +452,7 @@ def expand_query(text):
   </footer>
 
 
-  <script src="js/data.js?v=20261018-peek2"></script>
-  <script src="js/main.js?v=20261018-peek2"></script>
+  <script src="js/data.js?v=20261018-first"></script>
+  <script src="js/main.js?v=20261018-first"></script>
 </body>
 </html>
