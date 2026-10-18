@@ -280,13 +280,13 @@ renderLessons();
 renderSpy();
 
 // 코드 파일 미리보기 (내려받지 않고 아래에 펼치기)
-document.querySelectorAll("a.code-peek").forEach((link) => {
+document.querySelectorAll(".code-peek").forEach((link) => {
   link.addEventListener("click", async (ev) => {
     ev.preventDefault();
     const viewer = link.closest(".plan-block").querySelector(".code-viewer");
-    const url = link.getAttribute("href");
+    const url = link.dataset.src;
     const name = url.split("/").pop();
-    const peers = link.closest(".plan-block").querySelectorAll("a.code-peek");
+    const peers = link.closest(".plan-block").querySelectorAll(".code-peek");
     if (!viewer.hidden && viewer.dataset.src === url) {
       viewer.hidden = true; link.classList.remove("on"); return;
     }
@@ -320,7 +320,7 @@ document.querySelectorAll("a.code-peek").forEach((link) => {
 document.querySelectorAll(".code-viewer").forEach((viewer) => {
   viewer.querySelector(".cv-close").addEventListener("click", () => {
     viewer.hidden = true;
-    viewer.closest(".plan-block").querySelectorAll("a.code-peek").forEach((a) => a.classList.remove("on"));
+    viewer.closest(".plan-block").querySelectorAll(".code-peek").forEach((a) => a.classList.remove("on"));
   });
   viewer.querySelector(".cv-copy").addEventListener("click", async (ev) => {
     try { await navigator.clipboard.writeText(viewer.dataset.text || ""); ev.target.textContent = "✅ 복사됨"; }

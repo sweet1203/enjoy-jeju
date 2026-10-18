@@ -204,4 +204,8 @@ table.self td:first-child { width: 58%; }
 /* 키보드 키 표시 */
 kbd { font-family: var(--mono); font-size: .85em; background: #fff; border: 1px solid #cfc7bb; border-bottom-width: 2px; border-radius: 5px; padding: 0 5px; }
 .code-box { max-height: 420px; overflow: auto; margin: 8px 0 12px; }
-a.code-peek::after { content: " ▾"; font-size: .8em; }
+.code-peek { display: inline-flex; align-items: center; gap: 4px; margin: 2px 2px; padding: 3px 12px; border: 1px solid #b9d6e2; border-radius: 999px; background: #eef7fb; color: #14506a; font: inherit; font-size: .88rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.code-peek::after { content: "미리보기 ▾"; font-weight: 400; font-size: .78em; color: #5d7f8d; }
+.code-peek:hover { background: #dff0f7; }
+.code-peek.on { background: #14506a; color: #fff; border-color: #14506a; }
+.code-peek.on::after { content: "닫기 ▴"; color: #cfe6ef; }

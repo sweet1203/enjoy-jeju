@@ -134,13 +134,15 @@
 })();
 
 // 코드 파일 미리보기 (내려받지 않고 펼쳐 보기)
-document.querySelectorAll("a.code-peek").forEach((link) => {
+document.querySelectorAll(".code-peek").forEach((link) => {
   link.addEventListener("click", async (ev) => {
     ev.preventDefault();
     const box = link.closest("section").querySelector(".code-box");
     if (!box) return;
-    const url = link.getAttribute("href");
-    if (!box.hidden && box.dataset.src === url) { box.hidden = true; return; }
+    const url = link.dataset.src;
+    const peers = link.closest("section").querySelectorAll(".code-peek");
+    if (!box.hidden && box.dataset.src === url) { box.hidden = true; link.classList.remove("on"); return; }
+    peers.forEach((b) => b.classList.toggle("on", b === link));
     box.dataset.src = url; box.hidden = false; box.textContent = "불러오는 중…";
     try {
       const res = await fetch(url);
