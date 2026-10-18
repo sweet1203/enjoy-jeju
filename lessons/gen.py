@@ -21,7 +21,7 @@ def shell(n, unit, goals, flow, body):
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{n}차시 · {TITLES[n]} | 즐겨라 제주</title>
 <meta name="description" content="앨런 튜링 페르소나 AI 프로젝트 {n}차시 수업 자료 겸 학습지" />
-<link rel="stylesheet" href="lesson.css?v=modal" />
+<link rel="stylesheet" href="lesson.css?v=setup" />
 </head>
 <body data-lesson="lesson-{n}">
 <header class="topbar">
@@ -53,7 +53,7 @@ def shell(n, unit, goals, flow, body):
   </div>
   <p class="saved">적은 내용은 이 브라우저에 자동 저장돼요. 제출할 때는 ‘인쇄 · PDF로 저장’을 이용하세요.</p>
 </main>
-<script src="lesson.js?v=modal"></script>
+<script src="lesson.js?v=peek"></script>
 </body>
 </html>
 """

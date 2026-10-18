@@ -149,6 +149,3 @@ document.querySelectorAll("a.code-peek").forEach((link) => {
     } catch (e) { box.textContent = "파일을 불러오지 못했어요."; }
   });
 });
-
-// 사이트 안 미리보기 창으로 열렸을 때는 '사이트로 돌아가기' 링크를 숨긴다.
-if (window.self !== window.top) document.body.classList.add("in-frame");
