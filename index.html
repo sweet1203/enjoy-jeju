@@ -4,41 +4,41 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>즐겨라 제주 | 팀 속전속결</title>
-  <meta name="description" content="정보 교사 팀 속전속결의 AI 수업계획안 공유 사이트" />
+  <meta name="description" content="정보 교사 팀 속전속결의 AI 수업 교사용 안내 사이트" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@noonnu/maplestory-otf-bold@0.1.0/index.css" />
-  <link rel="stylesheet" href="css/style.css?v=20261018-chip-teacher" />
+  <link rel="stylesheet" href="css/style.css?v=20261018-tabs" />
 </head>
 <body>
+<body>
   <header class="nav">
-    <a class="logo" href="#top">🍊 속전속결</a>
+    <a class="logo" href="#home">🍊 속전속결</a>
     <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
-    <nav class="nav-links">
-      <a href="#team">교사 소개</a>
-      <a href="#about">프로젝트 소개</a>
-      <a href="#plan">수업 설계</a>
-      <a href="#lessons">수업계획안</a>
-      <a href="#resources">자료실</a>
-      <a href="#feedback">의견 나누기</a>
+    <nav class="nav-links" aria-label="메뉴">
+      <a href="#home" data-tab="home">🏠 홈</a>
+      <a href="#overview" data-tab="overview">🗺️ 수업 한눈에</a>
+      <a href="#guide" data-tab="guide">📚 차시별 안내</a>
+      <a href="#resources" data-tab="resources">📂 자료실</a>
+      <a href="#course" data-tab="course">🧑‍💻 코스웨어 사용법</a>
+      <a href="#ai" data-tab="ai">🤖 AI 실습 환경</a>
+      <a href="#feedback" data-tab="feedback">💬 의견 나누기</a>
     </nav>
   </header>
 
-  <!-- 현재 위치 바 (main.js가 섹션 제목으로 자동 생성) -->
-  <nav id="spy" class="spy" aria-label="현재 위치"></nav>
-
   <main id="top">
-    <!-- 메인 -->
-    <section class="hero">
+  <!-- ===== 🏠 홈 ===== -->
+  <div class="tab-panel" id="tab-home" data-tab="home">
+        <section class="hero">
       <div class="hero-inner">
         <div class="hero-top">
           <div class="hero-text">
             <p class="hero-kicker">정보 교사 6인의 AI 수업 프로젝트</p>
             <h1>즐겨라 <span>제주</span></h1>
-            <p class="hero-sub">앨런 튜링과 대화하는 페르소나 AI 제작 및 활용<br />수업계획안을 함께 나눕니다.</p>
-            <a class="btn" href="#lessons">수업계획안 보러 가기 →</a>
+            <p class="hero-sub">앨런 튜링과 대화하는 페르소나 AI 제작 및 활용<br />수업 자료를 선생님들과 함께 나눕니다.</p>
+            <a class="btn" href="#overview">수업 한눈에 보기 →</a>
           </div>
           <!-- 누르면 뒤집히는 사진 카드 (앞: 흑백, 뒤: 컬러) -->
           <button class="flip-card" type="button" aria-pressed="false" aria-label="사진을 눌러 뒤집기">
@@ -55,8 +55,13 @@
       </svg>
     </section>
 
+    <div class="teacher-only">
+      <p><b>🧑‍🏫 선생님 전용 안내 사이트예요.</b> 수업 설계 · 지도안 · 학습지 · 코스웨어 운영 방법을 모았어요.
+      학생은 이 사이트 대신 <a href="https://sweet1203.github.io/turing-course/" target="_blank" rel="noopener">학생용 코스웨어</a>로 수업에 참여해요.</p>
+    </div>
+
     <!-- 교사 소개 -->
-    <section id="team" class="section jeju-map">
+        <section id="team" class="section jeju-map">
       <svg class="map-bg" viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMax slice" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="mSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc8f2"/><stop offset=".6" stop-color="#c9ecff"/><stop offset="1" stop-color="#e9f8ff"/></linearGradient>
@@ -100,7 +105,7 @@
     </section>
 
     <!-- 프로젝트 소개 -->
-    <section id="about" class="section">
+        <section class="section">
       <h2>💡 프로젝트 소개</h2>
       <div class="hook">
         <p class="hook-label">오늘의 질문</p>
@@ -119,7 +124,7 @@
         </div>
         <div class="about-card">
           <h3>어떻게 쓰나요?</h3>
-          <p>수업계획안을 열어 흐름을 확인하고, 자료실에서 활동지와 PPT를 받아 그대로 또는 고쳐서 사용하세요.</p>
+          <p>‘수업 한눈에’에서 전체 흐름을 보고, ‘차시별 안내’와 ‘자료실’에서 지도안 · 학습지를 받아 그대로 또는 고쳐서 쓰세요. 학생 수업은 ‘코스웨어 사용법’의 학생용 사이트로 진행해요.</p>
         </div>
       </div>
       <figure class="scene">
@@ -127,11 +132,23 @@
         <figcaption>📌 속전속결 기획 회의 — 여섯 명의 아이디어가 모여 수업이 됩니다</figcaption>
       </figure>
     </section>
+  </div>
 
-    <!-- 수업 설계 -->
-    <section id="plan" class="section section-tint">
-      <h2>🗺️ 수업 설계</h2>
+  <!-- ===== 🗺️ 수업 한눈에 ===== -->
+  <div class="tab-panel" id="tab-overview" data-tab="overview" hidden>
+    <section class="section section-tint">
+      <h2>🗺️ 수업 한눈에</h2>
       <p class="section-desc">2022 개정 「인공지능 기초」 · 총 5차시 프로젝트</p>
+
+      <div class="plan-block">
+        <h3>🔄 수업 진행 절차</h3>
+        <div class="flow-steps">
+          <div><span>1</span><b>코스웨어 활동</b>학생이 학생용 사이트에서 차시 활동과 학습지를 따라가요</div>
+          <div><span>2</span><b>세특 질문 제출</b>차시 끝에 질문 3개에 답해 제출해요 (붙여넣기 제한)</div>
+          <div><span>3</span><b>스프레드시트 확인</b>선생님 시트의 1~5차시 탭에 학번별로 모여요</div>
+        </div>
+        <p class="setup-link"><a class="btn-mini" href="#course">🧑‍💻 코스웨어 사용법 보기 →</a> 학생용 사이트 주소, 내 주소로 배포하는 방법, 시트 연결을 안내해요.</p>
+      </div>
 
       <div class="plan-block">
         <h3>👩‍🎓 대상 학생</h3>
@@ -212,50 +229,117 @@
         <p class="plan-note"><b>운영 팁</b> <code>eval.py --dry-run</code>은 모델을 부르지 않고 검색만 확인해서 빠르게 돌아가요. 모델 서버가 바쁠 때는 dry-run으로 먼저 확인하고, 답이 필요한 비교는 질문 10개를 한 번에 돌려 결과 CSV로 봅니다.</p>
       </div>
     </section>
+  </div>
 
-    <!-- 수업계획안 -->
-    <section id="lessons" class="section">
-      <h2>📝 수업계획안</h2>
-      <p class="section-desc">카드를 누르면 상세 계획안이 아래로 펼쳐지고, 한글 파일로도 받을 수 있어요.</p>
-      <div class="lesson-grid" id="lesson-grid"></div>
-      <div class="lesson-detail" id="lesson-detail" hidden></div>
+  <!-- ===== 📚 차시별 안내 ===== -->
+  <div class="tab-panel" id="tab-guide" data-tab="guide" hidden>
+    <section class="section">
+      <h2>📚 차시별 안내</h2>
+      <p class="section-desc">차시를 고르면 학습 목표 · 수업 흐름 · 주요 활동을 보고, 지도안과 학습지를 바로 받을 수 있어요.</p>
+      <div class="track-tabs" id="guide-tabs" role="tablist" aria-label="차시 선택"></div>
+      <div id="guide-body"></div>
     </section>
+  </div>
 
-    <!-- 자료실 -->
-    <section id="resources" class="section section-tint">
+  <!-- ===== 📂 자료실 ===== -->
+  <div class="tab-panel" id="tab-resources" data-tab="resources" hidden>
+    <section class="section section-tint">
       <h2>📂 자료실</h2>
-      <p class="section-desc">차시별 수업 자료 겸 학습지를 웹에서 바로 열고, 지도안을 한글 문서 모양 그대로 미리 볼 수 있어요.</p>
-      <div class="resource-list" id="resource-list"></div>
+      <p class="section-desc">수업계획안 · 지도안 · 학습지 · 코드 파일을 한곳에 모았어요.</p>
 
-      <div class="teacher-course">
-        <h3>🧑‍🏫 선생님용: 학생 코스웨어 「나만의 튜링 챗봇 만들기」</h3>
-        <p>학생에게 배포해 5차시 수업을 이끄는 사이트예요. 차시마다 세특 질문 3개를 받아 선생님의 구글 스프레드시트(1~5차시 탭)에 모아요.</p>
+      <div class="plan-block">
+        <h3>📝 수업계획안</h3>
+        <p class="adv-lead">카드를 누르면 상세 계획안이 펼쳐지고, <b>한글(.hwpx) 파일</b>로 저장할 수 있어요.</p>
+        <div class="lesson-grid" id="lesson-grid"></div>
+        <div class="lesson-detail" id="lesson-detail" hidden></div>
+      </div>
+
+      <div class="plan-block">
+        <h3>📄 차시별 지도안 · 학습지</h3>
+        <div id="resource-list"></div>
+        <p class="plan-note"><b>학습지</b> 웹 학습지는 학생이 쓴 내용이 브라우저에 자동 저장되고, 화면의 버튼으로 인쇄 · PDF 저장할 수 있어요.</p>
+      </div>
+
+      <div class="plan-block">
+        <h3>💻 코드 파일</h3>
+        <div id="code-list"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== 🧑‍💻 코스웨어 사용법 ===== -->
+  <div class="tab-panel" id="tab-course" data-tab="course" hidden>
+    <section class="section">
+      <h2>🧑‍💻 코스웨어 사용법</h2>
+      <p class="section-desc">학생에게 배포해 5차시 수업을 이끄는 사이트 「나만의 튜링 챗봇 만들기」</p>
+
+      <div class="plan-block">
+        <h3>🔗 바로 가기</h3>
         <div class="tc-links">
-          <a class="tc-link" href="https://github.com/sweet1203/turing-course" target="_blank" rel="noopener"><b>📦 GitHub 저장소 (교사 안내)</b><span>github.com/sweet1203/turing-course · README에 시작 방법</span></a>
-          <a class="tc-link" href="https://sweet1203.github.io/turing-course/" target="_blank" rel="noopener"><b>🌐 학생용 사이트 열기</b><span>sweet1203.github.io/turing-course</span></a>
+          <a class="tc-link" href="https://sweet1203.github.io/turing-course/" target="_blank" rel="noopener"><b>🌐 학생용 사이트</b><span>sweet1203.github.io/turing-course</span></a>
+          <a class="tc-link" href="https://github.com/sweet1203/turing-course" target="_blank" rel="noopener"><b>📦 GitHub 저장소</b><span>github.com/sweet1203/turing-course · README에 시작 방법</span></a>
+          <a class="tc-link" href="https://docs.google.com/spreadsheets/d/1rNgW3XCUCoghizTZ7HEVMSCWtCJpfm4HkcjUGW8eYlE/edit?usp=sharing" target="_blank" rel="noopener"><b>📊 제출 결과 예시 스프레드시트</b><span>학생이 제출하면 이렇게 모여요 (샘플 시트)</span></a>
         </div>
-        <p class="tc-tip">🔒 스프레드시트 연결 방법이 담긴 <b>교사용 안내</b>는 학생 사이트에서 숨겨져 있어요. 로고를 <b>빠르게 5번 클릭</b>하거나, 입력칸 밖에서 키보드로 <code>teacher</code>를 입력하면 열려요.</p>
+      </div>
+
+      <div class="plan-block">
+        <h3>🧭 학생은 이렇게 써요</h3>
+        <div class="flow-steps">
+          <div><span>1</span><b>차시 페이지 열기</b>학생용 사이트에서 오늘 차시를 열고 단계별 활동을 체크하며 진행</div>
+          <div><span>2</span><b>세특 질문 3개 쓰기</b>학번(5자리) · 이름 · 답을 쓰고 제출. 붙여넣기(Ctrl+V)는 막혀 있어요</div>
+          <div><span>3</span><b>시트에 모이기</b>차시별 탭에 한 줄씩. 같은 학번이 다시 내면 새 줄 대신 그 줄을 고쳐요</div>
+        </div>
+      </div>
+
+      <div class="plan-block">
+        <h3>🍴 내 주소로 배포하기 (4단계)</h3>
+        <div class="setup-path">
+          <div><b>1. Fork</b>GitHub 저장소 오른쪽 위 <b>Fork</b>로 내 계정에 복사</div>
+          <div><b>2. Pages</b>Settings → Pages → Branch <code>main</code> / root 저장 → 내 사이트 주소가 생겨요</div>
+          <div><b>3. Apps Script</b>새 스프레드시트 → 확장 프로그램 → Apps Script에 <code>apps-script/Code.gs</code> 붙여 넣기 → <code>setupSheets</code> 실행 → 웹 앱으로 배포(액세스: 모든 사용자)</div>
+          <div><b>4. config.js</b>받은 웹 앱 주소를 <code>js/config.js</code>의 <code>APPS_SCRIPT_URL</code>에 붙여 넣고 저장(Commit)</div>
+        </div>
+        <p class="plan-note"><b>안심하세요</b> <code>setupSheets</code>를 다시 눌러도 이미 쌓인 학생 답은 지워지지 않고 제목 줄만 새로 써요.</p>
+      </div>
+
+      <div class="plan-block">
+        <h3>🔒 숨겨진 교사용 안내 열기</h3>
+        <p>학생 사이트 메뉴에는 교사용 안내가 보이지 않아요. 아래 방법으로 열면 시트 연결 확인 · 질문 수정 방법을 볼 수 있어요.</p>
+        <div class="setup-path two">
+          <div><b>방법 1</b>왼쪽 위 <b>로고를 빠르게 5번 클릭</b></div>
+          <div><b>방법 2</b>입력칸 밖에서 키보드로 <code>teacher</code> 입력</div>
+        </div>
+        <p class="plan-note"><b>질문을 바꾸려면</b> <code>js/config.js</code>와 <code>apps-script/Code.gs</code>의 질문을 똑같이 고치고, Apps Script는 <b>새 버전으로 다시 배포</b>해 주세요.</p>
       </div>
     </section>
+  </div>
 
-    <!-- 의견 -->
-    <section id="feedback" class="section">
-      <h2>💬 의견 나누기</h2>
-      <p class="section-desc">수업에 써 보신 후기나 개선 의견을 아래 패들릿에 바로 남겨 주세요. 오른쪽 아래 <b>+ 게시</b> 버튼을 누르면 로그인 없이 쓸 수 있어요.</p>
-      <div class="padlet-embed">
-        <iframe id="padlet-frame" title="의견 나누기 패들릿" loading="lazy"
-                allow="camera;microphone;geolocation;display-capture;clipboard-write"></iframe>
+  <!-- ===== 🤖 AI 실습 환경 ===== -->
+  <div class="tab-panel" id="tab-ai" data-tab="ai" hidden>
+    <section class="section section-tint">
+      <h2>🤖 AI 실습 환경</h2>
+      <p class="section-desc">튜링 페르소나 AI를 실행하는 코드와 환경, 그리고 수업을 넓히는 확장 트랙</p>
+
+      <div class="plan-block">
+        <h3>🧠 이렇게 돌아가요</h3>
+        <div class="flow-steps four">
+          <div><span>1</span><b>VESSL</b>학생마다 GPU 작업공간(JupyterLab)에 로그인</div>
+          <div><span>2</span><b>EXAONE</b>LG EXAONE 모델을 vLLM 서버로 실행 (교사가 미리 준비)</div>
+          <div><span>3</span><b>app.py</b>터미널에서 data.json을 검색(BM25)해 근거를 붙여 답하는 튜링</div>
+          <div><span>4</span><b>웹 · Roblox</b>같은 페르소나를 웹 채팅과 Roblox NPC로 연결</div>
+        </div>
       </div>
-      <a class="padlet-open" id="feedback-btn" href="#" target="_blank" rel="noopener">새 창에서 크게 보기 ↗</a>
-      <figure class="scene">
-        <img src="assets/scenes/pool.webp" alt="여섯 캐릭터가 수영장에서 즐겁게 노는 모습" loading="lazy" />
-        <figcaption>🌊 수업도 제주처럼, 즐겨라!</figcaption>
-      </figure>
-    </section>
 
-    <!-- 확장 트랙 -->
-    <section id="extend" class="section section-tint">
-      <h2>🌱 확장 트랙</h2>
+      <div class="plan-block">
+        <h3>📦 코드와 파일</h3>
+        <div class="tc-links">
+          <a class="tc-link" href="https://github.com/CarlosQuperman/persona-ai" target="_blank" rel="noopener"><b>📦 persona-ai 저장소 (최종본)</b><span>github.com/CarlosQuperman/persona-ai · app.py · data.json · 웹 · Roblox 연결</span></a>
+          <a class="tc-link" href="https://drive.google.com/file/d/1OcH5y2B-C-CaR_eSTrFZnxEgShykMEud/view?usp=sharing" target="_blank" rel="noopener"><b>🎮 Roblox 맵 파일</b><span>TuringAI_Future_Campus_Connected.rbxlx (구글 드라이브)</span></a>
+          <a class="tc-link" href="lessons/setup.html"><b>🔑 튜링 실행 따라하기 카드</b><span>VESSL 로그인 → 작업공간 → 터미널 실행 → 고치고 다시 실행 · 자주 나는 오류</span></a>
+        </div>
+      </div>
+
+      <h2 class="sub-h2">🌱 확장 트랙</h2>
       <p class="section-desc">같은 튜링 페르소나 AI를 중학교 수업, 윤리 융합 수업, 코드 심화 과제로 넓혀 봅니다.</p>
 
       <div class="track-tabs" role="tablist" aria-label="확장 트랙 선택">
@@ -455,14 +539,31 @@ def expand_query(text):
         </div>
       </div>
     </section>
+  </div>
+
+  <!-- ===== 💬 의견 나누기 ===== -->
+  <div class="tab-panel" id="tab-feedback" data-tab="feedback" hidden>
+    <section id="feedback" class="section">
+      <h2>💬 의견 나누기</h2>
+      <p class="section-desc">이 수업에 대한 다양한 의견을 패들릿에 남겨 주세요. 써 보신 후기, 고치면 좋을 점, 새 아이디어 모두 좋아요.<br />오른쪽 아래 <b>+ 게시</b> 버튼을 누르면 로그인 없이 쓸 수 있어요.</p>
+      <div class="padlet-embed">
+        <iframe id="padlet-frame" title="의견 나누기 패들릿"
+                allow="camera;microphone;geolocation;display-capture;clipboard-write"></iframe>
+      </div>
+      <a class="padlet-open" id="feedback-btn" href="#" target="_blank" rel="noopener">새 창에서 크게 보기 ↗</a>
+      <figure class="scene">
+        <img src="assets/scenes/pool.webp" alt="여섯 캐릭터가 수영장에서 즐겁게 노는 모습" loading="lazy" />
+        <figcaption>🌊 수업도 제주처럼, 즐겨라!</figcaption>
+      </figure>
+    </section>
+  </div>
   </main>
 
   <footer class="footer">
     <p>© 2026 팀 속전속결 · 즐겨라 제주</p>
   </footer>
 
-
-  <script src="js/data.js?v=20261018-chip"></script>
-  <script src="js/main.js?v=20261018-chip"></script>
+  <script src="js/data.js?v=20261018-tabs"></script>
+  <script src="js/main.js?v=20261018-tabs"></script>
 </body>
 </html>

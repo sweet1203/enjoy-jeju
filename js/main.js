@@ -25,9 +25,9 @@ document.querySelectorAll(".flip-card").forEach((card) => {
 });
 
 // 확장 트랙 탭
-document.querySelectorAll(".track-tab").forEach((tab) => {
+document.querySelectorAll(".track-tab[aria-controls]").forEach((tab) => {
   tab.addEventListener("click", () => {
-    document.querySelectorAll(".track-tab").forEach((t) => {
+    document.querySelectorAll(".track-tab[aria-controls]").forEach((t) => {
       const on = t === tab;
       t.classList.toggle("on", on);
       t.setAttribute("aria-selected", String(on));
@@ -82,7 +82,9 @@ function detailHTML(l) {
         <h3 class="detail-title">${l.icon} ${esc(l.title)}</h3>
       </div>
       <div class="detail-actions">
-        ${l.file ? `<button type="button" class="btn-mini plan-peek" data-img="${esc(l.file.href.replace(/\.hwp$/, ".webp"))}">📄 지도안 미리보기</button>` : ""}
+        <button type="button" class="btn-mini hwpx-save" data-id="${esc(l.id)}">⬇ 한글(.hwpx)로 저장</button>
+        ${l.file ? `<a class="btn-mini" href="${esc(l.file.href)}" download="${esc(l.file.name || "")}">⬇ 지도안 (.hwp)</a>` : ""}
+        ${l.file ? `<button type="button" class="btn-mini ghost plan-peek" data-img="${esc(l.file.href.replace(/\.hwp$/, ".webp"))}">📄 지도안 미리보기</button>` : ""}
         <button class="btn-mini ghost fold-btn">접기 ▲</button>
       </div>
     </div>
@@ -118,6 +120,8 @@ $("#lesson-grid").addEventListener("click", (e) => {
 });
 detail.addEventListener("click", (e) => {
   if (e.target.closest(".fold-btn")) toggleLesson(openId);
+  const save = e.target.closest(".hwpx-save");
+  if (save) saveHwpx(save);
   const peek = e.target.closest(".plan-peek");
   if (peek) {
     const box = detail.querySelector(".plan-peek-box");
@@ -177,50 +181,68 @@ async function saveHwpx(btn) {
   }
 }
 
-// 자료실 — 차시 카드 + 지도안 미리보기(한글 파일 모양 그대로)
-$("#resource-list").innerHTML = `
-  <a class="res-setup" href="lessons/setup.html"><b>🔑 실습 준비 · 튜링 실행 따라하기 카드</b><span>각자 VESSL 로그인 → 작업공간 → 터미널 실행 → 고치고 다시 실행 · 자주 나는 오류 (1~3차시)</span></a>
-  <div class="lesson-pages">${LESSON_PAGES.map((p) => `
-    <div class="lesson-page" data-no="${p.no}">
-      <a class="lp-main" href="${esc(p.href)}">
-        <span class="lp-no">${p.no}차시</span>
-        <b>${esc(p.title)}</b>
-        <small>${esc(p.desc)}</small>
-        <span class="lp-go">수업 자료 · 학습지 열기 →</span>
-      </a>
-      ${p.planImg ? `<button type="button" class="lp-plan" data-no="${p.no}" aria-expanded="false" aria-controls="plan-viewer">📄 ${p.no}차시 지도안 보기</button>` : ""}
-    </div>`).join("")}</div>
-  <div class="plan-viewer" id="plan-viewer" hidden></div>`;
+// 지도안 내려받기 · 미리보기 버튼
+const planDl = (p) => `<a class="btn-mini" href="${esc(p.plan)}" download="${p.no}차시_교수학습지도안.hwp">⬇ 지도안 (.hwp)</a>`;
+const sheetBtn = (p) => `<a class="btn-mini ghost" href="${esc(p.href)}" target="_blank" rel="noopener">📝 학습지 열기</a>`;
 
-const viewer = $("#plan-viewer");
-let shownPlan = null;
-function showPlan(no) {
-  const p = LESSON_PAGES.find((x) => x.no === no);
-  const same = shownPlan === no && !viewer.hidden;
-  document.querySelectorAll(".lp-plan").forEach((b) => {
-    const on = !same && Number(b.dataset.no) === no;
-    b.setAttribute("aria-expanded", String(on));
-    b.closest(".lesson-page").classList.toggle("on", on);
-    b.textContent = `📄 ${b.dataset.no}차시 지도안 ${on ? "닫기" : "보기"}`;
-  });
-  if (same) { viewer.hidden = true; shownPlan = null; return; }
-  shownPlan = no;
-  viewer.innerHTML = `
-    <div class="pv-head">
-      <b>${p.no}차시 교수·학습 지도안</b>
-      <span class="pv-actions">
-        <button type="button" class="btn-mini ghost pv-close">닫기 ✕</button>
-      </span>
-    </div>
-    <div class="pv-paper"><img src="${esc(p.planImg)}" alt="${p.no}차시 교수·학습 지도안 (한글 문서 미리보기)" /></div>`;
-  viewer.hidden = false;
-  viewer.scrollIntoView({ behavior: "smooth", block: "start" });
+// 차시별 안내 — 차시 버튼을 누르면 목표 · 흐름 · 활동과 자료 버튼이 보입니다.
+let guideNo = 1;
+function renderGuide(no) {
+  guideNo = no;
+  const p = LESSON_PAGES.find((x) => x.no === no) || LESSON_PAGES[0];
+  $("#guide-tabs").innerHTML = LESSON_PAGES.map((x) => `
+    <button class="track-tab${x.no === p.no ? " on" : ""}" role="tab" aria-selected="${x.no === p.no}" data-no="${x.no}">${x.no}차시</button>`).join("");
+  $("#guide-body").innerHTML = `
+    <div class="plan-block guide-card">
+      <p class="lp-no">${p.no}차시</p>
+      <h3>${esc(p.title)}</h3>
+      <div class="guide-actions">
+        ${planDl(p)}
+        <button type="button" class="btn-mini ghost guide-peek" aria-expanded="false">📄 지도안 미리보기</button>
+        ${sheetBtn(p)}
+      </div>
+      <div class="pv-paper guide-peek-box" hidden></div>
+      <h4>🎯 학습 목표</h4>
+      <ol class="guide-goals">${p.goals.map((g) => `<li>${esc(g)}</li>`).join("")}</ol>
+      <h4>🔄 수업 흐름</h4>
+      <div class="table-wrap"><table class="plan-table guide-flow"><tbody>
+        <tr><th>도입</th><td>${esc(p.flow.intro)}</td></tr>
+        <tr><th>전개</th><td>${esc(p.flow.main)}</td></tr>
+        <tr><th>정리</th><td>${esc(p.flow.close)}</td></tr>
+      </tbody></table></div>
+      <h4>🧩 주요 활동</h4>
+      <ul class="guide-acts">${p.acts.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>
+    </div>`;
 }
-$("#resource-list").addEventListener("click", (e) => {
-  const b = e.target.closest(".lp-plan");
-  if (b) showPlan(Number(b.dataset.no));
-  if (e.target.closest(".pv-close")) showPlan(shownPlan);
+$("#guide-tabs").addEventListener("click", (e) => {
+  const b = e.target.closest(".track-tab");
+  if (b) location.hash = `guide-${b.dataset.no}`;
 });
+$("#guide-body").addEventListener("click", (e) => {
+  const peek = e.target.closest(".guide-peek");
+  if (!peek) return;
+  const p = LESSON_PAGES.find((x) => x.no === guideNo);
+  const box = $("#guide-body .guide-peek-box");
+  const open = box.hidden;
+  if (open && !box.innerHTML) box.innerHTML = `<img src="${esc(p.planImg)}" alt="${p.no}차시 교수·학습 지도안 (한글 문서 미리보기)" />`;
+  box.hidden = !open;
+  peek.setAttribute("aria-expanded", String(open));
+  peek.textContent = open ? "📄 미리보기 닫기" : "📄 지도안 미리보기";
+});
+
+// 자료실 — 차시별 지도안 · 학습지 표, 코드 파일
+$("#resource-list").innerHTML = `
+  <div class="table-wrap"><table class="plan-table res-table">
+    <thead><tr><th>차시</th><th>주제</th><th>지도안</th><th>학습지</th></tr></thead>
+    <tbody>${LESSON_PAGES.map((p) => `
+      <tr><td>${p.no}</td>
+        <td><b>${esc(p.title)}</b><small>${esc(p.desc)}</small></td>
+        <td class="res-btns">${planDl(p)} <a class="btn-mini ghost" href="#guide-${p.no}">📄 미리보기</a></td>
+        <td class="res-btns">${sheetBtn(p)}</td></tr>`).join("")}
+    </tbody>
+  </table></div>`;
+$("#code-list").innerHTML = `<div class="tc-links">${CODE_FILES.map((f) => `
+  <a class="tc-link" href="${esc(f.href)}" download><b>⬇ ${esc(f.name)}</b><span>${esc(f.desc)}</span></a>`).join("")}</div>`;
 
 // 팀 소개 — 제주 게임 맵 위의 캐릭터, 머리 위에 소개 말풍선
 $("#team-grid").innerHTML = TEAM.map((m, i) => `
@@ -237,47 +259,36 @@ $("#team-grid").innerHTML = TEAM.map((m, i) => `
 
 // 의견 나누기 (패들릿)
 const fb = $("#feedback-btn");
-if (FEEDBACK_FORM_URL) {
-  fb.href = FEEDBACK_FORM_URL;
-  // 패들릿 주소 끝의 보드 ID로 화면 안에 넣을 임베드 주소를 만든다.
-  const padletId = FEEDBACK_FORM_URL.split("/").pop().split("-").pop();
-  $("#padlet-frame").src = `https://padlet.com/embed/${padletId}`;
-}
+if (FEEDBACK_FORM_URL) fb.href = FEEDBACK_FORM_URL;
 else { fb.textContent = "의견 폼 준비 중"; fb.classList.add("disabled"); fb.removeAttribute("href"); }
 
-// 현재 위치 바 (오른쪽) — 스크롤하면 지금 보고 있는 섹션이 표시됩니다.
-function renderSpy() {
-  const spy = $("#spy");
-  if (!spy) return;
-  const secs = [
-    { el: $(".hero"), label: "처음" },
-    ...[...document.querySelectorAll("main section[id]")].map((el) => ({
-      el, label: el.querySelector("h2").textContent.replace(/^[^\p{L}]+/u, "").trim(),
-    })),
-  ];
-  spy.innerHTML = `<div class="spy-track"><i class="spy-fill"></i></div>
-    <ol>${secs.map((s, i) => `<li><a href="#${s.el.id || "top"}" data-i="${i}"><span>${esc(s.label)}</span></a></li>`).join("")}</ol>`;
-  const links = [...spy.querySelectorAll("a")];
-  const fill = spy.querySelector(".spy-fill");
-
-  function update() {
-    const y = window.scrollY + window.innerHeight * 0.4;
-    let cur = 0;
-    secs.forEach((s, i) => { if (s.el.offsetTop <= y) cur = i; });
-    links.forEach((a, i) => {
-      a.classList.toggle("active", i === cur);
-      a.classList.toggle("passed", i < cur);
-    });
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    fill.style.height = (max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0) + "%";
+// 위 메뉴 탭 — 주소 끝(#)에 따라 한 화면씩 보여 줍니다.
+const TABS = ["home", "overview", "guide", "resources", "course", "ai", "feedback"];
+// 예전 주소(#team, #plan 등)로 들어와도 맞는 탭으로 보냅니다.
+const OLD_HASH = { top: "home", team: "home", about: "home", plan: "overview", lessons: "resources", extend: "ai" };
+function showTab() {
+  const h = decodeURIComponent(location.hash.slice(1));
+  const g = h.match(/^guide-(\d)$/);
+  const tab = g ? "guide" : TABS.includes(h) ? h : OLD_HASH[h] || "home";
+  if (g) renderGuide(Number(g[1]));
+  document.querySelectorAll(".tab-panel").forEach((p) => (p.hidden = p.dataset.tab !== tab));
+  document.querySelectorAll(".nav-links a").forEach((a) => {
+    const on = a.dataset.tab === tab;
+    a.classList.toggle("active", on);
+    if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+  });
+  // 패들릿은 의견 나누기 탭을 처음 열 때 불러옵니다. (주소 끝의 보드 ID로 임베드 주소를 만든다)
+  if (tab === "feedback" && FEEDBACK_FORM_URL && !$("#padlet-frame").src) {
+    const padletId = FEEDBACK_FORM_URL.split("/").pop().split("-").pop();
+    $("#padlet-frame").src = `https://padlet.com/embed/${padletId}`;
   }
-  window.addEventListener("scroll", update, { passive: true });
-  window.addEventListener("resize", update);
-  update();
+  window.scrollTo({ top: 0 });
 }
+window.addEventListener("hashchange", showTab);
 
 renderLessons();
-renderSpy();
+renderGuide(1);
+showTab();
 
 // 코드 파일 미리보기 (내려받지 않고 아래에 펼치기)
 document.querySelectorAll(".code-peek").forEach((link) => {
