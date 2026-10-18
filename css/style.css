@@ -211,7 +211,7 @@ img { max-width: 100%; }
   background: rgba(24, 38, 66, .88); border: 3px solid #f2c94c; border-radius: 10px; color: #fff;
   box-shadow: 0 0 0 3px rgba(24,38,66,.88), 0 10px 24px rgba(0,0,0,.25);
 }
-.motto.quest .motto-label { color: #ffe08a; font-family: "MaplestoryOTFBold", var(--font-myungjo), sans-serif; }
+.motto.quest .motto-label { color: #ffe08a; font-family: Galmuri11, var(--font-myungjo), sans-serif; }
 .motto.quest .motto-label b { color: #fff; }
 .motto.quest .motto-text { color: #fff; }
 
@@ -221,7 +221,7 @@ img { max-width: 100%; }
 .npc-bubble {
   position: relative; background: #fffef8; border: 2px solid #2b2f3a; border-radius: 10px;
   padding: 8px 12px 9px; min-width: 190px; max-width: 250px; margin-bottom: 14px;
-  font-family: "MaplestoryOTFBold", "Noto Sans KR", sans-serif; font-size: 13px; line-height: 1.55; color: #2b2f3a;
+  font-family: Galmuri11, "Noto Sans KR", sans-serif; font-size: 13px; line-height: 1.55; color: #2b2f3a;
   box-shadow: 0 3px 0 #2b2f3a; animation: npc-float 3.2s ease-in-out infinite; animation-delay: var(--d);
   word-break: keep-all;
 }
@@ -234,7 +234,7 @@ img { max-width: 100%; }
   border: 6px solid transparent; border-top-color: #fffef8; border-bottom: 0;
 }
 .npc-bubble p { margin: 0; }
-.npc-role { font-family: "MaplestoryOTFBold", sans-serif; font-weight: 700; color: #14506a; margin-bottom: 2px !important; }
+.npc-role { font-family: Galmuri11, sans-serif; font-weight: 700; color: #14506a; margin-bottom: 2px !important; }
 .npc-role span { background: var(--tangerine); color: #fff; border-radius: 4px; padding: 0 6px; margin-right: 4px; font-weight: 400; }
 .npc img.npc-sprite {
   border: 0; border-radius: 0; background: none; margin: 0;
@@ -246,7 +246,7 @@ img { max-width: 100%; }
 .npc-name {
   margin: 6px 0 0; position: relative; z-index: 2;
   background: rgba(24, 28, 38, .82); color: #fff; border-radius: 5px; padding: 2px 10px;
-  font-family: "MaplestoryOTFBold", "Noto Sans KR", sans-serif; font-size: 14px; letter-spacing: .5px;
+  font-family: Galmuri11, "Noto Sans KR", sans-serif; font-size: 14px; letter-spacing: .5px;
 }
 .npc-name small { color: #ffe08a; font-size: 11px; margin-left: 2px; }
 .npc-ground {
@@ -497,6 +497,5 @@ a.btn-mini { text-decoration: none; display: inline-block; }
 #extend .plan-table.ms-flow td:nth-child(3) { color: var(--muted); font-size: .92rem; }
 @media (max-width: 720px) { .run-where { grid-template-columns: 1fr; } .hook { padding: 22px 16px 18px; } }
 
-/* 교사 소개 · 메이플스토리체 */
-#team h2, #team .section-desc, #team .motto, #team .motto p { font-family: "MaplestoryOTFBold", "Jua", sans-serif; font-weight: 400; }
-#team .npc-bubble p { font-weight: 400; }
+/* 교사 소개 제목만 메이플스토리체 */
+#team h2 { font-family: "MaplestoryOTFBold", "Jua", sans-serif; }
