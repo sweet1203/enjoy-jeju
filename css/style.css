@@ -539,6 +539,16 @@ a.btn-mini { text-decoration: none; display: inline-block; }
 .tc-link:hover { border-color: var(--sea); }
 .tc-link b { display: block; color: var(--sea); }
 .tc-link span { display: block; color: var(--muted); font-size: .9rem; word-break: break-all; }
+.zep-entry { display: flex; gap: 20px; align-items: center; margin-bottom: 10px; }
+.zep-qr { margin: 0; flex: none; text-align: center; padding: 12px; background: #fff; border: 2px solid var(--line); border-radius: 16px; }
+.zep-qr img { display: block; width: 200px; height: 200px; }
+.zep-qr figcaption { margin-top: 6px; font-size: .9rem; color: var(--muted); }
+.zep-entry-text { flex: 1; min-width: 0; }
+.zep-steps { margin: 12px 0 0; padding-left: 1.3em; line-height: 1.7; }
+@media (max-width: 640px) {
+  .zep-entry { flex-direction: column; align-items: stretch; }
+  .zep-qr { align-self: center; }
+}
 .teacher-course .tc-tip { font-size: .92rem; color: var(--muted); margin: 0; }
 
 /* ===== 탭 구조 (위 메뉴로 한 화면씩) ===== */
