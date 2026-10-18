@@ -242,6 +242,8 @@ if (FEEDBACK_FORM_URL) {
   // 패들릿 주소 끝의 보드 ID로 화면 안에 넣을 임베드 주소를 만든다.
   const padletId = FEEDBACK_FORM_URL.split("/").pop().split("-").pop();
   $("#padlet-frame").src = `https://padlet.com/embed/${padletId}`;
+  fb.dataset.preview = `https://padlet.com/embed/${padletId}`;
+  fb.textContent = "크게 보기 ⤢";
 }
 else { fb.textContent = "의견 폼 준비 중"; fb.classList.add("disabled"); fb.removeAttribute("href"); }
 
@@ -327,4 +329,38 @@ document.querySelectorAll(".code-viewer").forEach((viewer) => {
     catch (e) { ev.target.textContent = "복사 실패"; }
     setTimeout(() => (ev.target.textContent = "📋 복사"), 1500);
   });
+});
+
+// 페이지 미리보기 — 링크를 눌러도 다른 페이지로 넘어가지 않고 이 화면 위에서 펼쳐 봅니다.
+const modal = document.createElement("div");
+modal.className = "pv-modal";
+modal.hidden = true;
+modal.innerHTML = `
+  <div class="pv-modal-box" role="dialog" aria-modal="true" aria-label="미리보기">
+    <div class="pv-modal-head"><b class="pv-modal-title"></b><button type="button" class="btn-mini ghost pv-modal-close">닫기 ✕</button></div>
+    <iframe class="pv-modal-frame" title="미리보기"></iframe>
+  </div>`;
+document.body.append(modal);
+function openPreview(url, title) {
+  modal.querySelector(".pv-modal-title").textContent = title;
+  modal.querySelector(".pv-modal-frame").src = url;
+  modal.hidden = false;
+  document.body.classList.add("pv-lock");
+}
+function closePreview() {
+  modal.hidden = true;
+  modal.querySelector(".pv-modal-frame").src = "about:blank";
+  document.body.classList.remove("pv-lock");
+}
+modal.addEventListener("click", (e) => { if (e.target === modal || e.target.closest(".pv-modal-close")) closePreview(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) closePreview(); });
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("a[href]");
+  if (!a || a.classList.contains("code-peek")) return;
+  const href = a.getAttribute("href");
+  const url = a.dataset.preview || (/^lessons\/.+\.html/.test(href) ? href : null);
+  if (!url || e.ctrlKey || e.metaKey || e.shiftKey) return;
+  e.preventDefault();
+  const label = a.querySelector("b") ? a.querySelector("b").textContent : a.textContent;
+  openPreview(url, label.replace(/[→⤢▾]/g, "").trim());
 });
