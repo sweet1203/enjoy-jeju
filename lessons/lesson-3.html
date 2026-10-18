@@ -114,6 +114,7 @@
     <div class="step">
       <h3><span class="tag">2단계</span>함수 고치기 — 검색 점수를 눈으로 보기</h3>
       <p><code>chat()</code> 함수에서 자료를 고르는 부분에 <code>print</code> 한 줄을 넣으면, 질문할 때마다 어떤 자료가 몇 점으로 뽑혔는지 화면에 나와요.</p>
+      <p class="tip">🖥️ <b>어디서 실행하나요?</b> <code>chat()</code>은 튜링의 답까지 받아야 끝나서 <b>모델 서버가 있는 교사 화면</b>에서 실행해요. 고친 app.py를 <code>app_모둠명.py</code>로 저장해 선생님께 내면 차례로 실행해 줘요. 아래 ‘3글자 자르기’ 도전은 모델 없이 <b>내 자리(Colab · 학교 PC)</b>에서 <code>eval.py --dry-run</code>으로 확인할 수 있어요.</p>
       <div class="example">        for doc in docs:
             index = doc.metadata[&quot;index&quot;]
             print(f&quot;[검색] {doc.metadata[&#x27;evidence&#x27;][:25]}… 점수 {scores[index]:.2f}&quot;)   # ← 이 줄 추가

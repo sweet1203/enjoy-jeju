@@ -381,6 +381,7 @@ ADV3 = f"""
     <div class="step">
       <h3><span class="tag">2단계</span>함수 고치기 — 검색 점수를 눈으로 보기</h3>
       <p><code>chat()</code> 함수에서 자료를 고르는 부분에 <code>print</code> 한 줄을 넣으면, 질문할 때마다 어떤 자료가 몇 점으로 뽑혔는지 화면에 나와요.</p>
+      <p class="tip">🖥️ <b>어디서 실행하나요?</b> <code>chat()</code>은 튜링의 답까지 받아야 끝나서 <b>모델 서버가 있는 교사 화면</b>에서 실행해요. 고친 app.py를 <code>app_모둠명.py</code>로 저장해 선생님께 내면 차례로 실행해 줘요. 아래 ‘3글자 자르기’ 도전은 모델 없이 <b>내 자리(Colab · 학교 PC)</b>에서 <code>eval.py --dry-run</code>으로 확인할 수 있어요.</p>
       {code(CODE_PRINT)}
       <div class="field">점수가 가장 높았던 질문과 가장 낮았던 질문 {text("adv2a")}</div>
 
@@ -529,8 +530,8 @@ L5 = f"""
     <h2><span class="no">개념</span>오늘 알아 둘 것</h2>
     <div class="concepts">
       <div class="concept"><b>하나의 두뇌, 여러 개의 창</b> · 웹 채팅 서버와 Roblox 서버도 <code>app.py</code>의 SYSTEM_PROMPT와 검색 기능을 그대로 가져다 써요. 그래서 4차시에 고친 내용이 웹과 Roblox에도 똑같이 반영돼요.</div>
-      <div class="concept"><b>웹 채팅</b> · VESSL이 만들어 준 공개 주소로 브라우저에서 접속해요. 주소 뒤에 <code>/ready</code>를 붙여 준비 상태를 확인해요.</div>
-      <div class="concept"><b>Roblox 연결</b> · ① VESSL에서 Roblox용 API 서버 실행(포트 7860) ② Roblox Studio 프로젝트에 서버 주소 입력 ③ 게임 서버 코드(Luau)가 API를 불러 NPC가 답변</div>
+      <div class="concept"><b>웹 채팅</b> · 선생님이 VESSL 작업공간에서 웹 서버를 켜고 <b>교사 화면(TV)</b>에 띄워요. 서버는 선생님 계정 안에서 돌아가서 학생 기기에서는 주소로 바로 열 수 없어요. 우리 모둠 차례가 되면 대표가 나와 교사 화면에서 대화해요.</div>
+      <div class="concept"><b>Roblox 연결</b> · ① 선생님이 VESSL에서 Roblox용 API 서버 실행(포트 7860) ② 교사 PC의 Roblox Studio 프로젝트에 서버 주소 입력 ③ 게임 서버 코드(Luau)가 API를 불러 NPC가 답변. 학생은 교사 화면에서 NPC에게 말을 걸어요.</div>
     </div>
 
     <details class="easy"><summary>서버, 클라이언트, API가 헷갈려요</summary><div>
@@ -539,7 +540,7 @@ L5 = f"""
     </div></details>
     <details class="easy"><summary>포트 7860, /ready는 뭔가요?</summary><div>
       <p><b>포트</b>는 한 컴퓨터 안의 ‘문 번호’예요. 모델 서버는 8000번 문, 웹·Roblox 서버는 7860번 문에서 손님을 받아요.</p>
-      <p>공개 주소 뒤에 <code>/ready</code>를 붙여 열었을 때 <code>{{"ready": true}}</code>가 보이면 모델까지 연결 준비가 끝난 거예요.</p>
+      <p>선생님이 서버 주소 뒤에 <code>/ready</code>를 붙여 열었을 때 <code>{{"ready": true}}</code>가 보이면 모델까지 연결 준비가 끝난 거예요. 화면에 함께 띄워 확인해 봐요.</p>
     </div></details>
     <details class="easy"><summary>Luau는 어떤 언어예요?</summary><div>
       <p>Roblox 게임 안에서 돌아가는 프로그래밍 언어예요. 파이썬처럼 읽기 쉬운 편이에요. 우리 프로젝트에서는 플레이어가 쓴 말을 VESSL 서버로 보내고, 받은 답을 NPC 말풍선으로 보여 주는 일을 해요.</p>
@@ -548,13 +549,14 @@ L5 = f"""
 
   <section class="block">
     <h2><span class="no">1단계</span>우리 튜링 연결하기</h2>
-    {choices("conn", ["공개 주소 뒤에 /ready를 붙여 {\"ready\": true} 확인", "웹 채팅 화면에서 첫인사 나누기", "Roblox Studio에 서버 주소 입력", "Roblox NPC에게 말을 걸어 답 받기", "4차시에 고친 내용이 반영됐는지 질문 하나로 확인"])}
+    <p>모둠 차례가 되면 선생님이 우리 모둠의 app.py · data.json으로 서버를 다시 켜 줘요. 대표가 교사 화면에서 확인하고, 나머지는 체크해요.</p>
+    {choices("conn", ["교사 화면에서 /ready → {\"ready\": true} 확인", "웹 채팅 화면에서 첫인사 나누기", "Roblox NPC에게 말을 걸어 답 받기", "4차시에 고친 내용이 반영됐는지 질문 하나로 확인"])}
     <div class="field">확인에 쓴 질문과 답 {text("connQ")}</div>
   </section>
 
   <section class="block">
     <h2><span class="no">2·3단계</span>‘튜링다움’ 상호 평가표</h2>
-    <p>다른 모둠의 튜링과 3분씩 대화하고, 기준마다 1~5점을 줘요. 서버를 나눠 쓰므로 순서표에 따라 차례로 이동해요.</p>
+    <p>교사 화면에 모둠별 튜링이 차례로 올라와요. 각 모둠 튜링과 3분씩 대화하는 동안 질문은 돌아가며 한 명씩 하고, 모두 기준마다 1~5점을 줘요.</p>
     <details class="easy"><summary>평가 기준 자세히 보기</summary><div>
       <ul>
         <li><b>사실 정확성</b> · 튜링의 생애와 업적을 자료와 맞게 말하나요?</li>
@@ -618,7 +620,7 @@ PAGES = {
         "평가 기준에 따라 다른 모둠의 페르소나를 평가하고 피드백할 수 있다.",
         "비판적 자세로 인간과 AI의 공존 방안을 제시할 수 있다."],
         [("도입", "같은 튜링을 터미널·웹·게임에서 만난다면?"),
-         ("전개", "웹·Roblox 연결 → 모둠 순회 대화 → ‘튜링다움’ 평가 → 피드백"),
+         ("전개", "교사 화면에서 웹·Roblox 연결 → 모둠별 차례 대화 → ‘튜링다움’ 평가 → 피드백"),
          ("정리", "인물 AI 사용 약속 만들기, 프로젝트 성찰")], L5),
 }
 
