@@ -606,3 +606,9 @@ a.btn-mini { text-decoration: none; display: inline-block; }
 .code-peek.code-card:hover { border-color: var(--sea); background: var(--paper); }
 .code-peek.code-card.on { border-color: #14506a; background: #eef7fb; color: inherit; }
 .code-peek.code-card.on::after { content: "닫기 ▴"; color: #14506a; }
+
+/* 수업 기대 효과 */
+.effect-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.effect-grid > div { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; font-size: .93rem; word-break: keep-all; }
+.effect-grid b { display: block; color: var(--sea); font-size: 1.02rem; margin-bottom: 4px; }
+.effect-grid small { display: block; margin-top: 6px; color: var(--tangerine-dark); font-weight: 700; font-size: .8rem; }
