@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@noonnu/maplestory-otf-bold@0.1.0/index.css" />
-  <link rel="stylesheet" href="css/style.css?v=20261018-maple2" />
+  <link rel="stylesheet" href="css/style.css?v=20261018-peek" />
 </head>
 <body>
   <header class="nav">
@@ -244,9 +244,13 @@
             <tbody>
               <tr><td>1. 값 바꾸기</td><td><code>OPENING</code>, 검색 개수 <code>k</code>, <code>temperature</code>, 대화 기억 길이 중 <b>하나</b>를 골라 바꾸고 같은 질문의 답 비교</td><td>🖥️ 교사 화면<br /><span class="muted">모둠당 2~3분, 차례로</span></td><td>바꿀 곳을 표시한 app.py, 관찰 기록표</td><td><a href="lessons/lesson-3.html">3</a></td></tr>
               <tr><td>2. 함수 고치기</td><td><code>tokenize</code>를 3글자 자르기로 고치고, 검색 점수가 어떻게 달라지는지 확인</td><td>💻 내 자리<br /><span class="muted"><code>--dry-run</code></span></td><td>빈칸 · 힌트가 있는 코드 조각</td><td><a href="lessons/lesson-3.html">3</a></td></tr>
-              <tr><td>3. 새 코드 쓰기</td><td><code>eval_starter.py</code>의 빈칸 5개를 채워 자동 검증 프로그램 완성 → 수정 전 · 후 비교</td><td>💻 내 자리에서 완성 · 검색 확인<br />→ 🖥️ 교사 화면에서 답 받기</td><td><a href="assets/code/eval_starter.py" download>eval_starter.py</a> · <a href="assets/code/questions.csv" download>questions.csv</a> · <a href="assets/code/eval.py" download>eval.py</a> (완성본)</td><td><a href="lessons/lesson-4.html">4</a></td></tr>
+              <tr><td>3. 새 코드 쓰기</td><td><code>eval_starter.py</code>의 빈칸 5개를 채워 자동 검증 프로그램 완성 → 수정 전 · 후 비교</td><td>💻 내 자리에서 완성 · 검색 확인<br />→ 🖥️ 교사 화면에서 답 받기</td><td><a class="code-peek" href="assets/code/eval_starter.py">eval_starter.py</a> · <a class="code-peek" href="assets/code/questions.csv">questions.csv</a> · <a class="code-peek" href="assets/code/eval.py">eval.py</a> (완성본)</td><td><a href="lessons/lesson-4.html">4</a></td></tr>
             </tbody>
           </table>
+        </div>
+        <div class="code-viewer" hidden>
+          <div class="cv-head"><b class="cv-name"></b><span class="cv-btns"><button type="button" class="cv-copy">📋 복사</button><a class="cv-down" download>⬇ 내려받기</a><button type="button" class="cv-close" aria-label="닫기">✕</button></span></div>
+          <div class="cv-body"></div>
         </div>
         <p class="plan-note"><b>Colab 준비</b> 첫 칸에서 <code>!pip install langchain-community langchain-openai rank_bm25</code>를 실행하고, app.py · data.json · eval_starter.py · questions.csv를 같은 폴더에 올립니다. <code>--dry-run</code>은 모델을 부르지 않아 GPU가 없어도 돌아가요.</p>
         <p class="plan-note"><b>교사 화면 운영</b> 모델 서버는 한 번에 한 질문씩 처리하므로 eval.py(질문 10개)는 모둠당 1~2분 걸립니다. 모둠 파일은 <code>app_모둠명.py</code>, <code>after_모둠명.csv</code>처럼 이름을 나눠 받아 두고, 다른 활동 시간에 차례로 돌려 결과 CSV를 돌려주세요.</p>
@@ -488,7 +492,7 @@ def expand_query(text):
   </footer>
 
 
-  <script src="js/data.js?v=20261018-maple2"></script>
-  <script src="js/main.js?v=20261018-maple2"></script>
+  <script src="js/data.js?v=20261018-peek"></script>
+  <script src="js/main.js?v=20261018-peek"></script>
 </body>
 </html>

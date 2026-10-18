@@ -499,3 +499,20 @@ a.btn-mini { text-decoration: none; display: inline-block; }
 
 /* 교사 소개 제목만 메이플스토리체 */
 #team h2 { font-family: "MaplestoryOTFBold", "Jua", sans-serif; }
+
+/* 코드 파일 미리보기 */
+a.code-peek { cursor: pointer; white-space: nowrap; }
+a.code-peek::after { content: " ▾"; font-size: .8em; }
+a.code-peek.on { font-weight: 700; }
+a.code-peek.on::after { content: " ▴"; }
+.code-viewer { margin: 14px 0 0; border-radius: 12px; overflow: hidden; border: 1px solid #2b3437; background: #1f2629; }
+.cv-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; padding: 8px 12px; background: #2b3437; color: #fff; }
+.cv-head b { font-family: "JetBrains Mono", Consolas, monospace; font-weight: 600; font-size: .9rem; }
+.cv-btns { display: flex; gap: 6px; }
+.cv-btns button, .cv-btns a { font: inherit; font-size: .82rem; border: 0; border-radius: 999px; padding: 3px 12px; background: rgba(255,255,255,.14); color: #fff; cursor: pointer; text-decoration: none; }
+.cv-btns button:hover, .cv-btns a:hover { background: rgba(255,255,255,.26); }
+.cv-body { max-height: 520px; overflow: auto; }
+.cv-body pre { margin: 0; padding: 14px 16px; color: #e9f1f3; font-size: .84rem; line-height: 1.6; }
+.cv-body pre code { background: none; padding: 0; color: inherit; font-family: "JetBrains Mono", Consolas, monospace; white-space: pre; }
+.cv-body .table-wrap { margin: 0; background: #fff; }
+.cv-body .cv-table { margin: 0; }

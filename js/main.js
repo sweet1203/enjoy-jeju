@@ -272,3 +272,55 @@ function renderSpy() {
 
 renderLessons();
 renderSpy();
+
+// 코드 파일 미리보기 (내려받지 않고 아래에 펼치기)
+document.querySelectorAll("a.code-peek").forEach((link) => {
+  link.addEventListener("click", async (ev) => {
+    ev.preventDefault();
+    const viewer = link.closest(".plan-block").querySelector(".code-viewer");
+    const url = link.getAttribute("href");
+    const name = url.split("/").pop();
+    const peers = link.closest(".plan-block").querySelectorAll("a.code-peek");
+    if (!viewer.hidden && viewer.dataset.src === url) {
+      viewer.hidden = true; link.classList.remove("on"); return;
+    }
+    peers.forEach((a) => a.classList.toggle("on", a === link));
+    viewer.dataset.src = url;
+    viewer.querySelector(".cv-name").textContent = "📄 " + name;
+    const down = viewer.querySelector(".cv-down");
+    down.href = url; down.setAttribute("download", name);
+    const body = viewer.querySelector(".cv-body");
+    body.textContent = "불러오는 중…";
+    viewer.hidden = false;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(res.status);
+      const text = (await res.text()).replace(/^\uFEFF/, "");
+      viewer.dataset.text = text;
+      if (name.endsWith(".csv")) {
+        const rows = text.trim().split(/\r?\n/).map((r) => r.split(","));
+        body.innerHTML = `<div class="table-wrap"><table class="plan-table cv-table"><thead><tr>${rows[0].map((c) => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${rows.slice(1).map((r) => `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+      } else {
+        const pre = document.createElement("pre");
+        const code = document.createElement("code");
+        code.textContent = text;
+        pre.appendChild(code);
+        body.replaceChildren(pre);
+      }
+    } catch (e) {
+      body.textContent = "파일을 불러오지 못했어요. ‘내려받기’로 열어 보세요.";
+    }
+    viewer.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+});
+document.querySelectorAll(".code-viewer").forEach((viewer) => {
+  viewer.querySelector(".cv-close").addEventListener("click", () => {
+    viewer.hidden = true;
+    viewer.closest(".plan-block").querySelectorAll("a.code-peek").forEach((a) => a.classList.remove("on"));
+  });
+  viewer.querySelector(".cv-copy").addEventListener("click", async (ev) => {
+    try { await navigator.clipboard.writeText(viewer.dataset.text || ""); ev.target.textContent = "✅ 복사됨"; }
+    catch (e) { ev.target.textContent = "복사 실패"; }
+    setTimeout(() => (ev.target.textContent = "📋 복사"), 1500);
+  });
+});
